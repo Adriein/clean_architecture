@@ -1,12 +1,10 @@
 import ISync from "../interfaces/ISync";
-import ISearchParams from "../interfaces/ISearchParams";
-import IEntity from "../interfaces/IEntity";
 
-export default class Collection<T> implements IEntity{
+export default abstract class Collection<T>{
   constructor(private collection: T[], private sync: ISync<T>) {}
 
-  protected async create(type: string): Promise<void> {
-    const models = await this.sync.findAll(type);
+  async create(): Promise<void> {
+    const models = await this.sync.findAll();
     for (const model of models) {
       this.collection.push(model);
     }

@@ -1,5 +1,7 @@
 //import mysql, { Connection } from "mysql";
 import { createConnection, Connection } from "typeorm";
+import Users from "./entity/DTOUser";
+import Food from "./entity/DTOFood";
 //import util from "util";
 
 export default class Database {
@@ -33,7 +35,7 @@ export default class Database {
       username: "root",
       password: "root",
       database: "test",
-      entities: [__dirname + "/api/infrastructure/data/entity/*.js"],
+      entities: [Users, Food],
       synchronize: true
     }).then(connection => (this._connection = connection));
   }

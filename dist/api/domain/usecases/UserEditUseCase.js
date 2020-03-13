@@ -35,50 +35,20 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var UsersInteractor_1 = __importDefault(require("../domain/interactors/UsersInteractor"));
-var Controller = /** @class */ (function () {
-    function Controller(entityFactory) {
-        this.usersInteractor = new UsersInteractor_1.default(entityFactory);
+var UserEditUseCase = /** @class */ (function () {
+    function UserEditUseCase(entityFactory) {
+        this.entityFactory = entityFactory;
+        this.user = this.entityFactory.createUser();
     }
-    Controller.prototype.getAllUsersProfiles = function () {
+    UserEditUseCase.prototype.execute = function (id, body) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.usersInteractor.executeUsersOverview()];
+                this.user.update(parseInt(id), body);
+                return [2 /*return*/];
             });
         });
     };
-    Controller.prototype.getUserProfile = function (id) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, this.usersInteractor.executeGetUserProfile(id)];
-            });
-        });
-    };
-    Controller.prototype.getUserFoods = function (id) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, this.usersInteractor.executeGetUserFoods(id)];
-            });
-        });
-    };
-    Controller.prototype.editUser = function (id, body) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, this.usersInteractor.executeEditUser(id, body)];
-            });
-        });
-    };
-    Controller.prototype.createUser = function (body) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, this.usersInteractor.executeCreateUser(body)];
-            });
-        });
-    };
-    return Controller;
+    return UserEditUseCase;
 }());
-exports.default = Controller;
+exports.default = UserEditUseCase;

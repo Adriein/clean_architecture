@@ -41,12 +41,12 @@ var Collection = /** @class */ (function () {
         this.collection = collection;
         this.sync = sync;
     }
-    Collection.prototype.create = function (searchParams) {
+    Collection.prototype.create = function () {
         return __awaiter(this, void 0, void 0, function () {
             var models, _i, models_1, model;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.sync.findAll(searchParams)];
+                    case 0: return [4 /*yield*/, this.sync.findAll()];
                     case 1:
                         models = _a.sent();
                         for (_i = 0, models_1 = models; _i < models_1.length; _i++) {

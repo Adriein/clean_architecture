@@ -72,6 +72,45 @@ var AdminRoutes = /** @class */ (function () {
                         return [2 /*return*/];
                 }
             });
+        }); })
+            .get("/profile/userfoods/:id", function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+            var _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _b = (_a = res).send;
+                        return [4 /*yield*/, this.controller.getUserFoods(req.params.id)];
+                    case 1:
+                        _b.apply(_a, [_c.sent()]);
+                        return [2 /*return*/];
+                }
+            });
+        }); })
+            .post("/profile", function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+            var _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _b = (_a = res).send;
+                        return [4 /*yield*/, this.controller.createUser(req.body)];
+                    case 1:
+                        _b.apply(_a, [_c.sent()]);
+                        return [2 /*return*/];
+                }
+            });
+        }); })
+            .put("/profile/:id", function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+            var _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _b = (_a = res).send;
+                        return [4 /*yield*/, this.controller.editUser(req.params.id, req.body)];
+                    case 1:
+                        _b.apply(_a, [_c.sent()]);
+                        return [2 /*return*/];
+                }
+            });
         }); });
     };
     AdminRoutes.prototype.getAdminRouter = function () {

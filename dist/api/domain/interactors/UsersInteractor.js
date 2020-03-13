@@ -41,10 +41,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var UsersOverviewUseCase_1 = __importDefault(require("../usecases/UsersOverviewUseCase"));
 var UserProfileUseCase_1 = __importDefault(require("../usecases/UserProfileUseCase"));
+var UserTastesUseCase_1 = __importDefault(require("../usecases/UserTastesUseCase"));
+var UserEditUseCase_1 = __importDefault(require("../usecases/UserEditUseCase"));
+var UserCreateUseCase_1 = __importDefault(require("../usecases/UserCreateUseCase"));
 var UserInteractor = /** @class */ (function () {
     function UserInteractor(entityFactory) {
         this.usersOverviewUseCase = new UsersOverviewUseCase_1.default(entityFactory);
         this.userProfileUseCase = new UserProfileUseCase_1.default(entityFactory);
+        this.userTastesUseCase = new UserTastesUseCase_1.default(entityFactory);
+        this.userEditUseCase = new UserEditUseCase_1.default(entityFactory);
+        this.userCreateUseCase = new UserCreateUseCase_1.default(entityFactory);
     }
     UserInteractor.prototype.executeUsersOverview = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -61,6 +67,36 @@ var UserInteractor = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.userProfileUseCase.execute(id)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserInteractor.prototype.executeGetUserFoods = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.userTastesUseCase.execute(id)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserInteractor.prototype.executeEditUser = function (id, body) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.userEditUseCase.execute(id, body)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserInteractor.prototype.executeCreateUser = function (body) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.userCreateUseCase.execute(body)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });

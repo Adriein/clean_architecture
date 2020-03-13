@@ -1,12 +1,12 @@
-import User from "../entities/User";
 import IUserProps from "../interfaces/IUserProps";
-import EntityFactory from "../factories/DomainEntityFactory";
+import IAbstractEntityFactory from "../interfaces/IAbstractEntityFactory";
+import Model from "../entities/Model";
 
 export default class UserProfileUseCase {
-  private user: User;
-  private entityFactory: EntityFactory;
+  private user: Model<IUserProps>;
+  private entityFactory: IAbstractEntityFactory;
 
-  constructor(entityFactory: EntityFactory) {
+  constructor(entityFactory: IAbstractEntityFactory) {
     this.entityFactory = entityFactory;
     this.user = this.entityFactory.createUser();
   }

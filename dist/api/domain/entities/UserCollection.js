@@ -53,7 +53,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var Collection_1 = __importDefault(require("./Collection"));
-var Enums_1 = require("../Enums");
 var UserCollection = /** @class */ (function (_super) {
     __extends(UserCollection, _super);
     function UserCollection(sync) {
@@ -63,7 +62,7 @@ var UserCollection = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, _super.prototype.create.call(this, { table: Enums_1.Tablenames.USER })];
+                    case 0: return [4 /*yield*/, _super.prototype.create.call(this)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });

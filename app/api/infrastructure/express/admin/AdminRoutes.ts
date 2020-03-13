@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import EntityFactory from "../../../domain/factories/DomainEntityFactory";
+import EntityFactory from "../../../factories/DomainEntityFactory";
 import Controller from "../../../delivery/Controller";
 //import Middelwares from "../Middelwares";
 
@@ -9,10 +9,14 @@ export default class AdminRoutes {
   private entityFactory: EntityFactory;
   private controller: Controller;
 
-  constructor(router: Router, entityFactory: EntityFactory, controller: Controller) {
+  constructor(
+    router: Router,
+    entityFactory: EntityFactory,
+    controller: Controller
+  ) {
     this.router = router;
     this.entityFactory = entityFactory;
-    this.controller = controller
+    this.controller = controller;
     this.setUpRoutes();
   }
 
@@ -27,9 +31,12 @@ export default class AdminRoutes {
       .get("/profile/userfoods/:id", async (req: Request, res: Response) => {
         res.send(await this.controller.getUserFoods(req.params.id));
       })
-      .put("/profile/:id", async (req: Request, res:Response) => {
-        res.send(await this.controller.editUser(req.params.id, req.body));
+      .post("/profile", async (req: Request, res: Response) => {
+        res.send(await this.controller.createUser(req.body));
       })
+      .put("/profile/:id", async (req: Request, res: Response) => {
+        res.send(await this.controller.editUser(req.params.id, req.body));
+      });
   }
 
   public getAdminRouter(): Router {

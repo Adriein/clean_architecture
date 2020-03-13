@@ -1,5 +1,5 @@
 import UsersInteractor from "../domain/interactors/UsersInteractor";
-import EntityFactory from "../domain/factories/DomainEntityFactory";
+import EntityFactory from "../factories/DomainEntityFactory";
 import IUserProps from "../domain/interfaces/IUserProps";
 import IUserFoodRelation from "../domain/interfaces/IUserFoodRelation";
 
@@ -22,7 +22,11 @@ export default class Controller {
     return this.usersInteractor.executeGetUserFoods(id);
   }
 
-  public async editUser(id: string, body: any): Promise<IUserProps> {
+  public async editUser(id: string, body: any): Promise<void> {
     return this.usersInteractor.executeEditUser(id, body);
+  }
+
+  public async createUser(body: any): Promise<void> {
+    return this.usersInteractor.executeCreateUser(body);
   }
 }

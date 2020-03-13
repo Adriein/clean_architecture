@@ -1,9 +1,10 @@
 import IUserProps from "../interfaces/IUserProps";
 import EntityFactory from "../../factories/DomainEntityFactory";
 import Model from "../entities/Model";
+import User from "../entities/User";
 
 
-export default class UserEditUseCase {
+export default class UserCreateUseCase {
   private user: Model<IUserProps>;
   private entityFactory: EntityFactory;
 
@@ -11,7 +12,7 @@ export default class UserEditUseCase {
     this.entityFactory = entityFactory;
     this.user = this.entityFactory.createUser();
   }
-  public async execute(id: string, body: any) {
-      this.user.update(parseInt(id), body);
+  public async execute(body: any) {
+      this.user.create(body);
   }
 }

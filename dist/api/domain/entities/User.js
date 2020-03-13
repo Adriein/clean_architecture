@@ -53,20 +53,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var Model_1 = __importDefault(require("./Model"));
-var Enums_1 = require("../Enums");
 var User = /** @class */ (function (_super) {
     __extends(User, _super);
     function User(modelAttributes, sync) {
         return _super.call(this, modelAttributes, sync) || this;
     }
-    User.prototype.fetch = function () {
+    User.prototype.fetch = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var id;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        id = this.get("id") || 0;
-                        return [4 /*yield*/, this.getById(id, { table: Enums_1.Tablenames.USER })];
+                    case 0: return [4 /*yield*/, _super.prototype.fetch.call(this, id)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    User.prototype.update = function (id, data) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, _super.prototype.update.call(this, id, data)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];

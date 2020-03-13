@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import "reflect-metadata";
 
 //import AuthRoutes from "./api/routes/auth/AuthRoutes";
-import EntityFactory from "./api/domain/factories/DomainEntityFactory";
+import EntityFactory from "./api/factories/DomainEntityFactory";
 import AdminRoutes from "./api/infrastructure/express/admin/AdminRoutes";
 import Controller from "./api/delivery/Controller";
 
@@ -43,7 +43,7 @@ export default class App {
     //this.app.use("/api/auth", new AuthRoutes(this.router).router);
     this.app.use(
       "/api/admin",
-      new AdminRoutes(this.router, this.entityFactory).getAdminRouter()
+      new AdminRoutes(this.router, this.entityFactory, this.controller).getAdminRouter()
     );
   }
 

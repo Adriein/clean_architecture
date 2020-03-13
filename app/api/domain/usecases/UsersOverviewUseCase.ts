@@ -1,12 +1,13 @@
-import UserCollection from "../entities/UserCollection";
 import IUserProps from "../interfaces/IUserProps";
-import EntityFactory from "../factories/DomainEntityFactory";
+import IAbstractEntityFactory from "../interfaces/IAbstractEntityFactory";
+import Collection from "../entities/Collection";
+
 
 export default class UsersOverviewUseCase {
-  private userCollection: UserCollection;
-  private entityFactory: EntityFactory;
+  private userCollection: Collection<IUserProps>;
+  private entityFactory: IAbstractEntityFactory;
 
-  constructor(entityFactory: EntityFactory) {
+  constructor(entityFactory: IAbstractEntityFactory) {
     this.entityFactory = entityFactory;
     this.userCollection = this.entityFactory.createUsersCollection();
   }

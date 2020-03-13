@@ -9,6 +9,6 @@ export default class UserCollection extends Collection<IUserProps> {
   }
 
   public async create(): Promise<void> {
-    return await super.create('usercollection');
+    return await super.create();
   }
 }

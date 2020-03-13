@@ -1,9 +1,10 @@
-import IEntity from "./IEntity";
+import IUserProps from "./IUserProps";
+import Model from "../entities/Model";
+import Collection from "../entities/Collection";
 
 
 
 export default interface IAbstractEntityFactory {
-    createUser(): IEntity;
-    createUsersCollection(): IEntity;
-    createFood(): IEntity;
+    createUser(): Model<IUserProps>;
+    createUsersCollection(): Collection<IUserProps>;
 }

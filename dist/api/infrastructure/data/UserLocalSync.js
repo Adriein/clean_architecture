@@ -39,46 +39,91 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var UsersInteractor_1 = __importDefault(require("../domain/interactors/UsersInteractor"));
-var Controller = /** @class */ (function () {
-    function Controller(entityFactory) {
-        this.usersInteractor = new UsersInteractor_1.default(entityFactory);
+var Database_1 = __importDefault(require("./Database"));
+var DTOUser_1 = __importDefault(require("./entity/DTOUser"));
+var UserLocalSync = /** @class */ (function () {
+    function UserLocalSync() {
+        this.db = Database_1.default.getInstance();
     }
-    Controller.prototype.getAllUsersProfiles = function () {
+    UserLocalSync.prototype.findAll = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var error_1;
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.usersInteractor.executeUsersOverview()];
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.db.connection.getRepository(DTOUser_1.default).find()];
+                    case 1: return [2 /*return*/, (_a.sent())];
+                    case 2:
+                        error_1 = _a.sent();
+                        throw error_1;
+                    case 3: return [2 /*return*/];
+                }
             });
         });
     };
-    Controller.prototype.getUserProfile = function (id) {
+    UserLocalSync.prototype.fetch = function (id) {
         return __awaiter(this, void 0, void 0, function () {
+            var error_2;
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.usersInteractor.executeGetUserProfile(id)];
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.db.connection.getRepository(DTOUser_1.default).findOne(id)];
+                    case 1: return [2 /*return*/, (_a.sent())];
+                    case 2:
+                        error_2 = _a.sent();
+                        throw error_2;
+                    case 3: return [2 /*return*/];
+                }
             });
         });
     };
-    Controller.prototype.getUserFoods = function (id) {
+    UserLocalSync.prototype.create = function (model) {
         return __awaiter(this, void 0, void 0, function () {
+            var parsed, error_3;
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.usersInteractor.executeGetUserFoods(id)];
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        parsed = JSON.parse(JSON.stringify(model));
+                        return [4 /*yield*/, this.db.connection.getRepository(DTOUser_1.default).save(parsed)];
+                    case 1:
+                        _a.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_3 = _a.sent();
+                        throw error_3;
+                    case 3: return [2 /*return*/];
+                }
             });
         });
     };
-    Controller.prototype.editUser = function (id, body) {
+    UserLocalSync.prototype.update = function (id, model) {
         return __awaiter(this, void 0, void 0, function () {
+            var user, foundondb, error_4;
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.usersInteractor.executeEditUser(id, body)];
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        user = this.db.connection.getRepository(DTOUser_1.default);
+                        return [4 /*yield*/, user.findOne(id)];
+                    case 1:
+                        foundondb = _a.sent();
+                        foundondb = Object.assign(foundondb, model);
+                        return [4 /*yield*/, user.save(foundondb)];
+                    case 2:
+                        _a.sent();
+                        return [3 /*break*/, 4];
+                    case 3:
+                        error_4 = _a.sent();
+                        console.log(error_4);
+                        throw error_4;
+                    case 4: return [2 /*return*/];
+                }
             });
         });
     };
-    Controller.prototype.createUser = function (body) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, this.usersInteractor.executeCreateUser(body)];
-            });
-        });
-    };
-    return Controller;
+    return UserLocalSync;
 }());
-exports.default = Controller;
+exports.default = UserLocalSync;

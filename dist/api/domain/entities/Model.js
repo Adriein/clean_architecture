@@ -51,16 +51,40 @@ var Model = /** @class */ (function () {
     Model.prototype.set = function (data) {
         this.attributes.set(data);
     };
-    Model.prototype.getById = function (id, searchParams) {
+    Model.prototype.fetch = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             var _a, _b;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
                         _b = (_a = this.attributes).set;
-                        return [4 /*yield*/, this.sync.getById(id, searchParams)];
+                        return [4 /*yield*/, this.sync.fetch(id)];
                     case 1:
                         _b.apply(_a, [_c.sent()]);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Model.prototype.update = function (id, data) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.sync.update(id, data)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Model.prototype.create = function (model) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.sync.create(model)];
+                    case 1:
+                        _a.sent();
                         return [2 /*return*/];
                 }
             });

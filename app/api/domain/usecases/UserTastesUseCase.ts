@@ -1,16 +1,17 @@
-import Food from "../entities/Food";
-import EntityFactory from "../factories/DomainEntityFactory";
 import IUserFoodRelation from "../interfaces/IUserFoodRelation";
+import IAbstractEntityFactory from "../interfaces/IAbstractEntityFactory";
+import Model from "../entities/Model";
 
 export default class GetUserTasterUseCase {
-  private food: Food;
-  private entityFactory: EntityFactory;
+  // private food: Model<IUserFoodRelation>;
+  private entityFactory: IAbstractEntityFactory;
 
-  constructor(entityFactory: EntityFactory) {
+  constructor(entityFactory: IAbstractEntityFactory) {
     this.entityFactory = entityFactory;
-    this.food = this.entityFactory.createFood();
+    // this.food = this.entityFactory.createFood();
   }
   public async execute(id: string): Promise<IUserFoodRelation[]> {
-      return await this.food.getUserFoodRelation(id);
+      // return await this.food.getUserFoodRelation(id);
+      throw new Error();
   }
 }
