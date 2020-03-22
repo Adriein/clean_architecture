@@ -7,16 +7,13 @@ var express_1 = __importDefault(require("express"));
 var cookie_session_1 = __importDefault(require("cookie-session"));
 var body_parser_1 = __importDefault(require("body-parser"));
 require("reflect-metadata");
-//import AuthRoutes from "./api/routes/auth/AuthRoutes";
-var DomainEntityFactory_1 = __importDefault(require("./api/factories/DomainEntityFactory"));
 var AdminRoutes_1 = __importDefault(require("./api/infrastructure/express/admin/AdminRoutes"));
 var Controller_1 = __importDefault(require("./api/delivery/Controller"));
 var App = /** @class */ (function () {
     function App() {
         this.app = express_1.default();
         this.router = express_1.default.Router();
-        this.entityFactory = new DomainEntityFactory_1.default();
-        this.controller = new Controller_1.default(this.entityFactory);
+        this.controller = new Controller_1.default();
     }
     App.prototype.init = function () {
         this.setUpEnvironment();
@@ -34,7 +31,7 @@ var App = /** @class */ (function () {
     };
     App.prototype.setUpRoutes = function () {
         //this.app.use("/api/auth", new AuthRoutes(this.router).router);
-        this.app.use("/api/admin", new AdminRoutes_1.default(this.router, this.entityFactory, this.controller).getAdminRouter());
+        this.app.use("/api/admin", new AdminRoutes_1.default(this.router, this.controller).getAdminRouter());
     };
     App.prototype.startServer = function () {
         this.app.listen(this.app.get("port"), function () {

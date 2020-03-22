@@ -38,9 +38,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 //import Middelwares from "../Middelwares";
 var AdminRoutes = /** @class */ (function () {
-    function AdminRoutes(router, entityFactory, controller) {
+    function AdminRoutes(router, controller) {
         this.router = router;
-        this.entityFactory = entityFactory;
         this.controller = controller;
         this.setUpRoutes();
     }

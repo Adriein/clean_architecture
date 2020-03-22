@@ -7,6 +7,7 @@ import {
 } from "../usecases";
 import { IAbstractEntityFactory, IUserProps } from "../interfaces";
 import { ResponseModel } from "../entities";
+import DomainEntityFactory from "../../factories/UserEntityFactory";
 
 export default class UserInteractor {
   private usersOverviewUseCase: UsersOverviewUseCase;
@@ -14,15 +15,19 @@ export default class UserInteractor {
   private userEditUseCase: UserEditUseCase;
   private userCreateUseCase: UserCreateUseCase;
   private userDeleteUseCase: UserDeleteUseCase;
+
+  private domainEntityFactory: IAbstractEntityFactory<IUserProps>;
   private responseModel: ResponseModel<IUserProps>;
 
-  constructor(entityFactory: IAbstractEntityFactory<IUserProps>) {
-    this.usersOverviewUseCase = new UsersOverviewUseCase(entityFactory);
-    this.userProfileUseCase = new UserProfileUseCase(entityFactory);
-    this.userEditUseCase = new UserEditUseCase(entityFactory);
-    this.userCreateUseCase = new UserCreateUseCase(entityFactory);
-    this.userDeleteUseCase = new UserDeleteUseCase(entityFactory);
-    this.responseModel = entityFactory.createResponseModel();
+  constructor() {
+    this.domainEntityFactory = new DomainEntityFactory();
+    this.usersOverviewUseCase = new UsersOverviewUseCase(this.domainEntityFactory);
+    this.userProfileUseCase = new UserProfileUseCase(this.domainEntityFactory);
+    this.userEditUseCase = new UserEditUseCase(this.domainEntityFactory);
+    this.userCreateUseCase = new UserCreateUseCase(this.domainEntityFactory);
+    this.userDeleteUseCase = new UserDeleteUseCase(this.domainEntityFactory);
+
+    this.responseModel = this.domainEntityFactory.createResponseModel();
   }
 
   public async executeUsersOverview(): Promise<ResponseModel<IUserProps>> {

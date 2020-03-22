@@ -4,21 +4,19 @@ import bodyParser from "body-parser";
 import "reflect-metadata";
 
 //import AuthRoutes from "./api/routes/auth/AuthRoutes";
-import EntityFactory from "./api/factories/DomainEntityFactory";
+import EntityFactory from "./api/factories/UserEntityFactory";
 import AdminRoutes from "./api/infrastructure/express/admin/AdminRoutes";
 import Controller from "./api/delivery/Controller";
 
 export default class App {
   private app: express.Application;
   private router: express.Router;
-  private entityFactory: EntityFactory;
-  private controller: Controller
+  private controller: Controller;
 
   constructor() {
     this.app = express();
     this.router = express.Router();
-    this.entityFactory = new EntityFactory();
-    this.controller = new Controller(this.entityFactory);
+    this.controller = new Controller();
   }
 
   public init(): void {
@@ -41,10 +39,7 @@ export default class App {
 
   private setUpRoutes() {
     //this.app.use("/api/auth", new AuthRoutes(this.router).router);
-    this.app.use(
-      "/api/admin",
-      new AdminRoutes(this.router, this.entityFactory, this.controller).getAdminRouter()
-    );
+    this.app.use("/api/admin", new AdminRoutes(this.router, this.controller).getAdminRouter());
   }
 
   private startServer() {

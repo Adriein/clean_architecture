@@ -1,17 +1,14 @@
 import { Router, Request, Response } from "express";
-import EntityFactory from "../../../factories/DomainEntityFactory";
 import Controller from "../../../delivery/Controller";
 //import Middelwares from "../Middelwares";
 
 export default class AdminRoutes {
   private router: Router;
   //private middelware = new Middelwares();
-  private entityFactory: EntityFactory;
   private controller: Controller;
 
-  constructor(router: Router, entityFactory: EntityFactory, controller: Controller) {
+  constructor(router: Router, controller: Controller) {
     this.router = router;
-    this.entityFactory = entityFactory;
     this.controller = controller;
     this.setUpRoutes();
   }

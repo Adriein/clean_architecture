@@ -1,11 +1,4 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  OneToMany
-} from "typeorm";
-
-import TableUser from "./TableUser";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import TableUserToFood from "./TableUserToFood";
 
 @Entity()
@@ -14,11 +7,13 @@ export default class Food {
   id?: number;
   @Column()
   name?: string;
-  // @ManyToMany(
-  //   type => TableUser,
-  //   user => user.foods
-  // )
-  // users?: TableUser[];
-  @OneToMany(type => TableUserToFood, userToFood => userToFood.food)
+  @Column()
+  kcal?: number;
+  @Column()
+  type?: string;
+  @OneToMany(
+    type => TableUserToFood,
+    userToFood => userToFood.food
+  )
   public users!: TableUserToFood[];
 }

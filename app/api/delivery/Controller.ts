@@ -1,13 +1,13 @@
 import UsersInteractor from "../domain/interactors/UsersInteractor";
-import EntityFactory from "../factories/DomainEntityFactory";
+import EntityFactory from "../factories/UserEntityFactory";
 import IUserProps from "../domain/interfaces/IUserProps";
 import ResponseModel from "../domain/entities/ResponseModel";
 
 export default class Controller {
   private usersInteractor: UsersInteractor;
 
-  constructor(entityFactory: EntityFactory) {
-    this.usersInteractor = new UsersInteractor(entityFactory);
+  constructor() {
+    this.usersInteractor = new UsersInteractor();
   }
 
   public async getAllUsersProfiles(): Promise<ResponseModel<IUserProps>> {
