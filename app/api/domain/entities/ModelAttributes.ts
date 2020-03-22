@@ -1,6 +1,6 @@
-import IAttributes from "../interfaces/IAttributes";
+import { IAttributes } from "../interfaces";
 
-export default class ModelAttributes<T> implements IAttributes<T>{
+export default class ModelAttributes<T> implements IAttributes<T> {
   constructor(private data: T) {}
 
   public get = <K extends keyof T>(propName: K): T[K] => {

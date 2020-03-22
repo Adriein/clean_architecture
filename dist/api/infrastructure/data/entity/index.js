@@ -1,0 +1,13 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var TableFood_1 = __importDefault(require("./TableFood"));
+exports.TableFood = TableFood_1.default;
+var TableLog_1 = __importDefault(require("./TableLog"));
+exports.TableLog = TableLog_1.default;
+var TableUser_1 = __importDefault(require("./TableUser"));
+exports.TableUser = TableUser_1.default;
+var TableUserToFood_1 = __importDefault(require("./TableUserToFood"));
+exports.TableUserToFood = TableUserToFood_1.default;

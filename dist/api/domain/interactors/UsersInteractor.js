@@ -35,22 +35,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var UsersOverviewUseCase_1 = __importDefault(require("../usecases/UsersOverviewUseCase"));
-var UserProfileUseCase_1 = __importDefault(require("../usecases/UserProfileUseCase"));
-var UserEditUseCase_1 = __importDefault(require("../usecases/UserEditUseCase"));
-var UserCreateUseCase_1 = __importDefault(require("../usecases/UserCreateUseCase"));
-var UserDeleteUseCase_1 = __importDefault(require("../usecases/UserDeleteUseCase"));
+var usecases_1 = require("../usecases");
 var UserInteractor = /** @class */ (function () {
     function UserInteractor(entityFactory) {
-        this.usersOverviewUseCase = new UsersOverviewUseCase_1.default(entityFactory);
-        this.userProfileUseCase = new UserProfileUseCase_1.default(entityFactory);
-        this.userEditUseCase = new UserEditUseCase_1.default(entityFactory);
-        this.userCreateUseCase = new UserCreateUseCase_1.default(entityFactory);
-        this.userDeleteUseCase = new UserDeleteUseCase_1.default(entityFactory);
+        this.usersOverviewUseCase = new usecases_1.UsersOverviewUseCase(entityFactory);
+        this.userProfileUseCase = new usecases_1.UserProfileUseCase(entityFactory);
+        this.userEditUseCase = new usecases_1.UserEditUseCase(entityFactory);
+        this.userCreateUseCase = new usecases_1.UserCreateUseCase(entityFactory);
+        this.userDeleteUseCase = new usecases_1.UserDeleteUseCase(entityFactory);
         this.responseModel = entityFactory.createResponseModel();
     }
     UserInteractor.prototype.executeUsersOverview = function () {

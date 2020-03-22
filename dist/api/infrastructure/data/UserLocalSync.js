@@ -40,9 +40,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var Database_1 = __importDefault(require("./Database"));
-var TableUser_1 = __importDefault(require("./entity/TableUser"));
-var TableUserToFood_1 = __importDefault(require("./entity/TableUserToFood"));
-var TableFood_1 = __importDefault(require("./entity/TableFood"));
+var entity_1 = require("./entity");
 var UserLocalSync = /** @class */ (function () {
     function UserLocalSync() {
         this.db = Database_1.default.getInstance();
@@ -54,7 +52,7 @@ var UserLocalSync = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.db.connection.getRepository(TableUser_1.default).find()];
+                        return [4 /*yield*/, this.db.connection.getRepository(entity_1.TableUser).find()];
                     case 1: return [2 /*return*/, (_a.sent())];
                     case 2:
                         error_1 = _a.sent();
@@ -71,12 +69,12 @@ var UserLocalSync = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 9, , 10]);
-                        return [4 /*yield*/, this.db.connection.getRepository(TableUser_1.default).findOne(id)];
+                        return [4 /*yield*/, this.db.connection.getRepository(entity_1.TableUser).findOne(id)];
                     case 1:
                         user = (_a.sent());
                         if (!(user != undefined)) return [3 /*break*/, 7];
                         return [4 /*yield*/, this.db.connection
-                                .getRepository(TableUserToFood_1.default)
+                                .getRepository(entity_1.TableUserToFood)
                                 .find({ where: { userId: id } })];
                     case 2:
                         asociatedFoods = _a.sent();
@@ -87,7 +85,7 @@ var UserLocalSync = /** @class */ (function () {
                         if (!(_i < asociatedFoods_1.length)) return [3 /*break*/, 6];
                         relatedFood = asociatedFoods_1[_i];
                         return [4 /*yield*/, this.db.connection
-                                .getRepository(TableFood_1.default)
+                                .getRepository(entity_1.TableFood)
                                 .findOne(relatedFood.foodId)];
                     case 4:
                         food = _a.sent();
@@ -130,7 +128,7 @@ var UserLocalSync = /** @class */ (function () {
                         parsedFoods = JSON.parse("[" + parsed.foods + "]");
                         //Delete unnecesary model params
                         delete parsed.foods;
-                        return [4 /*yield*/, this.db.connection.getRepository(TableUser_1.default).save(parsed)];
+                        return [4 /*yield*/, this.db.connection.getRepository(entity_1.TableUser).save(parsed)];
                     case 1:
                         savedUser = _a.sent();
                         _i = 0, parsedFoods_1 = parsedFoods;
@@ -138,11 +136,11 @@ var UserLocalSync = /** @class */ (function () {
                     case 2:
                         if (!(_i < parsedFoods_1.length)) return [3 /*break*/, 5];
                         foodObject = parsedFoods_1[_i];
-                        foodModel = new TableUserToFood_1.default();
+                        foodModel = new entity_1.TableUserToFood();
                         foodModel.userId = savedUser.id;
                         foodModel.foodId = foodObject.id;
                         foodModel.like = foodObject.like == "true" ? true : false;
-                        return [4 /*yield*/, this.db.connection.getRepository(TableUserToFood_1.default).save(foodModel)];
+                        return [4 /*yield*/, this.db.connection.getRepository(entity_1.TableUserToFood).save(foodModel)];
                     case 3:
                         _a.sent();
                         _a.label = 4;
@@ -165,8 +163,8 @@ var UserLocalSync = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 10, , 11]);
-                        userSchema = this.db.connection.getRepository(TableUser_1.default);
-                        foodSchema = this.db.connection.getRepository(TableUserToFood_1.default);
+                        userSchema = this.db.connection.getRepository(entity_1.TableUser);
+                        foodSchema = this.db.connection.getRepository(entity_1.TableUserToFood);
                         return [4 /*yield*/, userSchema.findOne(id)];
                     case 1:
                         user = _a.sent();
@@ -184,7 +182,7 @@ var UserLocalSync = /** @class */ (function () {
                             })];
                     case 3:
                         relatedFoods = _a.sent();
-                        foodModel = new TableUserToFood_1.default();
+                        foodModel = new entity_1.TableUserToFood();
                         foodModel.userId = user.id || 0;
                         foodModel.foodId = food.id;
                         foodModel.like = food.like == "true" ? true : false;
@@ -227,7 +225,7 @@ var UserLocalSync = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        userSchema = this.db.connection.getRepository(TableUser_1.default);
+                        userSchema = this.db.connection.getRepository(entity_1.TableUser);
                         return [4 /*yield*/, userSchema.findOne(id)];
                     case 1:
                         user = _a.sent();

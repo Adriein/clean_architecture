@@ -1,7 +1,5 @@
-import IUserProps from "../interfaces/IUserProps";
-import IAbstractEntityFactory from "../interfaces/IAbstractEntityFactory";
-import Model from "../entities/Model";
-
+import { IUserProps, IAbstractEntityFactory } from "../interfaces";
+import { Model } from "../entities";
 export default class UserProfileUseCase {
   private user: Model<IUserProps>;
   private entityFactory: IAbstractEntityFactory<IUserProps>;

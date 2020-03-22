@@ -1,11 +1,12 @@
-import UsersOverviewUseCase from "../usecases/UsersOverviewUseCase";
-import IUserProps from "../interfaces/IUserProps";
-import UserProfileUseCase from "../usecases/UserProfileUseCase";
-import UserEditUseCase from "../usecases/UserEditUseCase";
-import UserCreateUseCase from "../usecases/UserCreateUseCase";
-import ResponseModel from "../entities/ResponseModel";
-import IAbstractEntityFactory from "../interfaces/IAbstractEntityFactory";
-import UserDeleteUseCase from "../usecases/UserDeleteUseCase";
+import {
+  UsersOverviewUseCase,
+  UserProfileUseCase,
+  UserEditUseCase,
+  UserCreateUseCase,
+  UserDeleteUseCase
+} from "../usecases";
+import { IAbstractEntityFactory, IUserProps } from "../interfaces";
+import { ResponseModel } from "../entities";
 
 export default class UserInteractor {
   private usersOverviewUseCase: UsersOverviewUseCase;
@@ -63,7 +64,7 @@ export default class UserInteractor {
   public async executeDeleteUser(id: number): Promise<ResponseModel<IUserProps>> {
     try {
       return this.responseModel.setData([await this.userDeleteUseCase.execute(id)]).setStatus(200);
-    }catch(error) {
+    } catch (error) {
       return this.responseModel.setError(error);
     }
   }

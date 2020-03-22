@@ -1,6 +1,6 @@
-import ISync from "../interfaces/ISync";
+import { ISync } from "../interfaces";
 
-export default abstract class Collection<T>{
+export default abstract class Collection<T> {
   constructor(private collection: T[], private sync: ISync<T>) {}
 
   async create(): Promise<void> {

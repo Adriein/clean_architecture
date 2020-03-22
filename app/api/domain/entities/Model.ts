@@ -1,5 +1,4 @@
-import ISync from "../interfaces/ISync";
-import IAttributes from "../interfaces/IAttributes";
+import {ISync,IAttributes} from "../interfaces";
 
 export default abstract class Model<T> {
   constructor(private attributes: IAttributes<T>, private sync: ISync<T>) {}

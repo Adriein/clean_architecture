@@ -1,10 +1,6 @@
 import Database from "./Database";
-import ISync from "../../domain/interfaces/ISync";
-import TableUser from "./entity/TableUser";
-import IUserProps from "../../domain/interfaces/IUserProps";
-import TableUserToFood from "./entity/TableUserToFood";
-import TableFood from "./entity/TableFood";
-import IFoodProps from "../../domain/interfaces/IFoodProps";
+import { ISync, IUserProps, IFoodProps } from "../../domain/interfaces";
+import { TableUserToFood, TableFood, TableUser } from "./entity";
 
 export default class UserLocalSync implements ISync<IUserProps> {
   public db: Database;

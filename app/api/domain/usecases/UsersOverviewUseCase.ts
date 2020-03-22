@@ -1,6 +1,5 @@
-import IUserProps from "../interfaces/IUserProps";
-import IAbstractEntityFactory from "../interfaces/IAbstractEntityFactory";
-import Collection from "../entities/Collection";
+import { IUserProps, IAbstractEntityFactory } from "../interfaces";
+import { Collection } from "../entities";
 
 export default class UsersOverviewUseCase {
   private userCollection: Collection<IUserProps>;

@@ -1,10 +1,5 @@
-//import mysql, { Connection } from "mysql";
 import { createConnection, Connection } from "typeorm";
-import TableUser from "./entity/TableUser";
-import TableFood from "./entity/TableFood";
-import TableUserToFood from "./entity/TableUserToFood";
-import TableLog from "./entity/TableLog";
-//import util from "util";
+import { TableUser, TableFood, TableUserToFood, TableLog } from "./entity";
 
 export default class Database {
   private static instance: Database;
@@ -23,13 +18,6 @@ export default class Database {
   }
 
   private setUpDataBase(): void {
-    // return mysql.createConnection({
-    //   host: "localhost",
-    //   user: "root",
-    //   password: "root",
-    //   database: "nutrition_manager"
-    // });
-
     createConnection({
       type: "mysql",
       host: "localhost",
@@ -43,10 +31,6 @@ export default class Database {
   }
 
   public get connection(): Connection {
-  //   return util
-  //     .promisify(this.connection.query)
-  //     .call(this.connection, sqlStatement);
     return this._connection;
   }
-  // }
 }

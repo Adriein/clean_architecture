@@ -1,6 +1,5 @@
-import IUserProps from "../interfaces/IUserProps";
-import Model from "../entities/Model";
-import IAbstractEntityFactory from "../interfaces/IAbstractEntityFactory";
+import { IUserProps, IAbstractEntityFactory } from "../interfaces";
+import { Model } from "../entities";
 
 export default class UserDeleteUseCase {
   private user: Model<IUserProps>;

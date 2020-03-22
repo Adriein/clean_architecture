@@ -1,4 +1,4 @@
-import ILogger from "../interfaces/ILogger";
+import { ILogger } from "../interfaces";
 
 export default class ResponseModel<T> {
   private status!: number;
