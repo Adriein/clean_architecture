@@ -39,13 +39,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var UserEditUseCase = /** @class */ (function () {
     function UserEditUseCase(entityFactory) {
         this.entityFactory = entityFactory;
-        this.user = this.entityFactory.createUser();
+        this.user = this.entityFactory.createEntity();
     }
     UserEditUseCase.prototype.execute = function (id, body) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                this.user.update(parseInt(id), body);
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.user.update(parseInt(id), body)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/, this.user.getAttributes()];
+                }
             });
         });
     };

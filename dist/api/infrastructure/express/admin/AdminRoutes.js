@@ -48,66 +48,76 @@ var AdminRoutes = /** @class */ (function () {
         var _this = this;
         this.router
             .get("/overview", function (req, res) { return __awaiter(_this, void 0, void 0, function () {
-            var _a, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        _b = (_a = res).send;
-                        return [4 /*yield*/, this.controller.getAllUsersProfiles()];
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.controller.getAllUsersProfiles()];
                     case 1:
-                        _b.apply(_a, [_c.sent()]);
+                        response = _a.sent();
+                        if (!response.getError()) {
+                            res.status(response.getStatus()).send(response.getData());
+                        }
+                        res.status(response.getStatus()).send(response.getError());
                         return [2 /*return*/];
                 }
             });
         }); })
             .get("/profile/:id", function (req, res) { return __awaiter(_this, void 0, void 0, function () {
-            var _a, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        _b = (_a = res).send;
-                        return [4 /*yield*/, this.controller.getUserProfile(req.params.id)];
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.controller.getUserProfile(req.params.id)];
                     case 1:
-                        _b.apply(_a, [_c.sent()]);
-                        return [2 /*return*/];
-                }
-            });
-        }); })
-            .get("/profile/userfoods/:id", function (req, res) { return __awaiter(_this, void 0, void 0, function () {
-            var _a, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        _b = (_a = res).send;
-                        return [4 /*yield*/, this.controller.getUserFoods(req.params.id)];
-                    case 1:
-                        _b.apply(_a, [_c.sent()]);
+                        response = _a.sent();
+                        if (!response.getError()) {
+                            res.status(response.getStatus()).send(response.getData());
+                        }
+                        res.status(response.getStatus()).send(response.getError());
                         return [2 /*return*/];
                 }
             });
         }); })
             .post("/profile", function (req, res) { return __awaiter(_this, void 0, void 0, function () {
-            var _a, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        _b = (_a = res).send;
-                        return [4 /*yield*/, this.controller.createUser(req.body)];
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.controller.createUser(req.body)];
                     case 1:
-                        _b.apply(_a, [_c.sent()]);
+                        response = _a.sent();
+                        if (!response.getError()) {
+                            res.status(response.getStatus()).send(response.getData());
+                        }
+                        res.status(response.getStatus()).send(response.getError());
                         return [2 /*return*/];
                 }
             });
         }); })
             .put("/profile/:id", function (req, res) { return __awaiter(_this, void 0, void 0, function () {
-            var _a, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        _b = (_a = res).send;
-                        return [4 /*yield*/, this.controller.editUser(req.params.id, req.body)];
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.controller.editUser(req.params.id, req.body)];
                     case 1:
-                        _b.apply(_a, [_c.sent()]);
+                        response = _a.sent();
+                        if (!response.getError()) {
+                            res.status(response.getStatus()).send(response.getData());
+                        }
+                        res.status(response.getStatus()).send(response.getError());
+                        return [2 /*return*/];
+                }
+            });
+        }); })
+            .delete("/profile/:id", function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.controller.deleteUser(parseInt(req.params.id))];
+                    case 1:
+                        response = _a.sent();
+                        if (!response.getError()) {
+                            res.status(response.getStatus()).send(response.getData());
+                        }
+                        res.status(response.getStatus()).send(response.getError());
                         return [2 /*return*/];
                 }
             });

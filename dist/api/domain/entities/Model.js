@@ -68,11 +68,16 @@ var Model = /** @class */ (function () {
     };
     Model.prototype.update = function (id, data) {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var modelId, _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0: return [4 /*yield*/, this.sync.update(id, data)];
                     case 1:
-                        _a.sent();
+                        modelId = _c.sent();
+                        _b = (_a = this.attributes).set;
+                        return [4 /*yield*/, this.sync.fetch(modelId)];
+                    case 2:
+                        _b.apply(_a, [_c.sent()]);
                         return [2 /*return*/];
                 }
             });
@@ -80,11 +85,31 @@ var Model = /** @class */ (function () {
     };
     Model.prototype.create = function (model) {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var modelId, _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0: return [4 /*yield*/, this.sync.create(model)];
                     case 1:
-                        _a.sent();
+                        modelId = _c.sent();
+                        _b = (_a = this.attributes).set;
+                        return [4 /*yield*/, this.sync.fetch(modelId)];
+                    case 2:
+                        _b.apply(_a, [_c.sent()]);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Model.prototype.delete = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _b = (_a = this.attributes).set;
+                        return [4 /*yield*/, this.sync.delete(id)];
+                    case 1:
+                        _b.apply(_a, [_c.sent()]);
                         return [2 /*return*/];
                 }
             });
@@ -92,9 +117,6 @@ var Model = /** @class */ (function () {
     };
     Model.prototype.getAttributes = function () {
         return this.attributes.getAll();
-    };
-    Model.prototype.getSync = function () {
-        return this.sync;
     };
     return Model;
 }());

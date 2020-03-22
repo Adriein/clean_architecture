@@ -41,63 +41,106 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var UsersOverviewUseCase_1 = __importDefault(require("../usecases/UsersOverviewUseCase"));
 var UserProfileUseCase_1 = __importDefault(require("../usecases/UserProfileUseCase"));
-var UserTastesUseCase_1 = __importDefault(require("../usecases/UserTastesUseCase"));
 var UserEditUseCase_1 = __importDefault(require("../usecases/UserEditUseCase"));
 var UserCreateUseCase_1 = __importDefault(require("../usecases/UserCreateUseCase"));
+var UserDeleteUseCase_1 = __importDefault(require("../usecases/UserDeleteUseCase"));
 var UserInteractor = /** @class */ (function () {
     function UserInteractor(entityFactory) {
         this.usersOverviewUseCase = new UsersOverviewUseCase_1.default(entityFactory);
         this.userProfileUseCase = new UserProfileUseCase_1.default(entityFactory);
-        this.userTastesUseCase = new UserTastesUseCase_1.default(entityFactory);
         this.userEditUseCase = new UserEditUseCase_1.default(entityFactory);
         this.userCreateUseCase = new UserCreateUseCase_1.default(entityFactory);
+        this.userDeleteUseCase = new UserDeleteUseCase_1.default(entityFactory);
+        this.responseModel = entityFactory.createResponseModel();
     }
     UserInteractor.prototype.executeUsersOverview = function () {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.usersOverviewUseCase.execute()];
-                    case 1: return [2 /*return*/, _a.sent()];
+            var _a, _b, error_1;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        _b = (_a = this.responseModel).setData;
+                        return [4 /*yield*/, this.usersOverviewUseCase.execute()];
+                    case 1: return [2 /*return*/, _b.apply(_a, [_c.sent()]).setStatus(200)];
+                    case 2:
+                        error_1 = _c.sent();
+                        return [2 /*return*/, this.responseModel.setError(error_1)];
+                    case 3: return [2 /*return*/];
                 }
             });
         });
     };
     UserInteractor.prototype.executeGetUserProfile = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.userProfileUseCase.execute(id)];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    UserInteractor.prototype.executeGetUserFoods = function (id) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.userTastesUseCase.execute(id)];
-                    case 1: return [2 /*return*/, _a.sent()];
+            var _a, _b, error_2;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        _b = (_a = this.responseModel).setData;
+                        return [4 /*yield*/, this.userProfileUseCase.execute(id)];
+                    case 1: return [2 /*return*/, _b.apply(_a, [[_c.sent()]]).setStatus(200)];
+                    case 2:
+                        error_2 = _c.sent();
+                        return [2 /*return*/, this.responseModel.setError(error_2)];
+                    case 3: return [2 /*return*/];
                 }
             });
         });
     };
     UserInteractor.prototype.executeEditUser = function (id, body) {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.userEditUseCase.execute(id, body)];
-                    case 1: return [2 /*return*/, _a.sent()];
+            var _a, _b, error_3;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        _b = (_a = this.responseModel).setData;
+                        return [4 /*yield*/, this.userEditUseCase.execute(id, body)];
+                    case 1: return [2 /*return*/, _b.apply(_a, [[_c.sent()]])
+                            .setStatus(200)];
+                    case 2:
+                        error_3 = _c.sent();
+                        return [2 /*return*/, this.responseModel.setError(error_3)];
+                    case 3: return [2 /*return*/];
                 }
             });
         });
     };
     UserInteractor.prototype.executeCreateUser = function (body) {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.userCreateUseCase.execute(body)];
-                    case 1: return [2 /*return*/, _a.sent()];
+            var _a, _b, error_4;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        _b = (_a = this.responseModel).setData;
+                        return [4 /*yield*/, this.userCreateUseCase.execute(body)];
+                    case 1: return [2 /*return*/, _b.apply(_a, [[_c.sent()]])
+                            .setStatus(200)];
+                    case 2:
+                        error_4 = _c.sent();
+                        return [2 /*return*/, this.responseModel.setError(error_4)];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    UserInteractor.prototype.executeDeleteUser = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, _b, error_5;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        _b = (_a = this.responseModel).setData;
+                        return [4 /*yield*/, this.userDeleteUseCase.execute(id)];
+                    case 1: return [2 /*return*/, _b.apply(_a, [[_c.sent()]]).setStatus(200)];
+                    case 2:
+                        error_5 = _c.sent();
+                        return [2 /*return*/, this.responseModel.setError(error_5)];
+                    case 3: return [2 /*return*/];
                 }
             });
         });

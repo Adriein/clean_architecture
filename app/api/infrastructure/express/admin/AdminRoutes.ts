@@ -9,11 +9,7 @@ export default class AdminRoutes {
   private entityFactory: EntityFactory;
   private controller: Controller;
 
-  constructor(
-    router: Router,
-    entityFactory: EntityFactory,
-    controller: Controller
-  ) {
+  constructor(router: Router, entityFactory: EntityFactory, controller: Controller) {
     this.router = router;
     this.entityFactory = entityFactory;
     this.controller = controller;
@@ -23,19 +19,44 @@ export default class AdminRoutes {
   private setUpRoutes(): void {
     this.router
       .get("/overview", async (req: Request, res: Response) => {
-        res.send(await this.controller.getAllUsersProfiles());
+        const response = await this.controller.getAllUsersProfiles();
+
+        if (!response.getError()) {
+          res.status(response.getStatus()).send(response.getData());
+        }
+        res.status(response.getStatus()).send(response.getError());
       })
       .get("/profile/:id", async (req: Request, res: Response) => {
-        res.send(await this.controller.getUserProfile(req.params.id));
-      })
-      .get("/profile/userfoods/:id", async (req: Request, res: Response) => {
-        res.send(await this.controller.getUserFoods(req.params.id));
+        const response = await this.controller.getUserProfile(req.params.id);
+
+        if (!response.getError()) {
+          res.status(response.getStatus()).send(response.getData());
+        }
+        res.status(response.getStatus()).send(response.getError());
       })
       .post("/profile", async (req: Request, res: Response) => {
-        res.send(await this.controller.createUser(req.body));
+        const response = await this.controller.createUser(req.body);
+
+        if (!response.getError()) {
+          res.status(response.getStatus()).send(response.getData());
+        }
+        res.status(response.getStatus()).send(response.getError());
       })
       .put("/profile/:id", async (req: Request, res: Response) => {
-        res.send(await this.controller.editUser(req.params.id, req.body));
+        const response = await this.controller.editUser(req.params.id, req.body);
+
+        if (!response.getError()) {
+          res.status(response.getStatus()).send(response.getData());
+        }
+        res.status(response.getStatus()).send(response.getError());
+      })
+      .delete("/profile/:id", async (req: Request, res: Response) => {
+        const response = await this.controller.deleteUser(parseInt(req.params.id));
+
+        if (!response.getError()) {
+          res.status(response.getStatus()).send(response.getData());
+        }
+        res.status(response.getStatus()).send(response.getError());
       });
   }
 

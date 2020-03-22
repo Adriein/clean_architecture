@@ -7,15 +7,20 @@ var User_1 = __importDefault(require("../domain/entities/User"));
 var UserCollection_1 = __importDefault(require("../domain/entities/UserCollection"));
 var ModelAttributes_1 = __importDefault(require("../domain/entities/ModelAttributes"));
 var UserLocalSync_1 = __importDefault(require("../infrastructure/data/UserLocalSync"));
-var EntityFactory = /** @class */ (function () {
-    function EntityFactory() {
+var ResponseModel_1 = __importDefault(require("../domain/entities/ResponseModel"));
+var Logger_1 = __importDefault(require("../infrastructure/logs/Logger"));
+var DomainEntityFactory = /** @class */ (function () {
+    function DomainEntityFactory() {
     }
-    EntityFactory.prototype.createUser = function () {
+    DomainEntityFactory.prototype.createEntity = function () {
         return new User_1.default(new ModelAttributes_1.default({}), new UserLocalSync_1.default());
     };
-    EntityFactory.prototype.createUsersCollection = function () {
+    DomainEntityFactory.prototype.createCollection = function () {
         return new UserCollection_1.default(new UserLocalSync_1.default());
     };
-    return EntityFactory;
+    DomainEntityFactory.prototype.createResponseModel = function () {
+        return new ResponseModel_1.default(new Logger_1.default());
+    };
+    return DomainEntityFactory;
 }());
-exports.default = EntityFactory;
+exports.default = DomainEntityFactory;

@@ -4,14 +4,14 @@ import Model from "../entities/Model";
 
 export default class UserProfileUseCase {
   private user: Model<IUserProps>;
-  private entityFactory: IAbstractEntityFactory;
+  private entityFactory: IAbstractEntityFactory<IUserProps>;
 
-  constructor(entityFactory: IAbstractEntityFactory) {
+  constructor(entityFactory: IAbstractEntityFactory<IUserProps>) {
     this.entityFactory = entityFactory;
-    this.user = this.entityFactory.createUser();
+    this.user = this.entityFactory.createEntity();
   }
   public async execute(id: string): Promise<IUserProps> {
-    await this.user.fetch(parseInt(id));
+    await this.user.fetch(parseInt(id));  
     return this.user.getAttributes();
   }
 }

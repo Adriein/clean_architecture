@@ -39,7 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var UserProfileUseCase = /** @class */ (function () {
     function UserProfileUseCase(entityFactory) {
         this.entityFactory = entityFactory;
-        this.user = this.entityFactory.createUser();
+        this.user = this.entityFactory.createEntity();
     }
     UserProfileUseCase.prototype.execute = function (id) {
         return __awaiter(this, void 0, void 0, function () {

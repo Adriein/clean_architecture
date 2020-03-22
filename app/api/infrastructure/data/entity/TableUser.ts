@@ -2,10 +2,9 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  ManyToMany,
-  JoinTable
+  OneToMany
 } from "typeorm";
-import Food from "./DTOFood";
+import TableUserToFood from "./TableUserToFood";
 
 @Entity()
 export default class Users {
@@ -39,10 +38,13 @@ export default class Users {
   user_status?: boolean;
   @Column()
   rol?: string;
-  @ManyToMany(
-    type => Food,
-    food => food.users
-  )
-  @JoinTable()
-  foods?: Food[];
+  // @ManyToMany(
+  //   type => TableFood,
+  //   food => food.users
+  // )
+  // @JoinTable()
+  // foods?: TableFood[];
+
+  @OneToMany(type => TableUserToFood, userToFood => userToFood.user)
+  public foods!: TableUserToFood[];
 }

@@ -1,7 +1,7 @@
 import UsersInteractor from "../domain/interactors/UsersInteractor";
 import EntityFactory from "../factories/DomainEntityFactory";
 import IUserProps from "../domain/interfaces/IUserProps";
-import IUserFoodRelation from "../domain/interfaces/IUserFoodRelation";
+import ResponseModel from "../domain/entities/ResponseModel";
 
 export default class Controller {
   private usersInteractor: UsersInteractor;
@@ -10,23 +10,23 @@ export default class Controller {
     this.usersInteractor = new UsersInteractor(entityFactory);
   }
 
-  public async getAllUsersProfiles(): Promise<IUserProps[]> {
-    return this.usersInteractor.executeUsersOverview();
+  public async getAllUsersProfiles(): Promise<ResponseModel<IUserProps>> {
+    return await this.usersInteractor.executeUsersOverview();
   }
 
-  public async getUserProfile(id: string): Promise<IUserProps> {
-    return this.usersInteractor.executeGetUserProfile(id);
+  public async getUserProfile(id: string): Promise<ResponseModel<IUserProps>> {
+    return await this.usersInteractor.executeGetUserProfile(id);
   }
 
-  public async getUserFoods(id: string): Promise<IUserFoodRelation[]> {
-    return this.usersInteractor.executeGetUserFoods(id);
+  public async editUser(id: string, body: any): Promise<ResponseModel<IUserProps>> {
+    return await this.usersInteractor.executeEditUser(id, body);
   }
 
-  public async editUser(id: string, body: any): Promise<void> {
-    return this.usersInteractor.executeEditUser(id, body);
+  public async createUser(body: any): Promise<ResponseModel<IUserProps>> {
+    return await this.usersInteractor.executeCreateUser(body);
   }
 
-  public async createUser(body: any): Promise<void> {
-    return this.usersInteractor.executeCreateUser(body);
+  public async deleteUser(id: number): Promise<ResponseModel<IUserProps>> {
+    return await this.usersInteractor.executeDeleteUser(id);
   }
 }

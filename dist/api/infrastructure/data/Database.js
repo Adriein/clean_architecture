@@ -5,8 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 //import mysql, { Connection } from "mysql";
 var typeorm_1 = require("typeorm");
-var DTOUser_1 = __importDefault(require("./entity/DTOUser"));
-var DTOFood_1 = __importDefault(require("./entity/DTOFood"));
+var TableUser_1 = __importDefault(require("./entity/TableUser"));
+var TableFood_1 = __importDefault(require("./entity/TableFood"));
+var TableUserToFood_1 = __importDefault(require("./entity/TableUserToFood"));
+var TableLog_1 = __importDefault(require("./entity/TableLog"));
 //import util from "util";
 var Database = /** @class */ (function () {
     function Database() {
@@ -33,7 +35,7 @@ var Database = /** @class */ (function () {
             username: "root",
             password: "root",
             database: "test",
-            entities: [DTOUser_1.default, DTOFood_1.default],
+            entities: [TableUser_1.default, TableFood_1.default, TableUserToFood_1.default, TableLog_1.default],
             synchronize: true
         }).then(function (connection) { return (_this._connection = connection); });
     };

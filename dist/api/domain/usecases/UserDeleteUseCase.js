@@ -35,65 +35,24 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var UsersInteractor_1 = __importDefault(require("../domain/interactors/UsersInteractor"));
-var Controller = /** @class */ (function () {
-    function Controller(entityFactory) {
-        this.usersInteractor = new UsersInteractor_1.default(entityFactory);
+var UserDeleteUseCase = /** @class */ (function () {
+    function UserDeleteUseCase(entityFactory) {
+        this.entityFactory = entityFactory;
+        this.user = this.entityFactory.createEntity();
     }
-    Controller.prototype.getAllUsersProfiles = function () {
+    UserDeleteUseCase.prototype.execute = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.usersInteractor.executeUsersOverview()];
-                    case 1: return [2 /*return*/, _a.sent()];
+                    case 0: return [4 /*yield*/, this.user.delete(id)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/, this.user.getAttributes()];
                 }
             });
         });
     };
-    Controller.prototype.getUserProfile = function (id) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.usersInteractor.executeGetUserProfile(id)];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    Controller.prototype.editUser = function (id, body) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.usersInteractor.executeEditUser(id, body)];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    Controller.prototype.createUser = function (body) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.usersInteractor.executeCreateUser(body)];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    Controller.prototype.deleteUser = function (id) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.usersInteractor.executeDeleteUser(id)];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    return Controller;
+    return UserDeleteUseCase;
 }());
-exports.default = Controller;
+exports.default = UserDeleteUseCase;

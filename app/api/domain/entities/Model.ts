@@ -17,18 +17,20 @@ export default abstract class Model<T> {
   }
 
   public async update(id: number, data: T): Promise<void> {
-    await this.sync.update(id, data);
+    const modelId = await this.sync.update(id, data);
+    this.attributes.set(await this.sync.fetch(modelId));
   }
 
   public async create(model: T): Promise<void> {
-    await this.sync.create(model);
+    const modelId = await this.sync.create(model);
+    this.attributes.set(await this.sync.fetch(modelId));
+  }
+
+  public async delete(id: number): Promise<void> {
+    this.attributes.set(await this.sync.delete(id));
   }
 
   public getAttributes(): T {
     return this.attributes.getAll();
-  }
-
-  public getSync(): ISync<T> {
-    return this.sync;
   }
 }
