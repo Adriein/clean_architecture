@@ -1,16 +1,52 @@
-import { IUserProps, IAbstractEntityFactory } from "../interfaces";
-import { Model } from "../entities";
+import { IUserProps, IAbstractFactory, IFoodUserRelation } from "../../interfaces";
+import { Model } from "../../entities";
 
 export default class UserEditUseCase {
   private user: Model<IUserProps>;
-  private entityFactory: IAbstractEntityFactory<IUserProps>;
+  private entityFactory: IAbstractFactory;
+  private foodUserRelation: Model<IFoodUserRelation>;
 
-  constructor(entityFactory: IAbstractEntityFactory<IUserProps>) {
+  constructor(entityFactory: IAbstractFactory) {
     this.entityFactory = entityFactory;
-    this.user = this.entityFactory.createEntity();
+    this.user = this.entityFactory.createUser();
+    this.foodUserRelation = this.entityFactory.createFoodUserRelation();
   }
   public async execute(id: string, body: any): Promise<IUserProps> {
-    await this.user.update(parseInt(id), body);
+    //Retrive user stored on db
+    await this.user.fetch(parseInt(id));
+    const user = this.user.getAttributes();
+
+    if (!user) {
+      throw new Error("user not found");
+    }
+
+    //Parse the model foods object
+    const parsedFoods = JSON.parse(`[${body.foods}]`);
+
+    //Save changes on user foods preferences
+    for (const food of parsedFoods) {
+      const [relatedFoods]: IFoodUserRelation[] = await this.foodUserRelation.findBy({
+        where: { userId: user.id, foodId: food.id }
+      });
+      const foodModel = {
+        userId: user.id,
+        foodId: food.id,
+        like: food.like == "true" ? true : false
+      };
+
+      //Check if the user has any foods asociated
+      if (!relatedFoods) {
+        await this.foodUserRelation.create(foodModel);
+      } else {
+        await this.foodUserRelation.update(relatedFoods.id!, foodModel);
+      }
+    }
+
+    //Delete unnecesary model params
+    delete body.foods;
+
+    //Save user changes
+    await this.user.update(parseInt(id), JSON.parse(JSON.stringify(body)));
     return this.user.getAttributes();
   }
 }

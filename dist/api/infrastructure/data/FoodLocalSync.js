@@ -41,74 +41,87 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var Database_1 = __importDefault(require("./Database"));
 var entity_1 = require("./entity");
-var UserLocalSync = /** @class */ (function () {
-    function UserLocalSync() {
+var FoodLocalSync = /** @class */ (function () {
+    function FoodLocalSync() {
         this.db = Database_1.default.getInstance();
     }
-    UserLocalSync.prototype.findAll = function () {
+    FoodLocalSync.prototype.findAll = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var error_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var likedFoods, foodRelation, likedFoodsIds, _i, likedFoodsIds_1, id_1, _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.db.connection.getRepository(entity_1.TableUser).find()];
-                    case 1: return [2 /*return*/, (_a.sent())];
-                    case 2:
-                        error_1 = _a.sent();
-                        throw new Error("fallo al leer");
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    UserLocalSync.prototype.fetch = function (id) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, this.db.connection.getRepository(entity_1.TableUser).findOne(id)];
-            });
-        });
-    };
-    UserLocalSync.prototype.create = function (model) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.db.connection.getRepository(entity_1.TableUser).save(model)];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    UserLocalSync.prototype.update = function (id, model) {
-        return __awaiter(this, void 0, void 0, function () {
-            var userSchema, user;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        userSchema = this.db.connection.getRepository(entity_1.TableUser);
-                        return [4 /*yield*/, userSchema.findOne(id)];
+                        likedFoods = [];
+                        if (!id) return [3 /*break*/, 7];
+                        return [4 /*yield*/, this.db.connection
+                                .getRepository(entity_1.TableUserToFood)
+                                .find({ userId: id })];
                     case 1:
-                        user = _a.sent();
-                        return [4 /*yield*/, userSchema.save(Object.assign(user, model))];
-                    case 2: return [2 /*return*/, _a.sent()];
+                        foodRelation = _c.sent();
+                        likedFoodsIds = foodRelation.map(function (relation) {
+                            if (relation.like) {
+                                return relation.foodId;
+                            }
+                        });
+                        _i = 0, likedFoodsIds_1 = likedFoodsIds;
+                        _c.label = 2;
+                    case 2:
+                        if (!(_i < likedFoodsIds_1.length)) return [3 /*break*/, 5];
+                        id_1 = likedFoodsIds_1[_i];
+                        _b = (_a = likedFoods).push;
+                        return [4 /*yield*/, this.db.connection.getRepository(entity_1.TableFood).findOne(id_1)];
+                    case 3:
+                        _b.apply(_a, [(_c.sent())]);
+                        _c.label = 4;
+                    case 4:
+                        _i++;
+                        return [3 /*break*/, 2];
+                    case 5: return [4 /*yield*/, this.db.connection.getRepository(entity_1.TableFood).find()];
+                    case 6: return [2 /*return*/, (_c.sent())];
+                    case 7: return [4 /*yield*/, this.db.connection.getRepository(entity_1.TableFood).find()];
+                    case 8: return [2 /*return*/, (_c.sent())];
                 }
             });
         });
     };
-    UserLocalSync.prototype.delete = function (id) {
+    FoodLocalSync.prototype.fetch = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.db.connection.getRepository(entity_1.TableFood).findOne(id)];
+                    case 1: return [2 /*return*/, (_a.sent())];
+                }
+            });
+        });
+    };
+    FoodLocalSync.prototype.create = function (model) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 throw new Error("not implemented yet");
             });
         });
     };
-    UserLocalSync.prototype.findBy = function (options) {
+    FoodLocalSync.prototype.update = function (id, model) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 throw new Error("not implemented yet");
             });
         });
     };
-    return UserLocalSync;
+    FoodLocalSync.prototype.delete = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                throw new Error("not implemented yet");
+            });
+        });
+    };
+    FoodLocalSync.prototype.findBy = function (options) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                throw new Error("not implemented yet");
+            });
+        });
+    };
+    return FoodLocalSync;
 }());
-exports.default = UserLocalSync;
+exports.default = FoodLocalSync;

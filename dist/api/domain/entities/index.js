@@ -17,3 +17,7 @@ var User_1 = __importDefault(require("./User"));
 exports.User = User_1.default;
 var UserCollection_1 = __importDefault(require("./UserCollection"));
 exports.UserCollection = UserCollection_1.default;
+var FoodCollection_1 = __importDefault(require("./FoodCollection"));
+exports.FoodCollection = FoodCollection_1.default;
+var FoodUserRelation_1 = __importDefault(require("./FoodUserRelation"));
+exports.FoodUserRelation = FoodUserRelation_1.default;

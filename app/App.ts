@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import "reflect-metadata";
 
 //import AuthRoutes from "./api/routes/auth/AuthRoutes";
-import EntityFactory from "./api/factories/UserEntityFactory";
+import EntityFactory from "./api/factories/EntityAbstractFactory";
 import AdminRoutes from "./api/infrastructure/express/admin/AdminRoutes";
 import Controller from "./api/delivery/Controller";
 

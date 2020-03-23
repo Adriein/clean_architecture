@@ -1,4 +1,4 @@
-import {ISync,IAttributes} from "../interfaces";
+import { ISync, IAttributes } from "../interfaces";
 
 export default abstract class Model<T> {
   constructor(private attributes: IAttributes<T>, private sync: ISync<T>) {}
@@ -16,13 +16,11 @@ export default abstract class Model<T> {
   }
 
   public async update(id: number, data: T): Promise<void> {
-    const modelId = await this.sync.update(id, data);
-    this.attributes.set(await this.sync.fetch(modelId));
+    this.attributes.set(await this.sync.update(id, data));
   }
 
   public async create(model: T): Promise<void> {
-    const modelId = await this.sync.create(model);
-    this.attributes.set(await this.sync.fetch(modelId));
+    this.attributes.set(await this.sync.create(model));
   }
 
   public async delete(id: number): Promise<void> {
@@ -31,5 +29,9 @@ export default abstract class Model<T> {
 
   public getAttributes(): T {
     return this.attributes.getAll();
+  }
+
+  public async findBy(options?: Object) {
+    return await this.sync.findBy(options);
   }
 }

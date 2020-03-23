@@ -5,20 +5,20 @@ import TableFood from "./TableFood";
 @Entity()
 export default class TableUserToFood {
     @PrimaryGeneratedColumn()
-    public id!: number;
+    public id?: number;
 
     @Column()
-    public userId!: number;
+    public userId?: number;
 
     @Column()
-    public foodId!: number;
+    public foodId?: number;
 
     @Column()
-    public like!: boolean;
+    public like?: boolean;
 
     @ManyToOne(type => TableUser, user => user.foods)
-    public user!: TableUser;
+    public user?: TableUser;
 
     @ManyToOne(type => TableFood, food => food.users)
-    public food!: TableFood;
+    public food?: TableFood;
 }

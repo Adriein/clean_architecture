@@ -1,5 +1,5 @@
 import UsersInteractor from "../domain/interactors/UsersInteractor";
-import EntityFactory from "../factories/UserEntityFactory";
+import EntityFactory from "../factories/EntityAbstractFactory";
 import IUserProps from "../domain/interfaces/IUserProps";
 import ResponseModel from "../domain/entities/ResponseModel";
 

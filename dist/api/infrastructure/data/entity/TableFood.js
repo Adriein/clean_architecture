@@ -26,6 +26,14 @@ var Food = /** @class */ (function () {
         __metadata("design:type", String)
     ], Food.prototype, "name", void 0);
     __decorate([
+        typeorm_1.Column(),
+        __metadata("design:type", Number)
+    ], Food.prototype, "kcal", void 0);
+    __decorate([
+        typeorm_1.Column(),
+        __metadata("design:type", String)
+    ], Food.prototype, "type", void 0);
+    __decorate([
         typeorm_1.OneToMany(function (type) { return TableUserToFood_1.default; }, function (userToFood) { return userToFood.food; }),
         __metadata("design:type", Array)
     ], Food.prototype, "users", void 0);

@@ -7,14 +7,14 @@ export default interface IUserProps {
   first_name?: string;
   last_name?: string;
   sex?: string;
-  age?: string;
-  level?: string;
-  weight?: string;
-  height?: string;
+  age?: number;
+  level?: number;
+  weight?: number;
+  height?: number;
   nutrition_objective?: string;
   notes?: string;
   injuries?: string;
   foods?: IFoodProps[]
-  user_status?: number;
-  rol?: number;
+  user_status?: boolean;
+  rol?: string;
 }

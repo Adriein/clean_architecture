@@ -1,16 +1,16 @@
-import { IUserProps, IAbstractEntityFactory, IFoodProps } from "../interfaces";
-import { Model } from "../entities";
+import { IAbstractFactory, IFoodProps } from "../../interfaces";
+import { Collection } from "../../entities";
 
 export default class FoodListUseCase {
-  private food: Model<IFoodProps>;
-  private entityFactory: IAbstractEntityFactory<IUserProps>;
+  private food: Collection<IFoodProps>;
+  private entityFactory: IAbstractFactory;
 
-  constructor(entityFactory: IAbstractEntityFactory<IUserProps>) {
+  constructor(entityFactory: IAbstractFactory) {
     this.entityFactory = entityFactory;
-    this.food = this.entityFactory.createEntity();
+    this.food = this.entityFactory.createFoodCollection();
   }
-  public async execute(id?: number): Promise<IUserProps> {
-    await this.user.create(body);
-    return this.user.getAttributes();
+  public async execute(id?: number): Promise<IFoodProps[]> {
+    await this.food.create();
+    return this.food.getCollection();
   }
 }

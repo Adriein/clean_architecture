@@ -1,0 +1,37 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var entities_1 = require("../domain/entities");
+var UserLocalSync_1 = __importDefault(require("../infrastructure/data/UserLocalSync"));
+var FoodUserLocalSync_1 = __importDefault(require("../infrastructure/data/FoodUserLocalSync"));
+var FoodLocalSync_1 = __importDefault(require("../infrastructure/data/FoodLocalSync"));
+var Logger_1 = __importDefault(require("../infrastructure/logs/Logger"));
+var EntityAbstractFactory = /** @class */ (function () {
+    function EntityAbstractFactory() {
+    }
+    EntityAbstractFactory.prototype.createUser = function () {
+        return new entities_1.User(new entities_1.ModelAttributes({}), new UserLocalSync_1.default());
+    };
+    EntityAbstractFactory.prototype.createUserCollection = function () {
+        return new entities_1.UserCollection(new UserLocalSync_1.default());
+    };
+    EntityAbstractFactory.prototype.createUserResponseModel = function () {
+        return new entities_1.ResponseModel(new Logger_1.default());
+    };
+    EntityAbstractFactory.prototype.createFood = function () {
+        return new entities_1.Food(new entities_1.ModelAttributes({}), new FoodLocalSync_1.default());
+    };
+    EntityAbstractFactory.prototype.createFoodCollection = function () {
+        return new entities_1.FoodCollection(new FoodLocalSync_1.default());
+    };
+    EntityAbstractFactory.prototype.createFoodResponseModel = function () {
+        return new entities_1.ResponseModel(new Logger_1.default());
+    };
+    EntityAbstractFactory.prototype.createFoodUserRelation = function () {
+        return new entities_1.FoodUserRelation(new entities_1.ModelAttributes({}), new FoodUserLocalSync_1.default());
+    };
+    return EntityAbstractFactory;
+}());
+exports.default = EntityAbstractFactory;

@@ -40,16 +40,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var usecases_1 = require("../usecases");
-var DomainEntityFactory_1 = __importDefault(require("../../factories/DomainEntityFactory"));
+var EntityAbstractFactory_1 = __importDefault(require("../../factories/EntityAbstractFactory"));
 var UserInteractor = /** @class */ (function () {
     function UserInteractor() {
-        this.domainEntityFactory = new DomainEntityFactory_1.default();
-        this.usersOverviewUseCase = new usecases_1.UsersOverviewUseCase(this.domainEntityFactory);
-        this.userProfileUseCase = new usecases_1.UserProfileUseCase(this.domainEntityFactory);
-        this.userEditUseCase = new usecases_1.UserEditUseCase(this.domainEntityFactory);
-        this.userCreateUseCase = new usecases_1.UserCreateUseCase(this.domainEntityFactory);
-        this.userDeleteUseCase = new usecases_1.UserDeleteUseCase(this.domainEntityFactory);
-        this.responseModel = this.domainEntityFactory.createResponseModel();
+        this.entityFactory = new EntityAbstractFactory_1.default();
+        this.usersOverviewUseCase = new usecases_1.UsersOverviewUseCase(this.entityFactory);
+        this.userProfileUseCase = new usecases_1.UserProfileUseCase(this.entityFactory);
+        this.userEditUseCase = new usecases_1.UserEditUseCase(this.entityFactory);
+        this.userCreateUseCase = new usecases_1.UserCreateUseCase(this.entityFactory);
+        this.userDeleteUseCase = new usecases_1.UserDeleteUseCase(this.entityFactory);
+        this.responseModel = this.entityFactory.createUserResponseModel();
     }
     UserInteractor.prototype.executeUsersOverview = function () {
         return __awaiter(this, void 0, void 0, function () {

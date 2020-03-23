@@ -1,7 +1,7 @@
 import { ISync } from "../interfaces";
 
 export default abstract class Collection<T> {
-  constructor(private collection: T[], private sync: ISync<T>) {}
+  constructor(protected collection: T[], protected sync: ISync<T>) {}
 
   async create(): Promise<void> {
     const models = await this.sync.findAll();

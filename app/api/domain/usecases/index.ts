@@ -1,8 +1,8 @@
-import UserCreateUseCase from "./UserCreateUseCase";
-import UserDeleteUseCase from "./UserDeleteUseCase";
-import UserEditUseCase from "./UserEditUseCase";
-import UserProfileUseCase from "./UserProfileUseCase";
-import UsersOverviewUseCase from "./UsersOverviewUseCase";
+import UserCreateUseCase from "./users/UserCreateUseCase";
+import UserDeleteUseCase from "./users/UserDeleteUseCase";
+import UserEditUseCase from "./users/UserEditUseCase";
+import UserProfileUseCase from "./users/UserProfileUseCase";
+import UsersOverviewUseCase from "./users/UsersOverviewUseCase";
 
 export {
   UserCreateUseCase,
