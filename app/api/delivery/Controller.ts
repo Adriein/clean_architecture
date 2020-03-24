@@ -2,12 +2,16 @@ import UsersInteractor from "../domain/interactors/UsersInteractor";
 import EntityFactory from "../factories/EntityAbstractFactory";
 import IUserProps from "../domain/interfaces/IUserProps";
 import ResponseModel from "../domain/entities/ResponseModel";
+import { IFoodProps } from "../domain/interfaces";
+import FoodsInteractor from "../domain/interactors/FoodsInteractor";
 
 export default class Controller {
   private usersInteractor: UsersInteractor;
+  private foodsInteractor: FoodsInteractor;
 
   constructor() {
     this.usersInteractor = new UsersInteractor();
+    this.foodsInteractor = new FoodsInteractor();
   }
 
   public async getAllUsersProfiles(): Promise<ResponseModel<IUserProps>> {
@@ -28,5 +32,9 @@ export default class Controller {
 
   public async deleteUser(id: number): Promise<ResponseModel<IUserProps>> {
     return await this.usersInteractor.executeDeleteUser(id);
+  }
+
+  public async getAllFoods(): Promise<ResponseModel<IFoodProps>> {
+    return await this.foodsInteractor.executeFoodsList();
   }
 }

@@ -13,3 +13,5 @@ var UserProfileUseCase_1 = __importDefault(require("./users/UserProfileUseCase")
 exports.UserProfileUseCase = UserProfileUseCase_1.default;
 var UsersOverviewUseCase_1 = __importDefault(require("./users/UsersOverviewUseCase"));
 exports.UsersOverviewUseCase = UsersOverviewUseCase_1.default;
+var FoodListUseCase_1 = __importDefault(require("./foods/FoodListUseCase"));
+exports.FoodListUseCase = FoodListUseCase_1.default;

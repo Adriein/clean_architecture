@@ -31,6 +31,14 @@ export default class AdminRoutes {
         }
         res.status(response.getStatus()).send(response.getError());
       })
+      .get("/foods_overview", async (req: Request, res: Response) => {
+        const response = await this.controller.getAllFoods();
+
+        if (!response.getError()) {
+          res.status(response.getStatus()).send(response.getData());
+        }
+        res.status(response.getStatus()).send(response.getError());
+      })
       .post("/profile", async (req: Request, res: Response) => {
         const response = await this.controller.createUser(req.body);
 
