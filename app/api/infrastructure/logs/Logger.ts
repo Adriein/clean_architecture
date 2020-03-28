@@ -11,15 +11,15 @@ export default class Logger implements ILogger {
     this.db = Database.getInstance();
   }
 
-  log(message: string) {
+  async log(message: string) {
     const log = new TableLog();
     log.level = this._level;
     log.stack_trace = this._stack;
     log.message = message;
-    this.db.connection.getRepository(TableLog).save(log);
+    await this.db.connection.getRepository(TableLog).save(log);
   }
 
-  stack(stack: string = 'not stack setted'): this {
+  stack(stack: string = "not stack setted"): this {
     this._stack = stack;
     return this;
   }

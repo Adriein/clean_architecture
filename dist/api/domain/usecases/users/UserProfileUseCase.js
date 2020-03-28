@@ -38,18 +38,19 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var UserProfileUseCase = /** @class */ (function () {
     function UserProfileUseCase(entityFactory) {
-        this.user = entityFactory.createUser();
-        this.food = entityFactory.createFood();
-        this.foodUserRelation = entityFactory.createFoodUserRelation();
+        this.entityFactory = entityFactory;
     }
     UserProfileUseCase.prototype.execute = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             var user, asociatedFoods, foodObject, _i, asociatedFoods_1, relatedFood, food;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: 
-                    //fetch the user
-                    return [4 /*yield*/, this.user.fetch(parseInt(id))];
+                    case 0:
+                        this.user = this.entityFactory.createUser();
+                        this.food = this.entityFactory.createFood();
+                        this.foodUserRelation = this.entityFactory.createFoodUserRelation();
+                        //fetch the user
+                        return [4 /*yield*/, this.user.fetch(parseInt(id))];
                     case 1:
                         //fetch the user
                         _a.sent();

@@ -1,32 +1,36 @@
 import Database from "./Database";
-import { ISync, IUserProps, IFoodProps } from "../../domain/interfaces";
-import { TableUserToFood, TableFood, TableUser } from "./entity";
+import { ISync, IUserProps } from "../../domain/interfaces";
+import { TableUser } from "./entity";
 
 export default class UserLocalSync implements ISync<IUserProps> {
-  public db: Database;
-
-  constructor() {
-    this.db = Database.getInstance();
-  }
-
   public async findAll(): Promise<IUserProps[]> {
     try {
-      return (await this.db.connection.getRepository(TableUser).find()) as IUserProps[];
+      return (await Database.getInstance()
+        .connection.getRepository(TableUser)
+        .find()) as IUserProps[];
     } catch (error) {
-      throw new Error("fallo al leer");
+      throw new Error(`fallo en la lectura - ${error.message}`);
     }
   }
 
   public async fetch(id: number): Promise<IUserProps> {
-    return this.db.connection.getRepository(TableUser).findOne(id) as IUserProps;
+    const response = (await Database.getInstance()
+      .connection.getRepository(TableUser)
+      .findOne(id)) as IUserProps;
+    if (response == undefined) {
+      throw new Error(`not user found with id: ${id}`);
+    }
+    return response;
   }
 
   public async create(model: IUserProps): Promise<IUserProps> {
-    return await this.db.connection.getRepository(TableUser).save(model as TableUser);
+    return await Database.getInstance()
+      .connection.getRepository(TableUser)
+      .save(model as TableUser);
   }
 
   public async update(id: number, model: IUserProps): Promise<IUserProps> {
-    const userSchema = this.db.connection.getRepository(TableUser);
+    const userSchema = Database.getInstance().connection.getRepository(TableUser);
     const user = await userSchema.findOne(id);
 
     return await userSchema.save(Object.assign(user, model));

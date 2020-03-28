@@ -2,16 +2,16 @@ import { IUserProps, IAbstractFactory, IFoodUserRelation, IFoodProps } from "../
 import { Model } from "../../entities";
 
 export default class UserCreateUseCase {
-  private user: Model<IUserProps>;
-  private foodUserRelation: Model<IFoodUserRelation>;
+  private user!: Model<IUserProps>;
+  private foodUserRelation!: Model<IFoodUserRelation>;
   private entityFactory: IAbstractFactory;
 
   constructor(entityFactory: IAbstractFactory) {
     this.entityFactory = entityFactory;
-    this.user = this.entityFactory.createUser();
-    this.foodUserRelation = this.entityFactory.createFoodUserRelation();
   }
   public async execute(body: any): Promise<IUserProps> {
+    this.user = this.entityFactory.createUser();
+    this.foodUserRelation = this.entityFactory.createFoodUserRelation();
     //Parse the model
     const parsed = JSON.parse(JSON.stringify(body));
 

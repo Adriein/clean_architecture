@@ -43,7 +43,6 @@ var Database_1 = __importDefault(require("./Database"));
 var entity_1 = require("./entity");
 var UserLocalSync = /** @class */ (function () {
     function UserLocalSync() {
-        this.db = Database_1.default.getInstance();
     }
     UserLocalSync.prototype.findAll = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -52,11 +51,13 @@ var UserLocalSync = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.db.connection.getRepository(entity_1.TableUser).find()];
+                        return [4 /*yield*/, Database_1.default.getInstance()
+                                .connection.getRepository(entity_1.TableUser)
+                                .find()];
                     case 1: return [2 /*return*/, (_a.sent())];
                     case 2:
                         error_1 = _a.sent();
-                        throw new Error("fallo al leer");
+                        throw new Error("fallo en la lectura - " + error_1.message);
                     case 3: return [2 /*return*/];
                 }
             });
@@ -64,8 +65,19 @@ var UserLocalSync = /** @class */ (function () {
     };
     UserLocalSync.prototype.fetch = function (id) {
         return __awaiter(this, void 0, void 0, function () {
+            var response;
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.db.connection.getRepository(entity_1.TableUser).findOne(id)];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Database_1.default.getInstance()
+                            .connection.getRepository(entity_1.TableUser)
+                            .findOne(id)];
+                    case 1:
+                        response = (_a.sent());
+                        if (response == undefined) {
+                            throw new Error("not user found with id: " + id);
+                        }
+                        return [2 /*return*/, response];
+                }
             });
         });
     };
@@ -73,7 +85,9 @@ var UserLocalSync = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.db.connection.getRepository(entity_1.TableUser).save(model)];
+                    case 0: return [4 /*yield*/, Database_1.default.getInstance()
+                            .connection.getRepository(entity_1.TableUser)
+                            .save(model)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
@@ -85,7 +99,7 @@ var UserLocalSync = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        userSchema = this.db.connection.getRepository(entity_1.TableUser);
+                        userSchema = Database_1.default.getInstance().connection.getRepository(entity_1.TableUser);
                         return [4 /*yield*/, userSchema.findOne(id)];
                     case 1:
                         user = _a.sent();

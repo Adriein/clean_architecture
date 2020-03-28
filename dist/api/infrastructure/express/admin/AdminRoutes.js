@@ -55,6 +55,7 @@ var AdminRoutes = /** @class */ (function () {
                         response = _a.sent();
                         if (!response.getError()) {
                             res.status(response.getStatus()).send(response.getData());
+                            return [2 /*return*/];
                         }
                         res.status(response.getStatus()).send(response.getError());
                         return [2 /*return*/];
@@ -70,6 +71,7 @@ var AdminRoutes = /** @class */ (function () {
                         response = _a.sent();
                         if (!response.getError()) {
                             res.status(response.getStatus()).send(response.getData());
+                            return [2 /*return*/];
                         }
                         res.status(response.getStatus()).send(response.getError());
                         return [2 /*return*/];

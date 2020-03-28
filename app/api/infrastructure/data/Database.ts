@@ -13,12 +13,11 @@ export default class Database {
     if (!Database.instance) {
       Database.instance = new Database();
     }
-
     return Database.instance;
   }
 
-  private setUpDataBase(): void {
-    createConnection({
+  private async setUpDataBase(): Promise<void> {
+    this._connection = await createConnection({
       type: "mysql",
       host: "localhost",
       port: 3306,
@@ -27,7 +26,7 @@ export default class Database {
       database: "test",
       entities: [TableUser, TableFood, TableUserToFood, TableLog],
       synchronize: true
-    }).then(connection => (this._connection = connection));
+    });
   }
 
   public get connection(): Connection {

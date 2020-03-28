@@ -39,15 +39,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var UserDeleteUseCase = /** @class */ (function () {
     function UserDeleteUseCase(entityFactory) {
         this.entityFactory = entityFactory;
-        this.user = this.entityFactory.createUser();
     }
     UserDeleteUseCase.prototype.execute = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: 
-                    //Retrive user stored on db
-                    return [4 /*yield*/, this.user.fetch(id)];
+                    case 0:
+                        this.user = this.entityFactory.createUser();
+                        //Retrive user stored on db
+                        return [4 /*yield*/, this.user.fetch(id)];
                     case 1:
                         //Retrive user stored on db
                         _a.sent();
@@ -57,7 +57,7 @@ var UserDeleteUseCase = /** @class */ (function () {
                         //Set user_status to false witch means is inactive
                         this.user.set({ user_status: !this.user.getAttributes().user_status });
                         //Save user changes
-                        this.user.update(this.user.get('id'), this.user.getAttributes());
+                        this.user.update(this.user.get("id"), this.user.getAttributes());
                         return [2 /*return*/, this.user.getAttributes()];
                 }
             });

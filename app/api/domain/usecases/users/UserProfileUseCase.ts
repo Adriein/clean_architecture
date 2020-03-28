@@ -1,16 +1,18 @@
 import { IUserProps, IAbstractFactory, IFoodUserRelation, IFoodProps } from "../../interfaces";
 import { Model } from "../../entities";
 export default class UserProfileUseCase {
-  private user: Model<IUserProps>;
-  private foodUserRelation: Model<IFoodUserRelation>;
-  private food: Model<IFoodProps>;
+  private user!: Model<IUserProps>;
+  private foodUserRelation!: Model<IFoodUserRelation>;
+  private food!: Model<IFoodProps>;
+  private entityFactory: IAbstractFactory;
 
   constructor(entityFactory: IAbstractFactory) {
-    this.user = entityFactory.createUser();
-    this.food = entityFactory.createFood();
-    this.foodUserRelation = entityFactory.createFoodUserRelation();
+    this.entityFactory = entityFactory;
   }
   public async execute(id: string): Promise<IUserProps> {
+    this.user = this.entityFactory.createUser();
+    this.food = this.entityFactory.createFood();
+    this.foodUserRelation = this.entityFactory.createFoodUserRelation();
     //fetch the user
     await this.user.fetch(parseInt(id));
     const user = this.user.getAttributes();

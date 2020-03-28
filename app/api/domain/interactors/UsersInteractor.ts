@@ -23,14 +23,13 @@ export default class UserInteractor {
 
   constructor() {
     this.entityFactory = new EntityAbstractFactory();
+    this.responseModel = this.entityFactory.createUserResponseModel();
 
     this.usersOverviewUseCase = new UsersOverviewUseCase(this.entityFactory);
     this.userProfileUseCase = new UserProfileUseCase(this.entityFactory);
     this.userEditUseCase = new UserEditUseCase(this.entityFactory);
     this.userCreateUseCase = new UserCreateUseCase(this.entityFactory);
     this.userDeleteUseCase = new UserDeleteUseCase(this.entityFactory);
-
-    this.responseModel = this.entityFactory.createUserResponseModel();
   }
 
   public async executeUsersOverview(): Promise<ResponseModel<IUserProps>> {

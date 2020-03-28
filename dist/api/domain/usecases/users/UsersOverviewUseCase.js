@@ -39,13 +39,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var UsersOverviewUseCase = /** @class */ (function () {
     function UsersOverviewUseCase(entityFactory) {
         this.entityFactory = entityFactory;
-        this.userCollection = this.entityFactory.createUserCollection();
     }
     UsersOverviewUseCase.prototype.execute = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.userCollection.create()];
+                    case 0:
+                        this.userCollection = this.entityFactory.createUserCollection();
+                        return [4 /*yield*/, this.userCollection.create()];
                     case 1:
                         _a.sent();
                         return [2 /*return*/, this.userCollection.getCollection()];

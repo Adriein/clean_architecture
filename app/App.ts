@@ -1,6 +1,7 @@
 import express from "express";
 import cookieSession from "cookie-session";
 import bodyParser from "body-parser";
+import Database from "./api/infrastructure/data/Database";
 import "reflect-metadata";
 
 //import AuthRoutes from "./api/routes/auth/AuthRoutes";
@@ -28,7 +29,6 @@ export default class App {
 
   private setUpEnvironment(): void {
     this.app.set("port", process.env.PORT || 5000);
-
     console.log(`App Environment: PORT: ${this.app.get("port")} CONFIG: DEV `);
   }
 

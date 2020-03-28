@@ -39,8 +39,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var UserCreateUseCase = /** @class */ (function () {
     function UserCreateUseCase(entityFactory) {
         this.entityFactory = entityFactory;
-        this.user = this.entityFactory.createUser();
-        this.foodUserRelation = this.entityFactory.createFoodUserRelation();
     }
     UserCreateUseCase.prototype.execute = function (body) {
         return __awaiter(this, void 0, void 0, function () {
@@ -48,6 +46,8 @@ var UserCreateUseCase = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        this.user = this.entityFactory.createUser();
+                        this.foodUserRelation = this.entityFactory.createFoodUserRelation();
                         parsed = JSON.parse(JSON.stringify(body));
                         parsedFoods = JSON.parse("[" + parsed.foods + "]");
                         //Delete unnecesary model params

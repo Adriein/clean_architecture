@@ -20,16 +20,20 @@ export default class AdminRoutes {
 
         if (!response.getError()) {
           res.status(response.getStatus()).send(response.getData());
+          return;
         }
         res.status(response.getStatus()).send(response.getError());
+        return;
       })
       .get("/profile/:id", async (req: Request, res: Response) => {
         const response = await this.controller.getUserProfile(req.params.id);
 
         if (!response.getError()) {
           res.status(response.getStatus()).send(response.getData());
+          return;
         }
         res.status(response.getStatus()).send(response.getError());
+        return;
       })
       .get("/foods_overview", async (req: Request, res: Response) => {
         const response = await this.controller.getAllFoods();

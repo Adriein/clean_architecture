@@ -44,12 +44,12 @@ var EntityAbstractFactory_1 = __importDefault(require("../../factories/EntityAbs
 var UserInteractor = /** @class */ (function () {
     function UserInteractor() {
         this.entityFactory = new EntityAbstractFactory_1.default();
+        this.responseModel = this.entityFactory.createUserResponseModel();
         this.usersOverviewUseCase = new usecases_1.UsersOverviewUseCase(this.entityFactory);
         this.userProfileUseCase = new usecases_1.UserProfileUseCase(this.entityFactory);
         this.userEditUseCase = new usecases_1.UserEditUseCase(this.entityFactory);
         this.userCreateUseCase = new usecases_1.UserCreateUseCase(this.entityFactory);
         this.userDeleteUseCase = new usecases_1.UserDeleteUseCase(this.entityFactory);
-        this.responseModel = this.entityFactory.createUserResponseModel();
     }
     UserInteractor.prototype.executeUsersOverview = function () {
         return __awaiter(this, void 0, void 0, function () {

@@ -39,17 +39,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var UserEditUseCase = /** @class */ (function () {
     function UserEditUseCase(entityFactory) {
         this.entityFactory = entityFactory;
-        this.user = this.entityFactory.createUser();
-        this.foodUserRelation = this.entityFactory.createFoodUserRelation();
     }
     UserEditUseCase.prototype.execute = function (id, body) {
         return __awaiter(this, void 0, void 0, function () {
             var user, parsedFoods, _i, parsedFoods_1, food, relatedFoods, foodModel;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: 
-                    //Retrive user stored on db
-                    return [4 /*yield*/, this.user.fetch(parseInt(id))];
+                    case 0:
+                        this.user = this.entityFactory.createUser();
+                        this.foodUserRelation = this.entityFactory.createFoodUserRelation();
+                        //Retrive user stored on db
+                        return [4 /*yield*/, this.user.fetch(parseInt(id))];
                     case 1:
                         //Retrive user stored on db
                         _a.sent();
