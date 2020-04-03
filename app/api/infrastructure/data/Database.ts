@@ -13,6 +13,7 @@ export default class Database {
     if (!Database.instance) {
       Database.instance = new Database();
     }
+    
     return Database.instance;
   }
 

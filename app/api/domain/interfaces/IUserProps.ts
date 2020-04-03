@@ -2,6 +2,7 @@ import IFoodProps from "./IFoodProps";
 
 export default interface IUserProps {
   id?: number;
+  avatar?: string;
   email?: string;
   password?: string;
   first_name?: string;
@@ -14,7 +15,7 @@ export default interface IUserProps {
   nutrition_objective?: string;
   notes?: string;
   injuries?: string;
-  foods?: IFoodProps[]
+  foods?: IFoodProps[];
   user_status?: boolean;
   rol?: string;
 }

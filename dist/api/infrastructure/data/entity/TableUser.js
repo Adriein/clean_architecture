@@ -24,6 +24,10 @@ var Users = /** @class */ (function () {
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
+    ], Users.prototype, "avatar", void 0);
+    __decorate([
+        typeorm_1.Column(),
+        __metadata("design:type", String)
     ], Users.prototype, "email", void 0);
     __decorate([
         typeorm_1.Column(),

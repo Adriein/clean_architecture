@@ -1,5 +1,6 @@
 import { IUserProps, IAbstractFactory, IFoodUserRelation, IFoodProps } from "../../interfaces";
 import { Model } from "../../entities";
+import * as faker from "faker";
 
 export default class UserCreateUseCase {
   private user!: Model<IUserProps>;
@@ -15,6 +16,9 @@ export default class UserCreateUseCase {
     //Parse the model
     const parsed = JSON.parse(JSON.stringify(body));
 
+    //Provisional: create avatar
+    parsed.avatar = faker.internet.avatar();
+
     //Parse the model foods object
     const parsedFoods: IFoodProps[] = JSON.parse(`[${parsed.foods}]`);
 
@@ -22,7 +26,7 @@ export default class UserCreateUseCase {
     delete parsed.foods;
 
     //Save model into db
-    await this.user.create(body);
+    await this.user.create(parsed);
 
     //Save related foods
     for (const food of parsedFoods) {

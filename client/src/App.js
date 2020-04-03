@@ -7,6 +7,7 @@ import Row from "react-bootstrap/Row";
 import Menu from "./components/Menu";
 import Overview from "./components/Overview";
 import Feature from "./components/Feature";
+import UserTab from "./components/UserTab";
 
 import axios from "axios";
 
@@ -17,7 +18,10 @@ class App extends React.Component {
     active: false,
     pending: false,
     clicked: 0,
-    user: []
+    user: [],
+    activeTab: "profile",
+    tabMode: "view",
+    validated: ""
   };
 
   async componentDidMount() {
@@ -37,13 +41,63 @@ class App extends React.Component {
   };
 
   handleCardClick = async id => {
+    this.setState({ tabMode: "view" });
     this.setState({ user: (await axios.get(`/api/admin/profile/${id}`)).data });
     this.setState({ clicked: id });
   };
 
+  handleClose = event => {
+    this.setState({ tabMode: "view" });
+    this.setState({ clicked: 0 });
+  };
+
+  handleTabChange = key => {
+    this.setState({ tabMode: "view" });
+    this.setState({ activeTab: key });
+  };
+
+  handleEdit = event => {
+    this.setState({ tabMode: "edit" });
+  };
+
+  handleDelete = id => {
+    console.log("to implement");
+  };
+
+  handleSubmit = (event, body) => {
+    const form = event.currentTarget;
+
+    if (form.checkValidity() === true) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.setState({ tabMode: "view" });
+    }
+    delete body.foods;
+    console.log(body);
+
+    this.setState({ validated: true });
+  };
+
+  handleDiscard = event => {
+    this.setState({ tabMode: "view" });
+  };
+
   renderContent(id) {
     if (id !== 0) {
-    return <div>id: {id} name: {this.state.user[0].first_name} level: {this.state.user[0].level}</div>;
+      return (
+        <UserTab
+          tabKey={this.state.activeTab}
+          user={this.state.user[0]}
+          handleTabChange={this.handleTabChange}
+          handleEdit={this.handleEdit}
+          handleDelete={this.handleDelete}
+          handleClose={this.handleClose}
+          tabMode={this.state.tabMode}
+          validated={this.state.validated}
+          handleSubmit={this.handleSubmit}
+          handleDiscard={this.handleDiscard}
+        />
+      );
     }
     return (
       <div>

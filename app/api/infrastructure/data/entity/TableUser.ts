@@ -1,15 +1,12 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  OneToMany
-} from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import TableUserToFood from "./TableUserToFood";
 
 @Entity()
 export default class Users {
   @PrimaryGeneratedColumn()
   id?: number;
+  @Column()
+  avatar?: string;
   @Column()
   email?: string;
   @Column()
@@ -38,13 +35,10 @@ export default class Users {
   user_status?: boolean;
   @Column()
   rol?: string;
-  // @ManyToMany(
-  //   type => TableFood,
-  //   food => food.users
-  // )
-  // @JoinTable()
-  // foods?: TableFood[];
 
-  @OneToMany(type => TableUserToFood, userToFood => userToFood.user)
+  @OneToMany(
+    type => TableUserToFood,
+    userToFood => userToFood.user
+  )
   public foods!: TableUserToFood[];
 }

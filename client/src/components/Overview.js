@@ -17,12 +17,17 @@ class Overview extends React.Component {
       }
 
       return (
-        <UserCard key={user.id} id={user.id} user={user} handleCardClick={this.props.handleCardClick} />
+        <UserCard
+          key={user.id}
+          id={user.id}
+          user={user}
+          handleCardClick={this.props.handleCardClick}
+        />
       );
     });
 
     return (
-      <Card className="overview-element">
+      <Card className="overview">
         <Card.Header>
           <SearchBar
             term={this.props.term}
@@ -31,7 +36,7 @@ class Overview extends React.Component {
             togglePending={this.props.togglePending}
           />
         </Card.Header>
-        {activeUsers}
+        <div className="overview-scroll">{activeUsers}</div>
       </Card>
     );
   }
