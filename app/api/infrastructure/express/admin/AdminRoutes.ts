@@ -35,14 +35,6 @@ export default class AdminRoutes {
         res.status(response.getStatus()).send(response.getError());
         return;
       })
-      .get("/foods_overview", async (req: Request, res: Response) => {
-        const response = await this.controller.getAllFoods();
-
-        if (!response.getError()) {
-          res.status(response.getStatus()).send(response.getData());
-        }
-        res.status(response.getStatus()).send(response.getError());
-      })
       .post("/profile", async (req: Request, res: Response) => {
         const response = await this.controller.createUser(req.body);
 
@@ -61,6 +53,42 @@ export default class AdminRoutes {
       })
       .delete("/profile/:id", async (req: Request, res: Response) => {
         const response = await this.controller.deleteUser(parseInt(req.params.id));
+
+        if (!response.getError()) {
+          res.status(response.getStatus()).send(response.getData());
+        }
+        res.status(response.getStatus()).send(response.getError());
+      })
+      .get("/food/:id", async (req: Request, res: Response) => {
+        const response = await this.controller.retriveFood(req.params.id);
+
+        if (!response.getError()) {
+          res.status(response.getStatus()).send(response.getData());
+          return;
+        }
+        res.status(response.getStatus()).send(response.getError());
+        return;
+      })
+      .get("/food", async (req: Request, res: Response) => {
+        const response = await this.controller.getAllFoods();
+
+        if (!response.getError()) {
+          res.status(response.getStatus()).send(response.getData());
+          return;
+        }
+        res.status(response.getStatus()).send(response.getError());
+        return;
+      })
+      .post("/food", async (req: Request, res: Response) => {
+        const response = await this.controller.createFood(req.body);
+
+        if (!response.getError()) {
+          res.status(response.getStatus()).send(response.getData());
+        }
+        res.status(response.getStatus()).send(response.getError());
+      })
+      .put("/food/:id", async (req: Request, res: Response) => {
+        const response = await this.controller.updateFood(req.params.id, req.body);
 
         if (!response.getError()) {
           res.status(response.getStatus()).send(response.getData());

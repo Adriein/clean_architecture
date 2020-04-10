@@ -2,12 +2,17 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
+import RenderContext from "../contexts/RenderContext";
+
+import "../css/UserForm.css";
 
 class UserForm extends React.Component {
+  static contextType = RenderContext;
+
   state = {
     id: "",
     email: "",
-    first_name: null,
+    first_name: "",
     last_name: "",
     sex: "",
     age: "",
@@ -15,7 +20,7 @@ class UserForm extends React.Component {
     height: "",
     nutrition_objective: "",
     notes: "",
-    injuries: ""
+    injuries: "",
   };
 
   componentDidMount() {
@@ -24,17 +29,12 @@ class UserForm extends React.Component {
     }
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
   render() {
     return (
-      <Form
-        noValidate
-        validated={this.props.validated}
-        onSubmit={event => this.props.handleSubmit(event, this.state)}
-        className="test"
-      >
+      <Form noValidate validated={this.props.validated} className="user-form-form" onSubmit={(event) => this.props.onUserFormSubmit(event, this.state)}>
         <Form.Group>
           <Form.Label>First Name</Form.Label>
           <Form.Control
@@ -162,7 +162,7 @@ class UserForm extends React.Component {
             </Form.Control.Feedback>
           </InputGroup>
         </Form.Group>
-        <Form.Group className="notes">
+        <Form.Group className="user-form-notes-input">
           <Form.Label>Notes:</Form.Label>
           <Form.Control
             name="notes"
@@ -172,11 +172,11 @@ class UserForm extends React.Component {
             onChange={this.handleChange}
           />
         </Form.Group>
-        <div className="test-buttons">
-          <Button type="submit" className="submit" variant="success">
+        <div className="user-form-buttons">
+          <Button type="submit" variant="success">
             Save
           </Button>
-          <Button className="submit" variant="danger" onClick={this.props.handleDiscard}>
+          <Button variant="danger" onClick={this.context.onDiscard}>
             Discard
           </Button>
         </div>

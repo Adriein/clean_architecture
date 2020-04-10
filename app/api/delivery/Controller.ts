@@ -37,4 +37,16 @@ export default class Controller {
   public async getAllFoods(): Promise<ResponseModel<IFoodProps>> {
     return await this.foodsInteractor.executeFoodsList();
   }
+
+  public async retriveFood(id: string): Promise<ResponseModel<IFoodProps>> {
+    return await this.foodsInteractor.executeRetriveFood(parseInt(id));
+  }
+
+  public async createFood(body: any): Promise<ResponseModel<IFoodProps>> {
+    return await this.foodsInteractor.executeCreateFood(body);
+  }
+
+  public async updateFood(id: string, body: any): Promise<ResponseModel<IFoodProps>> {
+    return await this.foodsInteractor.executeUpdateFood(parseInt(id), body);
+  }
 }

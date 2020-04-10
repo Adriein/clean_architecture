@@ -36,34 +36,22 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var UserProfileUseCase = /** @class */ (function () {
-    function UserProfileUseCase(entityFactory) {
-        this.entityFactory = entityFactory;
+var EntityCreateUseCase = /** @class */ (function () {
+    function EntityCreateUseCase(model) {
+        this.model = model;
     }
-    UserProfileUseCase.prototype.execute = function (id) {
+    EntityCreateUseCase.prototype.create = function (body) {
         return __awaiter(this, void 0, void 0, function () {
-            var user;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        this.user = this.entityFactory.createUser();
-                        //fetch the user
-                        return [4 /*yield*/, this.user.fetch(parseInt(id))];
+                    case 0: return [4 /*yield*/, this.model.create(body)];
                     case 1:
-                        //fetch the user
                         _a.sent();
-                        user = this.user.getAttributes();
-                        if (user != undefined) {
-                            return [2 /*return*/, user];
-                        }
-                        else {
-                            throw new Error("user not found");
-                        }
-                        return [2 /*return*/];
+                        return [2 /*return*/, this.model.getAttributes()];
                 }
             });
         });
     };
-    return UserProfileUseCase;
+    return EntityCreateUseCase;
 }());
-exports.default = UserProfileUseCase;
+exports.default = EntityCreateUseCase;

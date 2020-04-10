@@ -10,28 +10,6 @@ export default class FoodLocalSync implements ISync<IFoodProps> {
   }
 
   public async findAll(id?: number): Promise<IFoodProps[]> {
-    const likedFoods: IFoodProps[] = [];
-    //Check if we want only list with liked foods
-    if (id) {
-      //Get food relation by user
-      const foodRelation = await this.db.connection
-        .getRepository(TableUserToFood)
-        .find({ userId: id });
-
-      //Get only the liked foods by this user
-      const likedFoodsIds = foodRelation.map((relation: TableUserToFood) => {
-        if (relation.like) {
-          return relation.foodId;
-        }
-      });
-
-      for (const id of likedFoodsIds) {
-        likedFoods.push(
-          (await this.db.connection.getRepository(TableFood).findOne(id)) as IFoodProps
-        );
-      }
-      return (await this.db.connection.getRepository(TableFood).find()) as IFoodProps[];
-    }
     return (await this.db.connection.getRepository(TableFood).find()) as IFoodProps[];
   }
 
@@ -40,11 +18,14 @@ export default class FoodLocalSync implements ISync<IFoodProps> {
   }
 
   public async create(model: IFoodProps): Promise<IFoodProps> {
-    throw new Error("not implemented yet");
+    return await this.db.connection.getRepository(TableFood).save(model as TableFood);
   }
 
   public async update(id: number, model: IFoodProps): Promise<IFoodProps> {
-    throw new Error("not implemented yet");
+    const foodSchema = this.db.connection.getRepository(TableFood);
+    const food = await foodSchema.findOne(id);
+
+    return await foodSchema.save(Object.assign(food, model));
   }
 
   public async delete(id: number): Promise<IFoodProps> {

@@ -3,7 +3,7 @@ import {
   UserProfileUseCase,
   UserEditUseCase,
   UserCreateUseCase,
-  UserDeleteUseCase
+  UserDeleteUseCase,
 } from "../usecases";
 import { IUserProps, IAbstractFactory } from "../interfaces";
 import { ResponseModel } from "../entities";
@@ -19,11 +19,10 @@ export default class UserInteractor {
 
   private entityFactory: IAbstractFactory;
 
-  private responseModel: ResponseModel<IUserProps>;
+  private responseModel!: ResponseModel<IUserProps>;
 
   constructor() {
     this.entityFactory = new EntityAbstractFactory();
-    this.responseModel = this.entityFactory.createUserResponseModel();
 
     this.usersOverviewUseCase = new UsersOverviewUseCase(this.entityFactory);
     this.userProfileUseCase = new UserProfileUseCase(this.entityFactory);
@@ -34,6 +33,7 @@ export default class UserInteractor {
 
   public async executeUsersOverview(): Promise<ResponseModel<IUserProps>> {
     try {
+      this.responseModel = this.entityFactory.createUserResponseModel();
       return this.responseModel.setData(await this.usersOverviewUseCase.execute()).setStatus(200);
     } catch (error) {
       return this.responseModel.setError(error);
@@ -42,6 +42,7 @@ export default class UserInteractor {
 
   public async executeGetUserProfile(id: string): Promise<ResponseModel<IUserProps>> {
     try {
+      this.responseModel = this.entityFactory.createUserResponseModel();
       return this.responseModel.setData([await this.userProfileUseCase.execute(id)]).setStatus(200);
     } catch (error) {
       return this.responseModel.setError(error);
@@ -50,6 +51,7 @@ export default class UserInteractor {
 
   public async executeEditUser(id: string, body: any): Promise<ResponseModel<IUserProps>> {
     try {
+      this.responseModel = this.entityFactory.createUserResponseModel();
       return this.responseModel
         .setData([await this.userEditUseCase.execute(id, body)])
         .setStatus(200);
@@ -60,6 +62,7 @@ export default class UserInteractor {
 
   public async executeCreateUser(body: any): Promise<ResponseModel<IUserProps>> {
     try {
+      this.responseModel = this.entityFactory.createUserResponseModel();
       return this.responseModel
         .setData([await this.userCreateUseCase.execute(body)])
         .setStatus(200);
@@ -70,6 +73,7 @@ export default class UserInteractor {
 
   public async executeDeleteUser(id: number): Promise<ResponseModel<IUserProps>> {
     try {
+      this.responseModel = this.entityFactory.createUserResponseModel();
       return this.responseModel.setData([await this.userDeleteUseCase.execute(id)]).setStatus(200);
     } catch (error) {
       return this.responseModel.setError(error);

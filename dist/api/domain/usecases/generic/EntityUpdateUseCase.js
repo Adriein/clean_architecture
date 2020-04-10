@@ -36,34 +36,35 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var UserProfileUseCase = /** @class */ (function () {
-    function UserProfileUseCase(entityFactory) {
-        this.entityFactory = entityFactory;
+var EntityUpdateUseCase = /** @class */ (function () {
+    function EntityUpdateUseCase(model) {
+        this.model = model;
     }
-    UserProfileUseCase.prototype.execute = function (id) {
+    EntityUpdateUseCase.prototype.update = function (id, body) {
         return __awaiter(this, void 0, void 0, function () {
-            var user;
+            var modelOnDB;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        this.user = this.entityFactory.createUser();
-                        //fetch the user
-                        return [4 /*yield*/, this.user.fetch(parseInt(id))];
+                    case 0: 
+                    //check if entity already exists in db
+                    return [4 /*yield*/, this.model.fetch(id)];
                     case 1:
-                        //fetch the user
+                        //check if entity already exists in db
                         _a.sent();
-                        user = this.user.getAttributes();
-                        if (user != undefined) {
-                            return [2 /*return*/, user];
+                        modelOnDB = this.model.getAttributes();
+                        if (!modelOnDB) {
+                            throw new Error("model not found on DB");
                         }
-                        else {
-                            throw new Error("user not found");
-                        }
-                        return [2 /*return*/];
+                        //update the new model on the db
+                        return [4 /*yield*/, this.model.update(id, body)];
+                    case 2:
+                        //update the new model on the db
+                        _a.sent();
+                        return [2 /*return*/, this.model.getAttributes()];
                 }
             });
         });
     };
-    return UserProfileUseCase;
+    return EntityUpdateUseCase;
 }());
-exports.default = UserProfileUseCase;
+exports.default = EntityUpdateUseCase;

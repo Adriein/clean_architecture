@@ -1,5 +1,5 @@
 import { Model, Collection, ResponseModel } from "../entities";
-import { IUserProps, IFoodProps, IFoodUserRelation } from ".";
+import { IUserProps, IFoodProps } from ".";
 
 export default interface IAbstractFactory {
   createUser(): Model<IUserProps>;
@@ -9,6 +9,4 @@ export default interface IAbstractFactory {
   createFood(): Model<IFoodProps>;
   createFoodCollection(): Collection<IFoodProps>;
   createFoodResponseModel(): ResponseModel<IFoodProps>;
-
-  createFoodUserRelation(): Model<IFoodUserRelation>;
 }

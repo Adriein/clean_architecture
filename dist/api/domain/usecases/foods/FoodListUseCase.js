@@ -39,13 +39,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var FoodListUseCase = /** @class */ (function () {
     function FoodListUseCase(entityFactory) {
         this.entityFactory = entityFactory;
-        this.food = this.entityFactory.createFoodCollection();
     }
-    FoodListUseCase.prototype.execute = function (id) {
+    FoodListUseCase.prototype.execute = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.food.create()];
+                    case 0:
+                        this.food = this.entityFactory.createFoodCollection();
+                        return [4 /*yield*/, this.food.create()];
                     case 1:
                         _a.sent();
                         return [2 /*return*/, this.food.getCollection()];

@@ -15,7 +15,6 @@ export default interface IUserProps {
   nutrition_objective?: string;
   notes?: string;
   injuries?: string;
-  foods?: IFoodProps[];
   user_status?: boolean;
   rol?: string;
 }

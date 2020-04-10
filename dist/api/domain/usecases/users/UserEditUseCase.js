@@ -42,12 +42,11 @@ var UserEditUseCase = /** @class */ (function () {
     }
     UserEditUseCase.prototype.execute = function (id, body) {
         return __awaiter(this, void 0, void 0, function () {
-            var user, parsedFoods, _i, parsedFoods_1, food, relatedFoods, foodModel;
+            var user;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         this.user = this.entityFactory.createUser();
-                        this.foodUserRelation = this.entityFactory.createFoodUserRelation();
                         //Retrive user stored on db
                         return [4 /*yield*/, this.user.fetch(parseInt(id))];
                     case 1:
@@ -57,40 +56,11 @@ var UserEditUseCase = /** @class */ (function () {
                         if (!user) {
                             throw new Error("user not found");
                         }
-                        parsedFoods = JSON.parse("[" + body.foods + "]");
-                        _i = 0, parsedFoods_1 = parsedFoods;
-                        _a.label = 2;
-                    case 2:
-                        if (!(_i < parsedFoods_1.length)) return [3 /*break*/, 8];
-                        food = parsedFoods_1[_i];
-                        return [4 /*yield*/, this.foodUserRelation.findBy({
-                                where: { userId: user.id, foodId: food.id }
-                            })];
-                    case 3:
-                        relatedFoods = (_a.sent())[0];
-                        foodModel = {
-                            userId: user.id,
-                            foodId: food.id,
-                            like: food.like == "true" ? true : false
-                        };
-                        if (!!relatedFoods) return [3 /*break*/, 5];
-                        return [4 /*yield*/, this.foodUserRelation.create(foodModel)];
-                    case 4:
-                        _a.sent();
-                        return [3 /*break*/, 7];
-                    case 5: return [4 /*yield*/, this.foodUserRelation.update(relatedFoods.id, foodModel)];
-                    case 6:
-                        _a.sent();
-                        _a.label = 7;
-                    case 7:
-                        _i++;
-                        return [3 /*break*/, 2];
-                    case 8:
-                        //Delete unnecesary model params
-                        delete body.foods;
+                        //Delete the id in the body
+                        delete body.id;
                         //Save user changes
                         return [4 /*yield*/, this.user.update(parseInt(id), JSON.parse(JSON.stringify(body)))];
-                    case 9:
+                    case 2:
                         //Save user changes
                         _a.sent();
                         return [2 /*return*/, this.user.getAttributes()];

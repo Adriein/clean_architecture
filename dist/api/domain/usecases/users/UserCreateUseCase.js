@@ -50,41 +50,20 @@ var UserCreateUseCase = /** @class */ (function () {
     }
     UserCreateUseCase.prototype.execute = function (body) {
         return __awaiter(this, void 0, void 0, function () {
-            var parsed, parsedFoods, _i, parsedFoods_1, food, foodRelationModel;
+            var parsed;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         this.user = this.entityFactory.createUser();
-                        this.foodUserRelation = this.entityFactory.createFoodUserRelation();
                         parsed = JSON.parse(JSON.stringify(body));
                         //Provisional: create avatar
                         parsed.avatar = faker.internet.avatar();
-                        parsedFoods = JSON.parse("[" + parsed.foods + "]");
-                        //Delete unnecesary model params
-                        delete parsed.foods;
                         //Save model into db
                         return [4 /*yield*/, this.user.create(parsed)];
                     case 1:
                         //Save model into db
                         _a.sent();
-                        _i = 0, parsedFoods_1 = parsedFoods;
-                        _a.label = 2;
-                    case 2:
-                        if (!(_i < parsedFoods_1.length)) return [3 /*break*/, 5];
-                        food = parsedFoods_1[_i];
-                        foodRelationModel = {
-                            userId: this.user.get("id"),
-                            foodId: food.id,
-                            like: food.liked
-                        };
-                        return [4 /*yield*/, this.foodUserRelation.create(foodRelationModel)];
-                    case 3:
-                        _a.sent();
-                        _a.label = 4;
-                    case 4:
-                        _i++;
-                        return [3 /*break*/, 2];
-                    case 5: return [2 /*return*/, this.user.getAttributes()];
+                        return [2 /*return*/, this.user.getAttributes()];
                 }
             });
         });

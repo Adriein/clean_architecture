@@ -6,7 +6,6 @@ import ResponseModel from "./ResponseModel";
 import User from "./User";
 import UserCollection from "./UserCollection";
 import FoodCollection from "./FoodCollection";
-import FoodUserRelation from "./FoodUserRelation";
 
 export {
   Collection,
@@ -17,5 +16,4 @@ export {
   User,
   UserCollection,
   FoodCollection,
-  FoodUserRelation
 };

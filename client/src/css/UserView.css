@@ -1,0 +1,75 @@
+.user-view-container {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  padding: 20px;
+}
+
+.user-view-img-section {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+.user-view-img-section {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.img-header {
+  width: 200px;
+}
+
+.active-logo {
+  color: white;
+}
+
+.profile-active-indicator {
+  position: absolute;
+  margin-left: -40px;
+  margin-top: -5px;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+  padding: 0.8em;
+  width: 200px;
+}
+.each-button:hover {
+  cursor: pointer;
+}
+
+.each-button {
+  background: #2e2e2e;
+  border-radius: 50%;
+  color: #fff;
+  height: 3.2em;
+  position: relative;
+  width: 3.2em;
+}
+
+.each-button > svg {
+  fill: currentColor;
+  height: 50%;
+  left: 50%;
+  position: absolute;
+  stroke: currentColor;
+  stroke-width: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+}
+
+.inbox-info {
+  position: absolute;
+  margin-left: 34px;
+}
+
+.user-view-nutrition-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 12px;
+}
+
+.user-view-nutrition-info > h4 {
+  grid-column: 1/3;
+}

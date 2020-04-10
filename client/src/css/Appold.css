@@ -84,59 +84,11 @@
   border-right: 1px solid lightgray;
 }
 
-.test {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  padding: 1em;
-  gap: 1em;
-}
-.test-buttons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-column: 2/3;
-  gap: 1em;
-}
-
-/* .submit {
-  grid-column: 2/3;
-} */
-
-.notes {
-  grid-column: 1/4;
-}
-
-.usertab-element-nutrition {
-  padding-top: 15px;
-}
-
-.usertab-img-container {
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
-
-.usertab-profile-img {
-  width: 100%;
-}
-
-.usertab-profile-logo {
-  padding-top: 15px;
-}
-
-.usertab-progressbar {
-  margin-bottom: 10px;
-}
-
 .close-logo:hover {
   cursor: pointer;
 }
 
-.edit-logo:hover {
-  cursor: pointer;
-}
 
-.delete-logo:hover {
-  cursor: pointer;
-}
 
 .close-logo {
   position: absolute;
@@ -144,12 +96,9 @@
   margin-top: 0.6rem;
 }
 
-.edit-logo {
-  margin-right: 10px;
-}
 
 /* .usertab-profile-logo {
   display: flex;
   justify-content: center;
   align-items: center;
-} */
+} */ 

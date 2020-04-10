@@ -44,7 +44,6 @@ var EntityAbstractFactory_1 = __importDefault(require("../../factories/EntityAbs
 var UserInteractor = /** @class */ (function () {
     function UserInteractor() {
         this.entityFactory = new EntityAbstractFactory_1.default();
-        this.responseModel = this.entityFactory.createUserResponseModel();
         this.usersOverviewUseCase = new usecases_1.UsersOverviewUseCase(this.entityFactory);
         this.userProfileUseCase = new usecases_1.UserProfileUseCase(this.entityFactory);
         this.userEditUseCase = new usecases_1.UserEditUseCase(this.entityFactory);
@@ -58,6 +57,7 @@ var UserInteractor = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
+                        this.responseModel = this.entityFactory.createUserResponseModel();
                         _b = (_a = this.responseModel).setData;
                         return [4 /*yield*/, this.usersOverviewUseCase.execute()];
                     case 1: return [2 /*return*/, _b.apply(_a, [_c.sent()]).setStatus(200)];
@@ -76,6 +76,7 @@ var UserInteractor = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
+                        this.responseModel = this.entityFactory.createUserResponseModel();
                         _b = (_a = this.responseModel).setData;
                         return [4 /*yield*/, this.userProfileUseCase.execute(id)];
                     case 1: return [2 /*return*/, _b.apply(_a, [[_c.sent()]]).setStatus(200)];
@@ -94,6 +95,7 @@ var UserInteractor = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
+                        this.responseModel = this.entityFactory.createUserResponseModel();
                         _b = (_a = this.responseModel).setData;
                         return [4 /*yield*/, this.userEditUseCase.execute(id, body)];
                     case 1: return [2 /*return*/, _b.apply(_a, [[_c.sent()]])
@@ -113,6 +115,7 @@ var UserInteractor = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
+                        this.responseModel = this.entityFactory.createUserResponseModel();
                         _b = (_a = this.responseModel).setData;
                         return [4 /*yield*/, this.userCreateUseCase.execute(body)];
                     case 1: return [2 /*return*/, _b.apply(_a, [[_c.sent()]])
@@ -132,6 +135,7 @@ var UserInteractor = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
+                        this.responseModel = this.entityFactory.createUserResponseModel();
                         _b = (_a = this.responseModel).setData;
                         return [4 /*yield*/, this.userDeleteUseCase.execute(id)];
                     case 1: return [2 /*return*/, _b.apply(_a, [[_c.sent()]]).setStatus(200)];

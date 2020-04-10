@@ -47,39 +47,10 @@ var FoodLocalSync = /** @class */ (function () {
     }
     FoodLocalSync.prototype.findAll = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var likedFoods, foodRelation, likedFoodsIds, _i, likedFoodsIds_1, id_1, _a, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        likedFoods = [];
-                        if (!id) return [3 /*break*/, 7];
-                        return [4 /*yield*/, this.db.connection
-                                .getRepository(entity_1.TableUserToFood)
-                                .find({ userId: id })];
-                    case 1:
-                        foodRelation = _c.sent();
-                        likedFoodsIds = foodRelation.map(function (relation) {
-                            if (relation.like) {
-                                return relation.foodId;
-                            }
-                        });
-                        _i = 0, likedFoodsIds_1 = likedFoodsIds;
-                        _c.label = 2;
-                    case 2:
-                        if (!(_i < likedFoodsIds_1.length)) return [3 /*break*/, 5];
-                        id_1 = likedFoodsIds_1[_i];
-                        _b = (_a = likedFoods).push;
-                        return [4 /*yield*/, this.db.connection.getRepository(entity_1.TableFood).findOne(id_1)];
-                    case 3:
-                        _b.apply(_a, [(_c.sent())]);
-                        _c.label = 4;
-                    case 4:
-                        _i++;
-                        return [3 /*break*/, 2];
-                    case 5: return [4 /*yield*/, this.db.connection.getRepository(entity_1.TableFood).find()];
-                    case 6: return [2 /*return*/, (_c.sent())];
-                    case 7: return [4 /*yield*/, this.db.connection.getRepository(entity_1.TableFood).find()];
-                    case 8: return [2 /*return*/, (_c.sent())];
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.db.connection.getRepository(entity_1.TableFood).find()];
+                    case 1: return [2 /*return*/, (_a.sent())];
                 }
             });
         });
@@ -97,14 +68,26 @@ var FoodLocalSync = /** @class */ (function () {
     FoodLocalSync.prototype.create = function (model) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                throw new Error("not implemented yet");
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.db.connection.getRepository(entity_1.TableFood).save(model)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
             });
         });
     };
     FoodLocalSync.prototype.update = function (id, model) {
         return __awaiter(this, void 0, void 0, function () {
+            var foodSchema, food;
             return __generator(this, function (_a) {
-                throw new Error("not implemented yet");
+                switch (_a.label) {
+                    case 0:
+                        foodSchema = this.db.connection.getRepository(entity_1.TableFood);
+                        return [4 /*yield*/, foodSchema.findOne(id)];
+                    case 1:
+                        food = _a.sent();
+                        return [4 /*yield*/, foodSchema.save(Object.assign(food, model))];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
             });
         });
     };

@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var entities_1 = require("../domain/entities");
 var UserLocalSync_1 = __importDefault(require("../infrastructure/data/UserLocalSync"));
-var FoodUserLocalSync_1 = __importDefault(require("../infrastructure/data/FoodUserLocalSync"));
 var FoodLocalSync_1 = __importDefault(require("../infrastructure/data/FoodLocalSync"));
 var Logger_1 = __importDefault(require("../infrastructure/logs/Logger"));
 var EntityAbstractFactory = /** @class */ (function () {
@@ -28,9 +27,6 @@ var EntityAbstractFactory = /** @class */ (function () {
     };
     EntityAbstractFactory.prototype.createFoodResponseModel = function () {
         return new entities_1.ResponseModel(new Logger_1.default());
-    };
-    EntityAbstractFactory.prototype.createFoodUserRelation = function () {
-        return new entities_1.FoodUserRelation(new entities_1.ModelAttributes({}), new FoodUserLocalSync_1.default());
     };
     return EntityAbstractFactory;
 }());

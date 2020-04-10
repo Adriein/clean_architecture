@@ -3,13 +3,11 @@ import {
   UserCollection,
   ModelAttributes,
   ResponseModel,
-  FoodUserRelation,
   Food,
   FoodCollection
 } from "../domain/entities";
 import { IAbstractFactory, IUserProps, IFoodProps, IFoodUserRelation } from "../domain/interfaces";
 import UserLocalSync from "../infrastructure/data/UserLocalSync";
-import FoodUserLocalSync from "../infrastructure/data/FoodUserLocalSync";
 import FoodLocalSync from "../infrastructure/data/FoodLocalSync";
 import Logger from "../infrastructure/logs/Logger";
 
@@ -36,9 +34,5 @@ export default class EntityAbstractFactory implements IAbstractFactory {
 
   createFoodResponseModel(): ResponseModel<IFoodProps> {
     return new ResponseModel(new Logger());
-  }
-
-  createFoodUserRelation(): FoodUserRelation {
-    return new FoodUserRelation(new ModelAttributes({}), new FoodUserLocalSync());
   }
 }

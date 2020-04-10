@@ -1,8 +1,10 @@
 export default interface IDietProps {
-  mealNumber?: string;
-  calories?: number;
-  carbohidrates?: number;
-  protein?: number;
-  fat?: number;
-  meals?: [];
+  id?: number,
+  userId?: number
+  createDate?: Date;
+  updateDate?: Date;
+  validTo?: Date;
+  numOfMeals?: number;
+  totalKcal?: number;
+  
 }

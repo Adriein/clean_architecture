@@ -1,0 +1,35 @@
+.card-header {
+    padding: 1em;
+}
+
+.overview {
+  overflow: hidden;
+}
+
+.overview-scroll {
+  padding: 0.6em;
+  overflow-y: scroll;
+  display: grid;
+  grid-template-rows: 1fr;
+  gap: 0.6em;
+  height: 100%;
+}
+
+.overview-card:hover {
+  cursor: pointer;
+}
+
+.overview-card-body {
+  display: flex;
+  flex-direction: row;
+}
+
+.overview-card-img {
+  width: 20%;
+}
+
+.overview-card-text {
+  width: 80%;
+  text-align: center;
+  margin-bottom: 0px;
+}

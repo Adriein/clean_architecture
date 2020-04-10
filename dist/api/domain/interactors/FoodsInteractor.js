@@ -41,10 +41,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var usecases_1 = require("../usecases");
 var EntityAbstractFactory_1 = __importDefault(require("../../factories/EntityAbstractFactory"));
+var EntityCreateUseCase_1 = __importDefault(require("../usecases/generic/EntityCreateUseCase"));
+var EntityUpdateUseCase_1 = __importDefault(require("../usecases/generic/EntityUpdateUseCase"));
+var EntityRetriveUseCase_1 = __importDefault(require("../usecases/generic/EntityRetriveUseCase"));
 var FoodsInteractor = /** @class */ (function () {
     function FoodsInteractor() {
         this.entityFactory = new EntityAbstractFactory_1.default();
-        this.foodsListUseCase = new usecases_1.FoodListUseCase(this.entityFactory);
         this.responseModel = this.entityFactory.createUserResponseModel();
     }
     FoodsInteractor.prototype.executeFoodsList = function () {
@@ -54,6 +56,7 @@ var FoodsInteractor = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
+                        this.foodsListUseCase = new usecases_1.FoodListUseCase(this.entityFactory);
                         _b = (_a = this.responseModel).setData;
                         return [4 /*yield*/, this.foodsListUseCase.execute()];
                     case 1: return [2 /*return*/, _b.apply(_a, [_c.sent()]).setStatus(200)];
@@ -64,6 +67,68 @@ var FoodsInteractor = /** @class */ (function () {
                 }
             });
         });
+    };
+    FoodsInteractor.prototype.executeRetriveFood = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, _b, error_2;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        this.retriveFoodUseCase = new EntityRetriveUseCase_1.default(this.entityFactory.createFood());
+                        _b = (_a = this.responseModel).setData;
+                        return [4 /*yield*/, this.retriveFoodUseCase.fetch(id)];
+                    case 1: return [2 /*return*/, _b.apply(_a, [[_c.sent()]]).setStatus(200)];
+                    case 2:
+                        error_2 = _c.sent();
+                        return [2 /*return*/, this.responseModel.setError(error_2)];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    FoodsInteractor.prototype.executeCreateFood = function (body) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, _b, error_3;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        this.createFoodUseCase = new EntityCreateUseCase_1.default(this.entityFactory.createFood());
+                        _b = (_a = this.responseModel).setData;
+                        return [4 /*yield*/, this.createFoodUseCase.create(this.mapper(body))];
+                    case 1: return [2 /*return*/, _b.apply(_a, [[_c.sent()]])
+                            .setStatus(200)];
+                    case 2:
+                        error_3 = _c.sent();
+                        return [2 /*return*/, this.responseModel.setError(error_3)];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    FoodsInteractor.prototype.executeUpdateFood = function (id, body) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, _b, error_4;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        this.updateFoodUseCase = new EntityUpdateUseCase_1.default(this.entityFactory.createFood());
+                        _b = (_a = this.responseModel).setData;
+                        return [4 /*yield*/, this.updateFoodUseCase.update(id, this.mapper(body))];
+                    case 1: return [2 /*return*/, _b.apply(_a, [[_c.sent()]])
+                            .setStatus(200)];
+                    case 2:
+                        error_4 = _c.sent();
+                        return [2 /*return*/, this.responseModel.setError(error_4)];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    FoodsInteractor.prototype.mapper = function (body) {
+        return JSON.parse(JSON.stringify(body));
     };
     return FoodsInteractor;
 }());
