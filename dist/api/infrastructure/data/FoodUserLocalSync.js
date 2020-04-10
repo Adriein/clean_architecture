@@ -40,7 +40,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var Database_1 = __importDefault(require("./Database"));
-var entity_1 = require("./entity");
 var FoodUserLocalSync = /** @class */ (function () {
     function FoodUserLocalSync() {
         this.db = Database_1.default.getInstance();
@@ -63,7 +62,7 @@ var FoodUserLocalSync = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.db.connection.getRepository(entity_1.TableUserToFood).save(model)];
+                    case 0: return [4 /*yield*/, this.db.connection.getRepository(TableUserToFood).save(model)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
@@ -75,7 +74,7 @@ var FoodUserLocalSync = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        foodSchema = this.db.connection.getRepository(entity_1.TableUserToFood);
+                        foodSchema = this.db.connection.getRepository(TableUserToFood);
                         return [4 /*yield*/, foodSchema.find({
                                 where: { id: id }
                             })];
@@ -97,12 +96,10 @@ var FoodUserLocalSync = /** @class */ (function () {
     FoodUserLocalSync.prototype.findBy = function (options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.db.connection
-                            .getRepository(entity_1.TableUserToFood)
-                            .find(options)];
-                    case 1: return [2 /*return*/, (_a.sent())];
-                }
+                // return (await this.db.connection
+                //   .getRepository(TableUserToFood)
+                //   .find(options)) as IFoodUserRelation[];
+                throw new Error();
             });
         });
     };

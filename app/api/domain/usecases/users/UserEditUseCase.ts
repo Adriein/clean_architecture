@@ -1,4 +1,4 @@
-import { IUserProps, IAbstractFactory, IFoodUserRelation } from "../../interfaces";
+import { IUserProps, IAbstractFactory } from "../../interfaces";
 import { Model } from "../../entities";
 
 export default class UserEditUseCase {

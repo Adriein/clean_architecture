@@ -19,3 +19,7 @@ var UserCollection_1 = __importDefault(require("./UserCollection"));
 exports.UserCollection = UserCollection_1.default;
 var FoodCollection_1 = __importDefault(require("./FoodCollection"));
 exports.FoodCollection = FoodCollection_1.default;
+var Macros_1 = __importDefault(require("./Macros"));
+exports.Macros = Macros_1.default;
+var Meal_1 = __importDefault(require("./Meal"));
+exports.Meal = Meal_1.default;

@@ -14,6 +14,12 @@ export default class AdminRoutes {
   }
 
   private setUpRoutes(): void {
+    this.userManagementRoutes();
+    this.foodManagementRoutes();
+    this.dietManagementRoutes();
+  }
+
+  private userManagementRoutes(): void {
     this.router
       .get("/overview", async (req: Request, res: Response) => {
         const response = await this.controller.getAllUsersProfiles();
@@ -58,7 +64,11 @@ export default class AdminRoutes {
           res.status(response.getStatus()).send(response.getData());
         }
         res.status(response.getStatus()).send(response.getError());
-      })
+      });
+  }
+
+  private foodManagementRoutes(): void {
+    this.router
       .get("/food/:id", async (req: Request, res: Response) => {
         const response = await this.controller.retriveFood(req.params.id);
 
@@ -95,6 +105,17 @@ export default class AdminRoutes {
         }
         res.status(response.getStatus()).send(response.getError());
       });
+  }
+
+  private dietManagementRoutes(): void {
+    this.router.post("/diet", async (req: Request, res: Response) => {
+      const response = await this.controller.createDiet(req.body);
+
+      if (!response.getError()) {
+        res.status(response.getStatus()).send(response.getData());
+      }
+      res.status(response.getStatus()).send(response.getError());
+    });
   }
 
   public getAdminRouter(): Router {

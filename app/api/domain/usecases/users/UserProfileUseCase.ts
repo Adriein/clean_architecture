@@ -1,4 +1,4 @@
-import { IUserProps, IAbstractFactory, IFoodUserRelation, IFoodProps } from "../../interfaces";
+import { IUserProps, IAbstractFactory } from "../../interfaces";
 import { Model } from "../../entities";
 export default class UserProfileUseCase {
   private user!: Model<IUserProps>;

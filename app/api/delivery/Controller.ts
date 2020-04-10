@@ -1,17 +1,20 @@
 import UsersInteractor from "../domain/interactors/UsersInteractor";
-import EntityFactory from "../factories/EntityAbstractFactory";
 import IUserProps from "../domain/interfaces/IUserProps";
 import ResponseModel from "../domain/entities/ResponseModel";
 import { IFoodProps } from "../domain/interfaces";
 import FoodsInteractor from "../domain/interactors/FoodsInteractor";
+import IDietProps from "../domain/interfaces/IDietProps";
+import DietInteractor from "../domain/interactors/DietInteractor";
 
 export default class Controller {
   private usersInteractor: UsersInteractor;
   private foodsInteractor: FoodsInteractor;
+  private dietInteractor: DietInteractor;
 
   constructor() {
     this.usersInteractor = new UsersInteractor();
     this.foodsInteractor = new FoodsInteractor();
+    this.dietInteractor = new DietInteractor();
   }
 
   public async getAllUsersProfiles(): Promise<ResponseModel<IUserProps>> {
@@ -48,5 +51,9 @@ export default class Controller {
 
   public async updateFood(id: string, body: any): Promise<ResponseModel<IFoodProps>> {
     return await this.foodsInteractor.executeUpdateFood(parseInt(id), body);
+  }
+
+  public async createDiet(body: any):Promise<ResponseModel<IDietProps>> {
+    return await this.dietInteractor.executeCreateDiet(body);
   }
 }

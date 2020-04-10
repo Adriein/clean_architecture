@@ -1,4 +1,4 @@
-import { IUserProps, IAbstractFactory, IFoodUserRelation, IFoodProps } from "../../interfaces";
+import { IUserProps, IAbstractFactory, IFoodProps } from "../../interfaces";
 import { Model } from "../../entities";
 import * as faker from "faker";
 

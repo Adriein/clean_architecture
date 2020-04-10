@@ -1,15 +1,25 @@
 import {
+  IAbstractFactory,
+  IUserProps,
+  IFoodProps,
+  IDietProps,
+  IMealProps,
+} from "../domain/interfaces";
+import {
   User,
   UserCollection,
   ModelAttributes,
   ResponseModel,
   Food,
-  FoodCollection
+  FoodCollection,
+  Meal,
 } from "../domain/entities";
-import { IAbstractFactory, IUserProps, IFoodProps, IFoodUserRelation } from "../domain/interfaces";
 import UserLocalSync from "../infrastructure/data/UserLocalSync";
 import FoodLocalSync from "../infrastructure/data/FoodLocalSync";
 import Logger from "../infrastructure/logs/Logger";
+import Diet from "../domain/entities/Diet";
+import DietLocalSync from "../infrastructure/data/DietLocalSync";
+import MealLocalSync from "../infrastructure/data/MealLocalSync";
 
 export default class EntityAbstractFactory implements IAbstractFactory {
   createUser(): User {
@@ -33,6 +43,18 @@ export default class EntityAbstractFactory implements IAbstractFactory {
   }
 
   createFoodResponseModel(): ResponseModel<IFoodProps> {
+    return new ResponseModel(new Logger());
+  }
+
+  createMeal(body:IMealProps): Meal {
+    return new Meal(new ModelAttributes(body), new MealLocalSync(), this);
+  }
+
+  createDiet(body: IDietProps): Diet {
+    return new Diet(new ModelAttributes(body), new DietLocalSync(), this);
+  }
+
+  createDietReponseModel(): ResponseModel<IDietProps> {
     return new ResponseModel(new Logger());
   }
 }

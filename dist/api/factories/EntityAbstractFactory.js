@@ -7,6 +7,9 @@ var entities_1 = require("../domain/entities");
 var UserLocalSync_1 = __importDefault(require("../infrastructure/data/UserLocalSync"));
 var FoodLocalSync_1 = __importDefault(require("../infrastructure/data/FoodLocalSync"));
 var Logger_1 = __importDefault(require("../infrastructure/logs/Logger"));
+var Diet_1 = __importDefault(require("../domain/entities/Diet"));
+var DietLocalSync_1 = __importDefault(require("../infrastructure/data/DietLocalSync"));
+var MealLocalSync_1 = __importDefault(require("../infrastructure/data/MealLocalSync"));
 var EntityAbstractFactory = /** @class */ (function () {
     function EntityAbstractFactory() {
     }
@@ -26,6 +29,15 @@ var EntityAbstractFactory = /** @class */ (function () {
         return new entities_1.FoodCollection(new FoodLocalSync_1.default());
     };
     EntityAbstractFactory.prototype.createFoodResponseModel = function () {
+        return new entities_1.ResponseModel(new Logger_1.default());
+    };
+    EntityAbstractFactory.prototype.createMeal = function (body) {
+        return new entities_1.Meal(new entities_1.ModelAttributes(body), new MealLocalSync_1.default(), this);
+    };
+    EntityAbstractFactory.prototype.createDiet = function (body) {
+        return new Diet_1.default(new entities_1.ModelAttributes(body), new DietLocalSync_1.default(), this);
+    };
+    EntityAbstractFactory.prototype.createDietReponseModel = function () {
         return new entities_1.ResponseModel(new Logger_1.default());
     };
     return EntityAbstractFactory;

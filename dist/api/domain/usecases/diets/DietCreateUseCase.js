@@ -36,49 +36,34 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var typeorm_1 = require("typeorm");
-var entity_1 = require("./entity");
-var Database = /** @class */ (function () {
-    function Database() {
-        this.setUpDataBase();
+var DietCreateUseCase = /** @class */ (function () {
+    function DietCreateUseCase(entityFactory) {
+        this.entityFactory = entityFactory;
     }
-    Database.getInstance = function () {
-        if (!Database.instance) {
-            Database.instance = new Database();
-        }
-        return Database.instance;
-    };
-    Database.prototype.setUpDataBase = function () {
+    DietCreateUseCase.prototype.execute = function (body) {
         return __awaiter(this, void 0, void 0, function () {
-            var _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var diet;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
-                        _a = this;
-                        return [4 /*yield*/, typeorm_1.createConnection({
-                                type: "mysql",
-                                host: "localhost",
-                                port: 3306,
-                                username: "root",
-                                password: "root",
-                                database: "test",
-                                entities: [entity_1.TableUser, entity_1.TableFood, entity_1.TableLog, entity_1.TableDiet, entity_1.TableMeal],
-                                synchronize: true
-                            })];
+                        diet = this.entityFactory.createDiet(body);
+                        //set the creation date
+                        //diet.set({ createDate: new Date() });
+                        //saving diet to generate the diet id
+                        return [4 /*yield*/, diet.create(body)];
                     case 1:
-                        _a._connection = _b.sent();
-                        return [2 /*return*/];
+                        //set the creation date
+                        //diet.set({ createDate: new Date() });
+                        //saving diet to generate the diet id
+                        _a.sent();
+                        //generate meals (by default 1 if num of meals is unseted)
+                        //await diet.generateMeals();
+                        //return the new diet
+                        return [2 /*return*/, diet.getAttributes()];
                 }
             });
         });
     };
-    Object.defineProperty(Database.prototype, "connection", {
-        get: function () {
-            return this._connection;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Database;
+    return DietCreateUseCase;
 }());
-exports.default = Database;
+exports.default = DietCreateUseCase;

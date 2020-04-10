@@ -44,6 +44,11 @@ var AdminRoutes = /** @class */ (function () {
         this.setUpRoutes();
     }
     AdminRoutes.prototype.setUpRoutes = function () {
+        this.userManagementRoutes();
+        this.foodManagementRoutes();
+        this.dietManagementRoutes();
+    };
+    AdminRoutes.prototype.userManagementRoutes = function () {
         var _this = this;
         this.router
             .get("/overview", function (req, res) { return __awaiter(_this, void 0, void 0, function () {
@@ -122,7 +127,11 @@ var AdminRoutes = /** @class */ (function () {
                         return [2 /*return*/];
                 }
             });
-        }); })
+        }); });
+    };
+    AdminRoutes.prototype.foodManagementRoutes = function () {
+        var _this = this;
+        this.router
             .get("/food/:id", function (req, res) { return __awaiter(_this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
@@ -175,6 +184,24 @@ var AdminRoutes = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.controller.updateFood(req.params.id, req.body)];
+                    case 1:
+                        response = _a.sent();
+                        if (!response.getError()) {
+                            res.status(response.getStatus()).send(response.getData());
+                        }
+                        res.status(response.getStatus()).send(response.getError());
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    AdminRoutes.prototype.dietManagementRoutes = function () {
+        var _this = this;
+        this.router.post("/diet", function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.controller.createDiet(req.body)];
                     case 1:
                         response = _a.sent();
                         if (!response.getError()) {

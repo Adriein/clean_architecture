@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -36,49 +47,55 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var typeorm_1 = require("typeorm");
-var entity_1 = require("./entity");
-var Database = /** @class */ (function () {
-    function Database() {
-        this.setUpDataBase();
+var DietLocalSync = /** @class */ (function () {
+    function DietLocalSync() {
     }
-    Database.getInstance = function () {
-        if (!Database.instance) {
-            Database.instance = new Database();
-        }
-        return Database.instance;
-    };
-    Database.prototype.setUpDataBase = function () {
+    DietLocalSync.prototype.findAll = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _a = this;
-                        return [4 /*yield*/, typeorm_1.createConnection({
-                                type: "mysql",
-                                host: "localhost",
-                                port: 3306,
-                                username: "root",
-                                password: "root",
-                                database: "test",
-                                entities: [entity_1.TableUser, entity_1.TableFood, entity_1.TableLog, entity_1.TableDiet, entity_1.TableMeal],
-                                synchronize: true
-                            })];
-                    case 1:
-                        _a._connection = _b.sent();
-                        return [2 /*return*/];
-                }
+            return __generator(this, function (_a) {
+                throw new Error();
             });
         });
     };
-    Object.defineProperty(Database.prototype, "connection", {
-        get: function () {
-            return this._connection;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Database;
+    DietLocalSync.prototype.fetch = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                throw new Error();
+            });
+        });
+    };
+    DietLocalSync.prototype.create = function (model) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                // return await Database.getInstance()
+                //   .connection.getRepository(TableMeal)
+                //   .save(model as TableMeal);
+                // console.log(model, 'model of meal');
+                return [2 /*return*/, __assign({}, model)];
+            });
+        });
+    };
+    DietLocalSync.prototype.update = function (id, model) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                throw new Error();
+            });
+        });
+    };
+    DietLocalSync.prototype.delete = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                throw new Error("not implemented yet");
+            });
+        });
+    };
+    DietLocalSync.prototype.findBy = function (options) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                throw new Error("not implemented yet");
+            });
+        });
+    };
+    return DietLocalSync;
 }());
-exports.default = Database;
+exports.default = DietLocalSync;

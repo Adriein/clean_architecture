@@ -41,10 +41,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var UsersInteractor_1 = __importDefault(require("../domain/interactors/UsersInteractor"));
 var FoodsInteractor_1 = __importDefault(require("../domain/interactors/FoodsInteractor"));
+var DietInteractor_1 = __importDefault(require("../domain/interactors/DietInteractor"));
 var Controller = /** @class */ (function () {
     function Controller() {
         this.usersInteractor = new UsersInteractor_1.default();
         this.foodsInteractor = new FoodsInteractor_1.default();
+        this.dietInteractor = new DietInteractor_1.default();
     }
     Controller.prototype.getAllUsersProfiles = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -131,6 +133,16 @@ var Controller = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.foodsInteractor.executeUpdateFood(parseInt(id), body)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    Controller.prototype.createDiet = function (body) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.dietInteractor.executeCreateDiet(body)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });

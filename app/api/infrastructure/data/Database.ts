@@ -1,5 +1,5 @@
 import { createConnection, Connection } from "typeorm";
-import { TableUser, TableFood, TableUserToFood, TableLog } from "./entity";
+import { TableUser, TableFood, TableDiet, TableLog, TableMeal } from "./entity";
 
 export default class Database {
   private static instance: Database;
@@ -25,7 +25,7 @@ export default class Database {
       username: "root",
       password: "root",
       database: "test",
-      entities: [TableUser, TableFood, TableUserToFood, TableLog],
+      entities: [TableUser, TableFood, TableLog, TableDiet, TableMeal],
       synchronize: true
     });
   }

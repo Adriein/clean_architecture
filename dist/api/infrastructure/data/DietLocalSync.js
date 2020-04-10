@@ -35,50 +35,65 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var typeorm_1 = require("typeorm");
+var Database_1 = __importDefault(require("./Database"));
 var entity_1 = require("./entity");
-var Database = /** @class */ (function () {
-    function Database() {
-        this.setUpDataBase();
+var DietLocalSync = /** @class */ (function () {
+    function DietLocalSync() {
     }
-    Database.getInstance = function () {
-        if (!Database.instance) {
-            Database.instance = new Database();
-        }
-        return Database.instance;
-    };
-    Database.prototype.setUpDataBase = function () {
+    DietLocalSync.prototype.findAll = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            return __generator(this, function (_a) {
+                throw new Error();
+            });
+        });
+    };
+    DietLocalSync.prototype.fetch = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                throw new Error();
+            });
+        });
+    };
+    DietLocalSync.prototype.create = function (model) {
+        return __awaiter(this, void 0, void 0, function () {
+            var a;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
-                        _a = this;
-                        return [4 /*yield*/, typeorm_1.createConnection({
-                                type: "mysql",
-                                host: "localhost",
-                                port: 3306,
-                                username: "root",
-                                password: "root",
-                                database: "test",
-                                entities: [entity_1.TableUser, entity_1.TableFood, entity_1.TableLog, entity_1.TableDiet, entity_1.TableMeal],
-                                synchronize: true
-                            })];
-                    case 1:
-                        _a._connection = _b.sent();
-                        return [2 /*return*/];
+                        console.log(model);
+                        a = JSON.parse(JSON.stringify(model));
+                        console.log(a);
+                        return [4 /*yield*/, Database_1.default.getInstance().connection.getRepository(entity_1.TableDiet).save(a)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
-    Object.defineProperty(Database.prototype, "connection", {
-        get: function () {
-            return this._connection;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Database;
+    DietLocalSync.prototype.update = function (id, model) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                throw new Error();
+            });
+        });
+    };
+    DietLocalSync.prototype.delete = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                throw new Error("not implemented yet");
+            });
+        });
+    };
+    DietLocalSync.prototype.findBy = function (options) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                throw new Error("not implemented yet");
+            });
+        });
+    };
+    return DietLocalSync;
 }());
-exports.default = Database;
+exports.default = DietLocalSync;

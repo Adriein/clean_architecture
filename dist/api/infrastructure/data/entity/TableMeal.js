@@ -8,36 +8,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var typeorm_1 = require("typeorm");
-var _1 = require(".");
-var Food = /** @class */ (function () {
-    function Food() {
+var TableDiet_1 = __importDefault(require("./TableDiet"));
+var Meal = /** @class */ (function () {
+    function Meal() {
     }
     __decorate([
         typeorm_1.PrimaryGeneratedColumn(),
         __metadata("design:type", Number)
-    ], Food.prototype, "id", void 0);
+    ], Meal.prototype, "id", void 0);
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], Food.prototype, "name", void 0);
+    ], Meal.prototype, "name", void 0);
     __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", Number)
-    ], Food.prototype, "kcal", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", String)
-    ], Food.prototype, "type", void 0);
-    __decorate([
-        typeorm_1.ManyToMany(function (type) { return _1.TableMeal; }),
-        typeorm_1.JoinTable(),
-        __metadata("design:type", Array)
-    ], Food.prototype, "meals", void 0);
-    Food = __decorate([
+        typeorm_1.ManyToOne(function (type) { return TableDiet_1.default; }, function (diet) { return diet.meals; }),
+        __metadata("design:type", TableDiet_1.default)
+    ], Meal.prototype, "diet", void 0);
+    Meal = __decorate([
         typeorm_1.Entity()
-    ], Food);
-    return Food;
+    ], Meal);
+    return Meal;
 }());
-exports.default = Food;
+exports.default = Meal;

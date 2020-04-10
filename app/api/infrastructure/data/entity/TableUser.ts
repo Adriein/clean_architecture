@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
-import TableUserToFood from "./TableUserToFood";
+import { TableDiet } from ".";
 
 @Entity()
 export default class Users {
@@ -35,10 +35,6 @@ export default class Users {
   user_status?: boolean;
   @Column()
   rol?: string;
-
-  @OneToMany(
-    type => TableUserToFood,
-    userToFood => userToFood.user
-  )
-  public foods!: TableUserToFood[];
+  @OneToMany((type) => TableDiet, (diet) => diet.user)
+  diets?: TableDiet[];
 }

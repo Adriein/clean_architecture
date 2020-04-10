@@ -35,50 +35,40 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var typeorm_1 = require("typeorm");
-var entity_1 = require("./entity");
-var Database = /** @class */ (function () {
-    function Database() {
-        this.setUpDataBase();
+var EntityAbstractFactory_1 = __importDefault(require("../../factories/EntityAbstractFactory"));
+var DietCreateUseCase_1 = __importDefault(require("../usecases/diets/DietCreateUseCase"));
+var DietInteractor = /** @class */ (function () {
+    function DietInteractor() {
+        this.entityFactory = new EntityAbstractFactory_1.default();
+        this.responseModel = this.entityFactory.createDietReponseModel();
     }
-    Database.getInstance = function () {
-        if (!Database.instance) {
-            Database.instance = new Database();
-        }
-        return Database.instance;
-    };
-    Database.prototype.setUpDataBase = function () {
+    DietInteractor.prototype.executeCreateDiet = function (body) {
         return __awaiter(this, void 0, void 0, function () {
-            var _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var _a, _b, error_1;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a = this;
-                        return [4 /*yield*/, typeorm_1.createConnection({
-                                type: "mysql",
-                                host: "localhost",
-                                port: 3306,
-                                username: "root",
-                                password: "root",
-                                database: "test",
-                                entities: [entity_1.TableUser, entity_1.TableFood, entity_1.TableLog, entity_1.TableDiet, entity_1.TableMeal],
-                                synchronize: true
-                            })];
-                    case 1:
-                        _a._connection = _b.sent();
-                        return [2 /*return*/];
+                        _c.trys.push([0, 2, , 3]);
+                        this.dietCreateUseCase = new DietCreateUseCase_1.default(this.entityFactory);
+                        _b = (_a = this.responseModel).setData;
+                        return [4 /*yield*/, this.dietCreateUseCase.execute(this.mapper(body))];
+                    case 1: return [2 /*return*/, _b.apply(_a, [[_c.sent()]])
+                            .setStatus(200)];
+                    case 2:
+                        error_1 = _c.sent();
+                        return [2 /*return*/, this.responseModel.setError(error_1)];
+                    case 3: return [2 /*return*/];
                 }
             });
         });
     };
-    Object.defineProperty(Database.prototype, "connection", {
-        get: function () {
-            return this._connection;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Database;
+    DietInteractor.prototype.mapper = function (body) {
+        return JSON.parse(JSON.stringify(body));
+    };
+    return DietInteractor;
 }());
-exports.default = Database;
+exports.default = DietInteractor;

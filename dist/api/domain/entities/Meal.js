@@ -60,61 +60,54 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var Model_1 = __importDefault(require("./Model"));
-var Diet = /** @class */ (function (_super) {
-    __extends(Diet, _super);
-    function Diet(modelAttributes, sync, entityFactory) {
+var Meal = /** @class */ (function (_super) {
+    __extends(Meal, _super);
+    function Meal(modelAttributes, sync, entityFactory) {
         var _this = _super.call(this, modelAttributes, sync) || this;
-        _this.meals = [];
+        _this.foods = [];
         _this.entityFactory = entityFactory;
         return _this;
     }
-    Diet.prototype.generateMeals = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var created, _a, id, numOfMeals, meal;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        created = 0;
-                        _a = this.getAttributes(), id = _a.id, numOfMeals = _a.numOfMeals;
-                        _b.label = 1;
-                    case 1:
-                        if (!(created < numOfMeals)) return [3 /*break*/, 3];
-                        meal = this.entityFactory.createMeal({ dietId: id });
-                        return [4 /*yield*/, meal.create(meal.getAttributes())];
-                    case 2:
-                        _b.sent();
-                        this.meals = __spreadArrays(this.meals, [meal.getAttributes()]);
-                        created++;
-                        return [3 /*break*/, 1];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
+    Meal.prototype.addKcal = function (kcal) {
+        var actualKcal = this.get("totalKcal") || 0;
+        this.set({ totalKcal: actualKcal + kcal });
     };
-    Diet.prototype.incrementMeals = function () {
+    Meal.prototype.substractKcal = function (kcal) {
+        var actualKcal = this.get("totalKcal") || 0;
+        this.set({ totalKcal: actualKcal - kcal });
+    };
+    Meal.prototype.addFood = function (body) {
         return __awaiter(this, void 0, void 0, function () {
-            var id, meal;
+            var food;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        id = this.getAttributes().id;
-                        meal = this.entityFactory.createMeal({ dietId: id });
-                        return [4 /*yield*/, meal.create(meal.getAttributes())];
+                        food = this.entityFactory.createFood();
+                        return [4 /*yield*/, food.create(body)];
                     case 1:
                         _a.sent();
-                        this.meals = __spreadArrays(this.meals, [meal.getAttributes()]);
-                        return [2 /*return*/];
+                        this.addKcal(body.kcal);
+                        return [2 /*return*/, (this.foods = __spreadArrays(this.foods, [food]))];
                 }
             });
         });
     };
-    Object.defineProperty(Diet.prototype, "allMeals", {
-        get: function () {
-            return this.meals;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Diet;
+    Meal.prototype.removeFood = function (body) {
+        return __awaiter(this, void 0, void 0, function () {
+            var food;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        food = this.entityFactory.createFood();
+                        return [4 /*yield*/, food.delete(body.id)];
+                    case 1:
+                        _a.sent();
+                        this.substractKcal(body.kcal);
+                        return [2 /*return*/, (this.foods = this.foods.filter(function (food) { return food.get("id") != body.id; }))];
+                }
+            });
+        });
+    };
+    return Meal;
 }(Model_1.default));
-exports.default = Diet;
+exports.default = Meal;
