@@ -5,6 +5,6 @@ export default interface IMealProps {
   id?: number;
   name?: string;
   totalKcal?: number;
-  dietId?: number;
-  foods?: Model<IFoodProps>[];
+  diet?: number;
+  foods?: IFoodProps[];
 }

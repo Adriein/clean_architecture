@@ -173,6 +173,7 @@ var AdminRoutes = /** @class */ (function () {
                         response = _a.sent();
                         if (!response.getError()) {
                             res.status(response.getStatus()).send(response.getData());
+                            return [2 /*return*/];
                         }
                         res.status(response.getStatus()).send(response.getError());
                         return [2 /*return*/];
@@ -188,6 +189,7 @@ var AdminRoutes = /** @class */ (function () {
                         response = _a.sent();
                         if (!response.getError()) {
                             res.status(response.getStatus()).send(response.getData());
+                            return [2 /*return*/];
                         }
                         res.status(response.getStatus()).send(response.getError());
                         return [2 /*return*/];
@@ -197,7 +199,8 @@ var AdminRoutes = /** @class */ (function () {
     };
     AdminRoutes.prototype.dietManagementRoutes = function () {
         var _this = this;
-        this.router.post("/diet", function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+        this.router
+            .post("/diet", function (req, res) { return __awaiter(_this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -206,6 +209,23 @@ var AdminRoutes = /** @class */ (function () {
                         response = _a.sent();
                         if (!response.getError()) {
                             res.status(response.getStatus()).send(response.getData());
+                            return [2 /*return*/];
+                        }
+                        res.status(response.getStatus()).send(response.getError());
+                        return [2 /*return*/];
+                }
+            });
+        }); })
+            .put("/diet/:id", function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.controller.updateDiet(parseInt(req.params.id), req.body)];
+                    case 1:
+                        response = _a.sent();
+                        if (!response.getError()) {
+                            res.status(response.getStatus()).send(response.getData());
+                            return [2 /*return*/];
                         }
                         res.status(response.getStatus()).send(response.getError());
                         return [2 /*return*/];

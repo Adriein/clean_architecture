@@ -42,7 +42,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Database_1 = __importDefault(require("./Database"));
 var entity_1 = require("./entity");
 var DietLocalSync = /** @class */ (function () {
-    function DietLocalSync() {
+    function DietLocalSync(mapper) {
+        this.mapper = mapper;
     }
     DietLocalSync.prototype.findAll = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -54,20 +55,25 @@ var DietLocalSync = /** @class */ (function () {
     DietLocalSync.prototype.fetch = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                throw new Error();
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Database_1.default.getInstance()
+                            .connection.getRepository(entity_1.DietSchema)
+                            .findOne(id)];
+                    case 1: return [2 /*return*/, (_a.sent())];
+                }
             });
         });
     };
     DietLocalSync.prototype.create = function (model) {
         return __awaiter(this, void 0, void 0, function () {
-            var a;
+            var schema;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log(model);
-                        a = JSON.parse(JSON.stringify(model));
-                        console.log(a);
-                        return [4 /*yield*/, Database_1.default.getInstance().connection.getRepository(entity_1.TableDiet).save(a)];
+                        schema = this.mapper.mapToDatabase(model, function () { return new entity_1.DietSchema(); });
+                        return [4 /*yield*/, Database_1.default.getInstance()
+                                .connection.getRepository(entity_1.DietSchema)
+                                .save(schema)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
@@ -90,7 +96,12 @@ var DietLocalSync = /** @class */ (function () {
     DietLocalSync.prototype.findBy = function (options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                throw new Error("not implemented yet");
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Database_1.default.getInstance()
+                            .connection.getRepository(entity_1.DietSchema)
+                            .find(options)];
+                    case 1: return [2 /*return*/, (_a.sent())];
+                }
             });
         });
     };

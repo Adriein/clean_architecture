@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var typeorm_1 = require("typeorm");
-var _1 = require(".");
 var Food = /** @class */ (function () {
     function Food() {
     }
@@ -30,11 +29,6 @@ var Food = /** @class */ (function () {
         typeorm_1.Column(),
         __metadata("design:type", String)
     ], Food.prototype, "type", void 0);
-    __decorate([
-        typeorm_1.ManyToMany(function (type) { return _1.TableMeal; }),
-        typeorm_1.JoinTable(),
-        __metadata("design:type", Array)
-    ], Food.prototype, "meals", void 0);
     Food = __decorate([
         typeorm_1.Entity()
     ], Food);

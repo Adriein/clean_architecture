@@ -1,12 +1,18 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
-import TableDiet from "./TableDiet";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, ManyToMany, JoinTable } from "typeorm";
+import DietSchema from "./DietSchema";
+import { TableFood } from ".";
 
 @Entity()
 export default class Meal {
   @PrimaryGeneratedColumn()
   id?: number;
-  @Column()
+  @Column({ nullable: true })
   name?: string;
-  @ManyToOne((type) => TableDiet, (diet) => diet.meals)
-  diet?: TableDiet;
+  @Column("double", { nullable: true })
+  totalKcal?: number;
+  @ManyToOne((type) => DietSchema, (diet) => diet.meals)
+  diet?: DietSchema;
+  @ManyToMany((type) => TableFood)
+  @JoinTable()
+  foods?: TableFood[];
 }

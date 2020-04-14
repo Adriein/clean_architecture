@@ -94,28 +94,45 @@ export default class AdminRoutes {
 
         if (!response.getError()) {
           res.status(response.getStatus()).send(response.getData());
+          return;
         }
         res.status(response.getStatus()).send(response.getError());
+        return;
       })
       .put("/food/:id", async (req: Request, res: Response) => {
         const response = await this.controller.updateFood(req.params.id, req.body);
 
         if (!response.getError()) {
           res.status(response.getStatus()).send(response.getData());
+          return;
         }
         res.status(response.getStatus()).send(response.getError());
+        return;
       });
   }
 
   private dietManagementRoutes(): void {
-    this.router.post("/diet", async (req: Request, res: Response) => {
-      const response = await this.controller.createDiet(req.body);
+    this.router
+      .post("/diet", async (req: Request, res: Response) => {
+        const response = await this.controller.createDiet(req.body);
 
-      if (!response.getError()) {
-        res.status(response.getStatus()).send(response.getData());
-      }
-      res.status(response.getStatus()).send(response.getError());
-    });
+        if (!response.getError()) {
+          res.status(response.getStatus()).send(response.getData());
+          return;
+        }
+        res.status(response.getStatus()).send(response.getError());
+        return;
+      })
+      .put("/diet/:id", async (req: Request, res: Response) => {
+        const response = await this.controller.updateDiet(parseInt(req.params.id), req.body);
+
+        if (!response.getError()) {
+          res.status(response.getStatus()).send(response.getData());
+          return;
+        }
+        res.status(response.getStatus()).send(response.getError());
+        return;
+      });
   }
 
   public getAdminRouter(): Router {

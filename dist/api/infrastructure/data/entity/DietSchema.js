@@ -13,35 +13,42 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var typeorm_1 = require("typeorm");
-var DietSchema_1 = __importDefault(require("./DietSchema"));
+var TableUser_1 = __importDefault(require("./TableUser"));
 var _1 = require(".");
-var Meal = /** @class */ (function () {
-    function Meal() {
+var DietSchema = /** @class */ (function () {
+    function DietSchema() {
     }
     __decorate([
         typeorm_1.PrimaryGeneratedColumn(),
         __metadata("design:type", Number)
-    ], Meal.prototype, "id", void 0);
+    ], DietSchema.prototype, "id", void 0);
     __decorate([
         typeorm_1.Column({ nullable: true }),
-        __metadata("design:type", String)
-    ], Meal.prototype, "name", void 0);
+        __metadata("design:type", Date)
+    ], DietSchema.prototype, "validTo", void 0);
     __decorate([
-        typeorm_1.Column("double", { nullable: true }),
+        typeorm_1.CreateDateColumn(),
+        __metadata("design:type", Date)
+    ], DietSchema.prototype, "createDate", void 0);
+    __decorate([
+        typeorm_1.UpdateDateColumn({ nullable: true }),
+        __metadata("design:type", Date)
+    ], DietSchema.prototype, "updateDate", void 0);
+    __decorate([
+        typeorm_1.Column(),
         __metadata("design:type", Number)
-    ], Meal.prototype, "totalKcal", void 0);
+    ], DietSchema.prototype, "numOfMeals", void 0);
     __decorate([
-        typeorm_1.ManyToOne(function (type) { return DietSchema_1.default; }, function (diet) { return diet.meals; }),
-        __metadata("design:type", DietSchema_1.default)
-    ], Meal.prototype, "diet", void 0);
+        typeorm_1.ManyToOne(function (type) { return TableUser_1.default; }, function (user) { return user.diets; }),
+        __metadata("design:type", TableUser_1.default)
+    ], DietSchema.prototype, "user", void 0);
     __decorate([
-        typeorm_1.ManyToMany(function (type) { return _1.TableFood; }),
-        typeorm_1.JoinTable(),
+        typeorm_1.OneToMany(function (type) { return _1.TableMeal; }, function (meal) { return meal.diet; }),
         __metadata("design:type", Array)
-    ], Meal.prototype, "foods", void 0);
-    Meal = __decorate([
+    ], DietSchema.prototype, "meals", void 0);
+    DietSchema = __decorate([
         typeorm_1.Entity()
-    ], Meal);
-    return Meal;
+    ], DietSchema);
+    return DietSchema;
 }());
-exports.default = Meal;
+exports.default = DietSchema;

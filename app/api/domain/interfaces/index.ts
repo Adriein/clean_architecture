@@ -4,9 +4,9 @@ import IFoodProps from "./IFoodProps";
 import ILogger from "./ILogger";
 import ISync from "./ISync";
 import IUserProps from "./IUserProps";
-import IFactory from "./IFactory";
 import IMealProps from "./IMealProps";
 import IDietProps from "./IDietProps";
+import IMapper from "./IMapper";
 
 export {
   IAbstractFactory,
@@ -15,7 +15,7 @@ export {
   ILogger,
   ISync,
   IUserProps,
-  IFactory,
   IMealProps,
   IDietProps,
+  IMapper,
 };

@@ -2,6 +2,6 @@ import TableFood from "./TableFood";
 import TableLog from "./TableLog";
 import TableUser from "./TableUser";
 import TableMeal from "./TableMeal";
-import TableDiet from "./TableDiet";
+import DietSchema from "./DietSchema";
 
-export { TableFood, TableLog, TableUser, TableDiet, TableMeal };
+export { TableFood, TableLog, TableUser, DietSchema, TableMeal };

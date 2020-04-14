@@ -47,17 +47,11 @@ var DietCreateUseCase = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         diet = this.entityFactory.createDiet(body);
-                        //set the creation date
-                        //diet.set({ createDate: new Date() });
                         //saving diet to generate the diet id
                         return [4 /*yield*/, diet.create(body)];
                     case 1:
-                        //set the creation date
-                        //diet.set({ createDate: new Date() });
                         //saving diet to generate the diet id
                         _a.sent();
-                        //generate meals (by default 1 if num of meals is unseted)
-                        //await diet.generateMeals();
                         //return the new diet
                         return [2 /*return*/, diet.getAttributes()];
                 }

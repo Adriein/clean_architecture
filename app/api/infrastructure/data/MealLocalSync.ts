@@ -1,6 +1,7 @@
 import Database from "./Database";
 import { ISync, IMealProps } from "../../domain/interfaces";
 import { TableMeal } from "./entity";
+import { getRepository } from "typeorm";
 
 export default class DietLocalSync implements ISync<IMealProps> {
   public async findAll(): Promise<IMealProps[]> {
@@ -11,13 +12,13 @@ export default class DietLocalSync implements ISync<IMealProps> {
     throw new Error();
   }
 
-  public async create(model: IMealProps): Promise<IMealProps> {
-    // return await Database.getInstance()
-    //   .connection.getRepository(TableMeal)
-    //   .save(model as TableMeal);
-    // console.log(model, 'model of meal');
-
-    return { ...model };
+  public async create(model: any): Promise<IMealProps> {
+    const connection = Database.getInstance().connection.getRepository(TableMeal);
+    const mealSchema = new TableMeal();
+    mealSchema.foods = model.foods
+    console.log(model);
+    
+    return await connection.save(model);
   }
 
   public async update(id: number, model: IMealProps): Promise<IMealProps> {
@@ -25,10 +26,20 @@ export default class DietLocalSync implements ISync<IMealProps> {
   }
 
   public async delete(id: number): Promise<IMealProps> {
-    throw new Error("not implemented yet");
+    const connection = Database.getInstance().connection.getRepository(TableMeal);
+    const mealSchema = new TableMeal();
+    mealSchema.foods = [];
+    const mealInDB = await connection.findOne(id);
+    await connection.save(Object.assign(mealInDB, mealSchema));
+    await connection.delete(id);
+    return { id };
   }
 
   public async findBy(options?: Object): Promise<IMealProps[]> {
-    throw new Error("not implemented yet");
+    console.log(options);
+    
+    return (await Database.getInstance()
+      .connection.getRepository(TableMeal)
+      .find({relations: ["diet"]})) as IMealProps[];
   }
 }

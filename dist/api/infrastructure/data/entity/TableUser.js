@@ -79,7 +79,7 @@ var Users = /** @class */ (function () {
         __metadata("design:type", String)
     ], Users.prototype, "rol", void 0);
     __decorate([
-        typeorm_1.OneToMany(function (type) { return _1.TableDiet; }, function (diet) { return diet.user; }),
+        typeorm_1.OneToMany(function (type) { return _1.DietSchema; }, function (diet) { return diet.user; }),
         __metadata("design:type", Array)
     ], Users.prototype, "diets", void 0);
     Users = __decorate([

@@ -53,7 +53,11 @@ export default class Controller {
     return await this.foodsInteractor.executeUpdateFood(parseInt(id), body);
   }
 
-  public async createDiet(body: any):Promise<ResponseModel<IDietProps>> {
+  public async createDiet(body: any): Promise<ResponseModel<IDietProps>> {
     return await this.dietInteractor.executeCreateDiet(body);
+  }
+
+  public async updateDiet(id: number, body: any): Promise<ResponseModel<IDietProps>> {
+    return await this.dietInteractor.executeUpdateDiet(id, body);
   }
 }

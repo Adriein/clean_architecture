@@ -41,6 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var EntityAbstractFactory_1 = __importDefault(require("../../factories/EntityAbstractFactory"));
 var DietCreateUseCase_1 = __importDefault(require("../usecases/diets/DietCreateUseCase"));
+var DietUpdateUseCase_1 = __importDefault(require("../usecases/diets/DietUpdateUseCase"));
 var DietInteractor = /** @class */ (function () {
     function DietInteractor() {
         this.entityFactory = new EntityAbstractFactory_1.default();
@@ -55,7 +56,7 @@ var DietInteractor = /** @class */ (function () {
                         _c.trys.push([0, 2, , 3]);
                         this.dietCreateUseCase = new DietCreateUseCase_1.default(this.entityFactory);
                         _b = (_a = this.responseModel).setData;
-                        return [4 /*yield*/, this.dietCreateUseCase.execute(this.mapper(body))];
+                        return [4 /*yield*/, this.dietCreateUseCase.execute(this.parse(body))];
                     case 1: return [2 /*return*/, _b.apply(_a, [[_c.sent()]])
                             .setStatus(200)];
                     case 2:
@@ -66,7 +67,27 @@ var DietInteractor = /** @class */ (function () {
             });
         });
     };
-    DietInteractor.prototype.mapper = function (body) {
+    DietInteractor.prototype.executeUpdateDiet = function (id, body) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, _b, error_2;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        this.dietUpdateUseCase = new DietUpdateUseCase_1.default(this.entityFactory);
+                        _b = (_a = this.responseModel).setData;
+                        return [4 /*yield*/, this.dietUpdateUseCase.execute(id, this.parse(body))];
+                    case 1: return [2 /*return*/, _b.apply(_a, [[_c.sent()]])
+                            .setStatus(200)];
+                    case 2:
+                        error_2 = _c.sent();
+                        return [2 /*return*/, this.responseModel.setError(error_2)];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    DietInteractor.prototype.parse = function (body) {
         return JSON.parse(JSON.stringify(body));
     };
     return DietInteractor;

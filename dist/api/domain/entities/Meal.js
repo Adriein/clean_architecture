@@ -78,33 +78,14 @@ var Meal = /** @class */ (function (_super) {
     };
     Meal.prototype.addFood = function (body) {
         return __awaiter(this, void 0, void 0, function () {
-            var food;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        food = this.entityFactory.createFood();
-                        return [4 /*yield*/, food.create(body)];
-                    case 1:
-                        _a.sent();
-                        this.addKcal(body.kcal);
-                        return [2 /*return*/, (this.foods = __spreadArrays(this.foods, [food]))];
+            var _i, _a, food;
+            return __generator(this, function (_b) {
+                for (_i = 0, _a = body.foods; _i < _a.length; _i++) {
+                    food = _a[_i];
+                    this.addKcal(food.kcal);
+                    this.foods = __spreadArrays(this.foods, [food]);
                 }
-            });
-        });
-    };
-    Meal.prototype.removeFood = function (body) {
-        return __awaiter(this, void 0, void 0, function () {
-            var food;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        food = this.entityFactory.createFood();
-                        return [4 /*yield*/, food.delete(body.id)];
-                    case 1:
-                        _a.sent();
-                        this.substractKcal(body.kcal);
-                        return [2 /*return*/, (this.foods = this.foods.filter(function (food) { return food.get("id") != body.id; }))];
-                }
+                return [2 /*return*/, this.foods];
             });
         });
     };

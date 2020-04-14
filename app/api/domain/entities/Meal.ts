@@ -4,7 +4,7 @@ import { IMealProps, IAttributes, ISync, IAbstractFactory, IFoodProps } from "..
 
 export default class Meal extends Model<IMealProps> {
   private entityFactory: IAbstractFactory;
-  private foods: Food[] = [];
+  private foods: IFoodProps[] = [];
 
   constructor(
     modelAttributes: IAttributes<IMealProps>,
@@ -25,17 +25,20 @@ export default class Meal extends Model<IMealProps> {
     this.set({ totalKcal: actualKcal - kcal });
   }
 
-  public async addFood(body: IFoodProps): Promise<Food[]> {
-    const food = this.entityFactory.createFood();
-    await food.create(body);
-    this.addKcal(body.kcal!);
-    return (this.foods = [...this.foods, food]);
+  public async addFood(body: IMealProps): Promise<IFoodProps[]> {
+    for(const food of body.foods!) {
+      this.addKcal(food.kcal!);
+      this.foods = [...this.foods, food]
+    }
+    
+    
+    return this.foods;
   }
 
-  public async removeFood(body: IFoodProps): Promise<Food[]> {
-    const food = this.entityFactory.createFood();
-    await food.delete(body.id!);
-    this.substractKcal(body.kcal!);
-    return (this.foods = this.foods.filter((food: Food) => food.get("id") != body.id));
-  }
+  // public async removeFood(body: IFoodProps): Promise<Food[]> {
+  //   const food = this.entityFactory.createFood();
+  //   await food.delete(body.id!);
+  //   this.substractKcal(body.kcal!);
+  //   return (this.foods = this.foods.filter((food: Food) => food.get("id") != body.id));
+  // }
 }

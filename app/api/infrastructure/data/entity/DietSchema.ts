@@ -3,7 +3,7 @@ import TableUser from "./TableUser";
 import { TableMeal } from ".";
 
 @Entity()
-export default class Diet {
+export default class DietSchema {
   @PrimaryGeneratedColumn()
   id?: number;
   @Column({nullable: true})

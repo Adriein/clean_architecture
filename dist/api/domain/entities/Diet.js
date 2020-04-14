@@ -79,7 +79,10 @@ var Diet = /** @class */ (function (_super) {
                         _b.label = 1;
                     case 1:
                         if (!(created < numOfMeals)) return [3 /*break*/, 3];
-                        meal = this.entityFactory.createMeal({ dietId: id });
+                        meal = this.entityFactory.createMeal({
+                            diet: id,
+                            name: "meal n\u00BA" + (created + 1),
+                        });
                         return [4 /*yield*/, meal.create(meal.getAttributes())];
                     case 2:
                         _b.sent();
@@ -91,18 +94,40 @@ var Diet = /** @class */ (function (_super) {
             });
         });
     };
-    Diet.prototype.incrementMeals = function () {
+    Diet.prototype.incrementMeals = function (body) {
         return __awaiter(this, void 0, void 0, function () {
             var id, meal;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         id = this.getAttributes().id;
-                        meal = this.entityFactory.createMeal({ dietId: id });
+                        meal = this.entityFactory.createMeal({
+                            diet: id,
+                            name: "meal n\u00BA" + (this.meals.length + 1),
+                        });
                         return [4 /*yield*/, meal.create(meal.getAttributes())];
                     case 1:
                         _a.sent();
                         this.meals = __spreadArrays(this.meals, [meal.getAttributes()]);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Diet.prototype.decrementMeals = function (mealId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var id, meal;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        id = this.getAttributes().id;
+                        meal = this.entityFactory.createMeal({
+                            diet: id,
+                        });
+                        return [4 /*yield*/, meal.delete(mealId)];
+                    case 1:
+                        _a.sent();
+                        this.meals = this.meals.filter(function (element) { return element.id != meal.get("id"); });
                         return [2 /*return*/];
                 }
             });

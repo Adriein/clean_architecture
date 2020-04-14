@@ -1,15 +1,4 @@
 "use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -46,7 +35,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+var Database_1 = __importDefault(require("./Database"));
+var entity_1 = require("./entity");
 var DietLocalSync = /** @class */ (function () {
     function DietLocalSync() {
     }
@@ -66,12 +60,17 @@ var DietLocalSync = /** @class */ (function () {
     };
     DietLocalSync.prototype.create = function (model) {
         return __awaiter(this, void 0, void 0, function () {
+            var connection, mealSchema;
             return __generator(this, function (_a) {
-                // return await Database.getInstance()
-                //   .connection.getRepository(TableMeal)
-                //   .save(model as TableMeal);
-                // console.log(model, 'model of meal');
-                return [2 /*return*/, __assign({}, model)];
+                switch (_a.label) {
+                    case 0:
+                        connection = Database_1.default.getInstance().connection.getRepository(entity_1.TableMeal);
+                        mealSchema = new entity_1.TableMeal();
+                        mealSchema.foods = model.foods;
+                        console.log(model);
+                        return [4 /*yield*/, connection.save(model)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
             });
         });
     };
@@ -84,15 +83,38 @@ var DietLocalSync = /** @class */ (function () {
     };
     DietLocalSync.prototype.delete = function (id) {
         return __awaiter(this, void 0, void 0, function () {
+            var connection, mealSchema, mealInDB;
             return __generator(this, function (_a) {
-                throw new Error("not implemented yet");
+                switch (_a.label) {
+                    case 0:
+                        connection = Database_1.default.getInstance().connection.getRepository(entity_1.TableMeal);
+                        mealSchema = new entity_1.TableMeal();
+                        mealSchema.foods = [];
+                        return [4 /*yield*/, connection.findOne(id)];
+                    case 1:
+                        mealInDB = _a.sent();
+                        return [4 /*yield*/, connection.save(Object.assign(mealInDB, mealSchema))];
+                    case 2:
+                        _a.sent();
+                        return [4 /*yield*/, connection.delete(id)];
+                    case 3:
+                        _a.sent();
+                        return [2 /*return*/, { id: id }];
+                }
             });
         });
     };
     DietLocalSync.prototype.findBy = function (options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                throw new Error("not implemented yet");
+                switch (_a.label) {
+                    case 0:
+                        console.log(options);
+                        return [4 /*yield*/, Database_1.default.getInstance()
+                                .connection.getRepository(entity_1.TableMeal)
+                                .find({ relations: ["diet"] })];
+                    case 1: return [2 /*return*/, (_a.sent())];
+                }
             });
         });
     };

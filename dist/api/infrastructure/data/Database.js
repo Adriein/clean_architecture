@@ -62,7 +62,7 @@ var Database = /** @class */ (function () {
                                 username: "root",
                                 password: "root",
                                 database: "test",
-                                entities: [entity_1.TableUser, entity_1.TableFood, entity_1.TableLog, entity_1.TableDiet, entity_1.TableMeal],
+                                entities: [entity_1.TableUser, entity_1.TableFood, entity_1.TableLog, entity_1.DietSchema, entity_1.TableMeal],
                                 synchronize: true
                             })];
                     case 1:

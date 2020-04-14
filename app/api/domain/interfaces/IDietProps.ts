@@ -1,4 +1,5 @@
 import { Macros } from "../entities";
+import { IMealProps } from ".";
 
 
 export default interface IDietProps {
@@ -10,4 +11,5 @@ export default interface IDietProps {
   numOfMeals?: number;
   totalKcal?: number;
   macros?: Macros;
+  meals?: IMealProps[];
 }

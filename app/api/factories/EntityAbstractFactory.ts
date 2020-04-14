@@ -20,6 +20,8 @@ import Logger from "../infrastructure/logs/Logger";
 import Diet from "../domain/entities/Diet";
 import DietLocalSync from "../infrastructure/data/DietLocalSync";
 import MealLocalSync from "../infrastructure/data/MealLocalSync";
+import DietMapper from "../infrastructure/data/mappers/DietMapper";
+import { DietSchema } from "../infrastructure/data/entity";
 
 export default class EntityAbstractFactory implements IAbstractFactory {
   createUser(): User {
@@ -51,7 +53,7 @@ export default class EntityAbstractFactory implements IAbstractFactory {
   }
 
   createDiet(body: IDietProps): Diet {
-    return new Diet(new ModelAttributes(body), new DietLocalSync(), this);
+    return new Diet(new ModelAttributes(body), new DietLocalSync(new DietMapper()), this);
   }
 
   createDietReponseModel(): ResponseModel<IDietProps> {
