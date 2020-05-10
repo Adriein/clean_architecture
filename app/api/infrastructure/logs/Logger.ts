@@ -1,4 +1,4 @@
-import ILogger from "../../domain/interfaces/ILogger";
+import ILogger from "../../core/interfaces/ILogger";
 import TableLog from "../data/entity/TableLog";
 import Database from "../data/Database";
 

@@ -1,5 +1,5 @@
 import { DietSchema, TableMeal, TableUser } from "../entity";
-import { IDietProps, IMealProps } from "../../../domain/interfaces";
+import { IDietProps, IMealProps } from "../../../core/interfaces";
 import Mapper from "./Mapper";
 
 export default class DietMapper extends Mapper<IDietProps, DietSchema> {

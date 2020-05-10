@@ -1,5 +1,5 @@
 import Database from "./Database";
-import { ISync, IFoodProps } from "../../domain/interfaces";
+import { ISync, IFoodProps } from "../../core/interfaces";
 import { TableFood } from "./entity";
 
 export default class FoodLocalSync implements ISync<IFoodProps> {

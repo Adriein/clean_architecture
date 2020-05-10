@@ -1,5 +1,5 @@
 import Database from "./Database";
-import { ISync, IUserProps } from "../../domain/interfaces";
+import { ISync, IUserProps } from "../../core/interfaces";
 import { TableUser } from "./entity";
 
 export default class UserLocalSync implements ISync<IUserProps> {

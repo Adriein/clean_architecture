@@ -1,9 +1,9 @@
-import UsersInteractor from "../domain/interactors/UsersInteractor";
+import UsersInteractor from "../core/interactors/UsersInteractor";
 import IUserProps from "../domain/interfaces/IUserProps";
-import ResponseModel from "../domain/entities/ResponseModel";
-import { IFoodProps } from "../domain/interfaces";
-import FoodsInteractor from "../domain/interactors/FoodsInteractor";
-import IDietProps from "../domain/interfaces/IDietProps";
+import ResponseModel fro../core/interfaces/IUserPropsodel";
+import { IFoodProps } from ../core/entities/ResponseModel
+import FoodsInteractor from ../core/interfacesrs/FoodsInteractor";
+import IDietProps from "../do../core/interactors/FoodsInteractor
 import DietInteractor from "../domain/interactors/DietInteractor";
 
 export default class Controller {

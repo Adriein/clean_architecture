@@ -1,4 +1,4 @@
-import { IMapper } from "../../../domain/interfaces";
+import { IMapper } from "../../../core/interfaces";
 
 export default abstract class Mapper<T extends Object, K extends Object> implements IMapper<T, K> {
   mapToDatabase(props: T, fn: Function): K {

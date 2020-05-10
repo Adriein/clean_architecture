@@ -1,7 +1,7 @@
 import Database from "./Database";
-import { ISync, IDietProps } from "../../domain/interfaces";
+import { ISync, IDietProps } from "../../core/interfaces";
 import { DietSchema, TableUser, TableMeal } from "./entity";
-import IMapper from "../../domain/interfaces/IMapper";
+import IMapper from "../../core/interfaces/IMapper";
 
 export default class DietLocalSync implements ISync<IDietProps> {
   constructor(private mapper: IMapper<IDietProps, DietSchema>) {}

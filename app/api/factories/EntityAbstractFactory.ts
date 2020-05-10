@@ -4,7 +4,7 @@ import {
   IFoodProps,
   IDietProps,
   IMealProps,
-} from "../domain/interfaces";
+} from "../core/interfaces";
 import {
   User,
   UserCollection,
@@ -13,11 +13,11 @@ import {
   Food,
   FoodCollection,
   Meal,
-} from "../domain/entities";
+} from "../core/entities";
 import UserLocalSync from "../infrastructure/data/UserLocalSync";
 import FoodLocalSync from "../infrastructure/data/FoodLocalSync";
 import Logger from "../infrastructure/logs/Logger";
-import Diet from "../domain/entities/Diet";
+import Diet from "../core/entities/Diet";
 import DietLocalSync from "../infrastructure/data/DietLocalSync";
 import MealLocalSync from "../infrastructure/data/MealLocalSync";
 import DietMapper from "../infrastructure/data/mappers/DietMapper";

@@ -1,5 +1,5 @@
 import Database from "./Database";
-import { ISync, IMealProps } from "../../domain/interfaces";
+import { ISync, IMealProps } from "../../core/interfaces";
 import { TableMeal } from "./entity";
 import { getRepository } from "typeorm";
 
