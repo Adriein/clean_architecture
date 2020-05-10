@@ -1,60 +1,32 @@
 import React from "react";
-import UserCard from "./UserCard";
-import Card from "react-bootstrap/Card";
+import UserList from "./UsersList";
 import SearchBar from "./SearchBar";
+import { UsersProvider } from "../contexts/UsersContext";
 
-import UserContext from "../contexts/UserContext";
+//core imports
+import { withStyles } from "@material-ui/core/styles";
 
-import "../css/Overview.css"
+//style imports
+import UsersOverviewStyles from "../styles/UsersOverviewStyles";
 
-class Overview extends React.Component {
-  static contextType = UserContext;
+//material-ui imports
+import Paper from "@material-ui/core/Paper";
+import AppBar from "@material-ui/core/AppBar";
 
-  state = {
-    searchTerm: "",
-    active: false,
-    pending: false,
-  };
+function UsersOverview(props) {
+  const { classes } = props;
+  console.log("render usersoverview");
 
-  handleSearchChange = (event) => {
-    this.setState({ searchTerm: event.target.value });
-  };
-
-  toggleActive = () => {
-    this.setState({ active: !this.state.active });
-  };
-
-  togglePending = () => {
-    this.setState({ pending: !this.state.pending });
-  };
-
-  render() {
-    const activeUsers = this.context.users.map((user) => {
-      const fullName = `${user.first_name} ${user.last_name}`;
-      if (fullName.toLowerCase().indexOf(this.state.searchTerm) === -1) {
-        return null;
-      }
-      if (this.state.active && user.user_status !== true) {
-        return null;
-      }
-
-      return <UserCard key={user.id} user={user} />;
-    });
-
-    return (
-      <Card className="overview">
-        <Card.Header>
-          <SearchBar
-            term={this.state.searchTerm}
-            handleSearchChange={this.handleSearchChange}
-            toggleActive={this.toggleActive}
-            togglePending={this.togglePending}
-          />
-        </Card.Header>
-        <div className="overview-scroll">{activeUsers}</div>
-      </Card>
-    );
-  }
+  return (
+    <Paper elevation={4}>
+      <UsersProvider>
+        <AppBar position="static">
+          <SearchBar />
+        </AppBar>
+        <UserList />
+      </UsersProvider>
+    </Paper>
+  );
 }
 
-export default Overview;
+export default withStyles(UsersOverviewStyles)(UsersOverview);

@@ -14,7 +14,7 @@ export default class UserEditUseCase {
     //Retrive user stored on db
     await this.user.fetch(parseInt(id));
     const user = this.user.getAttributes();
-
+    
     if (!user) {
       throw new Error("user not found");
     }

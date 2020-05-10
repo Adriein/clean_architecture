@@ -53,6 +53,7 @@ var UserEditUseCase = /** @class */ (function () {
                         //Retrive user stored on db
                         _a.sent();
                         user = this.user.getAttributes();
+                        console.log(body, 'body on use case');
                         if (!user) {
                             throw new Error("user not found");
                         }

@@ -103,6 +103,7 @@ var UserLocalSync = /** @class */ (function () {
                         return [4 /*yield*/, userSchema.findOne(id)];
                     case 1:
                         user = _a.sent();
+                        console.log(model);
                         return [4 /*yield*/, userSchema.save(Object.assign(user, model))];
                     case 2: return [2 /*return*/, _a.sent()];
                 }
