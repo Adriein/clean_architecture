@@ -14,9 +14,7 @@ import Paper from "@material-ui/core/Paper";
 import AppBar from "@material-ui/core/AppBar";
 
 function UsersOverview(props) {
-  const { classes } = props;
   console.log("render usersoverview");
-
   return (
     <Paper elevation={4}>
       <UsersProvider>

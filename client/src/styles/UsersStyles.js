@@ -5,27 +5,15 @@ export default {
     padding: "0px",
     display: "grid",
     gridTemplateColumns: "0.125fr 1fr",
-    
-  },
-  container: {
-    display: "grid",
-    gridTemplateColumns: "0.4fr 1fr",
-    padding: "1em",
-    gap: "1em"
-  },
-  bar: {
-    
-  },
-  navigation: {
- 
-  },
-  users: {  
- 
   },
   features: {
     display: "grid",
     gridTemplateColumns: "1fr 1fr",
     padding: "4em",
-    gap: "1em"
-  }
+    gap: "1em",
+  },
+  container:{
+    padding: "2em",
+  },
+  navigation: {},
 };

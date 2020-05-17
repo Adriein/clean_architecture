@@ -6,8 +6,8 @@ import UsersOverviewStyles from "../styles/UsersOverviewStyles";
 
 //icons
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
+import ErrorIcon from "@material-ui/icons/Error";
+import EmailIcon from "@material-ui/icons/Email";
 
 //material ui imports
 import ListItem from "@material-ui/core/ListItem";
@@ -16,6 +16,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+import Badge from "@material-ui/core/Badge";
 
 function UserCard(props) {
   const { classes } = props;
@@ -45,10 +46,12 @@ function UserCard(props) {
         <VisibilityIcon />
       </IconButton>
       <IconButton edge="end" aria-label="delete">
-        <DeleteIcon />
+        <Badge color="secondary" badgeContent={0}>
+          <EmailIcon />
+        </Badge>
       </IconButton>
       <IconButton edge="end" aria-label="delete">
-        <EditIcon />
+        <ErrorIcon />
       </IconButton>
     </ListItem>
   );

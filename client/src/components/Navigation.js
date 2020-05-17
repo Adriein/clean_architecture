@@ -13,14 +13,19 @@ import AssessmentIcon from "@material-ui/icons/Assessment";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import SettingsIcon from "@material-ui/icons/Settings";
 import MailIcon from "@material-ui/icons/Mail";
+import PeopleIcon from "@material-ui/icons/People";
+import { Link, useLocation } from "react-router-dom";
 
 function Navigation(props) {
   console.log("render menu");
+  const { pathname } = useLocation();
   const { classes } = props;
   const icon = (text) => {
     switch (text) {
       case "Home":
         return <HomeIcon />;
+      case "Users":
+        return <PeopleIcon />;
       case "Diet":
         return <KitchenIcon />;
       case "Plans":
@@ -32,7 +37,28 @@ function Navigation(props) {
       case "Mail":
         return <MailIcon />;
       default:
-        return <MailIcon />;
+        return "";
+    }
+  };
+
+  const link = (text) => {
+    switch (text) {
+      case "Home":
+        return "/";
+      case "Users":
+        return "/users";
+      case "Diet":
+        return "/diet";
+      case "Plans":
+        return "/plans";
+      case "Charts":
+        return "/charts";
+      case "Settings":
+        return "/settings";
+      case "Mail":
+        return "/messages";
+      default:
+        return "";
     }
   };
   return (
@@ -43,11 +69,13 @@ function Navigation(props) {
       </div>
       <Divider />
       <List>
-        {["Home", "Diet", "Plans", "Charts", "Settings", "Mail"].map((text) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{icon(text)}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
+        {["Home", "Users", "Diet", "Plans", "Charts", "Settings", "Mail"].map((text) => (
+          <Link className={classes.link} to={link(text)}  key={text} >
+            <ListItem button selected={pathname === link(text) ? true : false}>
+              <ListItemIcon>{icon(text)}</ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          </Link>
         ))}
       </List>
     </div>
