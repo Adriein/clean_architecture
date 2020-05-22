@@ -1,13 +1,13 @@
-import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
-import "../App.css"
+import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+import '../App.css';
 
-import Dashboard from "./Dashboard";
-import Diet from "./Diet";
-import Users from "./Users";
+import Dashboard from './Dashboard';
+import Diet from './Diet';
+import Users from './Users';
 
 function App() {
-  console.log("render");
+  console.log('render');
   return (
     <BrowserRouter>
       <Route path="/" exact component={Dashboard} />

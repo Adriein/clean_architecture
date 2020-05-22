@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 
 import Navigation from './Navigation';
 import { withStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
 import UsersStyles from '../styles/UsersStyles';
+import UsersView from './UserView';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -16,9 +18,13 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Tooltip from '@material-ui/core/Tooltip';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+
+//icons
 import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
 import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 function createData(id, status, rol, email, password, name, lastName, gender) {
   return { id, status, rol, email, password, name, lastName, gender };
@@ -34,6 +40,7 @@ const rows = [
   createData('7', 'active', 'user', 'test@test.com', 'contubicocu', 'Juan', 'Martin', 'male'),
   createData('8', 'active', 'user', 'test@test.com', 'contubicocu', 'Adria', 'Claret', 'male'),
 ];
+
 const headCells = [
   { id: 'name', numeric: false, disablePadding: true, label: 'Users' },
   { id: 'status', numeric: true, disablePadding: false, label: 'Status' },
@@ -41,6 +48,7 @@ const headCells = [
   { id: 'email', numeric: true, disablePadding: false, label: 'Email' },
   { id: 'password', numeric: true, disablePadding: false, label: 'Password' },
   { id: 'gender', numeric: true, disablePadding: false, label: 'Gender' },
+  { id: 'actions', numeric: true, disablePadding: false, label: 'Actions' },
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -68,20 +76,20 @@ function tableSort(array, comparator) {
   });
   return stabilizedThis.map((el) => el[0]);
 }
-function EnhancedTableToolbar({ numSelected }) {
+function EnhancedTableToolbar({ numSelected, classes }) {
   return (
-    <Paper>
+    <Paper elevation={0}>
       <Toolbar
-      // className={clsx(classes.root, {
-      //   [classes.highlight]: numSelected > 0,
-      // })}
+        className={clsx(classes.toolbar, {
+          [classes.highlight]: numSelected > 0,
+        })}
       >
         {numSelected > 0 ? (
-          <Typography color="inherit" variant="subtitle1" component="div">
+          <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
             {numSelected} selected
           </Typography>
         ) : (
-          <Typography variant="h6" id="tableTitle" component="div">
+          <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
             Users Management
           </Typography>
         )}
@@ -93,9 +101,9 @@ function EnhancedTableToolbar({ numSelected }) {
             </IconButton>
           </Tooltip>
         ) : (
-          <Tooltip title="Filter list">
-            <IconButton aria-label="filter list">
-              <FilterListIcon />
+          <Tooltip title="Create user" placement="left">
+            <IconButton aria-label="create user">
+              <PersonAddIcon />
             </IconButton>
           </Tooltip>
         )}
@@ -112,7 +120,7 @@ function EnhancedTableHead({ order, orderBy, sort, selectAll }) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
-          <Tooltip title="select all users" placement="left">
+          <Tooltip title="select all users" placement="top">
             <Checkbox inputProps={{ 'aria-label': 'select all users' }} onChange={selectAll} />
           </Tooltip>
         </TableCell>
@@ -141,6 +149,7 @@ function OrderedTable({ classes }) {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('status');
   const [selected, setSelected] = useState([]);
+  const [isView, setView] = useState(false);
 
   const sort = (column, event) => {
     const isAsc = orderBy === column && order === 'asc';
@@ -160,46 +169,68 @@ function OrderedTable({ classes }) {
 
   const isSelected = (id) => selected.indexOf(id) !== -1;
 
+  const toggleView = (event) => {
+    setView(!isView);
+  };
+
   return (
     <div className={classes.root}>
       <div className={classes.navigation}>
         <Navigation />
       </div>
+
       <div className={classes.container}>
-        <EnhancedTableToolbar numSelected={selected.length} />
-        <TableContainer component={Paper}>
-          <Table aria-label="simple table">
-            <EnhancedTableHead
-              order={order}
-              orderBy={orderBy}
-              sort={sort}
-              selectAll={masterSelect}
-            />
-            <TableBody>
-              {tableSort(rows, getComparator(order, orderBy)).map((row) => {
-                const isItemSelected = isSelected(row.id);
-                return (
-                  <TableRow role="checkbox" tabIndex={-1} key={row.id}>
-                    <TableCell padding="checkbox">
-                      <Checkbox checked={isItemSelected} onClick={onSelect(row.id)} />
-                    </TableCell>
-                    <TableCell component="th" id={row.name} scope="row" padding="none">
-                      {`${row.name} ${row.lastName}`}
-                    </TableCell>
-                    <TableCell align="right">{row.status}</TableCell>
-                    <TableCell align="right">{row.rol}</TableCell>
-                    <TableCell align="right">{row.email}</TableCell>
-                    <TableCell align="right">{row.password}</TableCell>
-                    <TableCell align="right">{row.gender}</TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        {isView ? (
+          <UsersView />
+        ) : (
+          <>
+            <EnhancedTableToolbar numSelected={selected.length} classes={classes} />
+            <TableContainer component={Paper}>
+              <Table aria-label="simple table">
+                <EnhancedTableHead
+                  order={order}
+                  orderBy={orderBy}
+                  sort={sort}
+                  selectAll={masterSelect}
+                />
+                <TableBody>
+                  {tableSort(rows, getComparator(order, orderBy)).map((row) => {
+                    const isItemSelected = isSelected(row.id);
+                    return (
+                      <TableRow role="checkbox" tabIndex={-1} key={row.id}>
+                        <TableCell padding="checkbox">
+                          <Checkbox checked={isItemSelected} onClick={onSelect(row.id)} />
+                        </TableCell>
+                        <TableCell component="th" id={row.name} scope="row" padding="none">
+                          {`${row.name} ${row.lastName}`}
+                        </TableCell>
+                        <TableCell align="right">{row.status}</TableCell>
+                        <TableCell align="right">{row.rol}</TableCell>
+                        <TableCell align="right">{row.email}</TableCell>
+                        <TableCell align="right">{row.password}</TableCell>
+                        <TableCell align="right">{row.gender}</TableCell>
+                        <TableCell align="right">
+                          <Tooltip title="Edit">
+                            <IconButton aria-label="edit">
+                              <EditIcon />
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip title="View">
+                            <IconButton aria-label="view" onClick={toggleView}>
+                              <VisibilityIcon />
+                            </IconButton>
+                          </Tooltip>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </>
+        )}
       </div>
     </div>
   );
 }
-
 export default withStyles(UsersStyles)(OrderedTable);

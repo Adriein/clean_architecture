@@ -26,7 +26,7 @@ const reducer = (state, action) => {
     case "FETCH_SUCCESS":
       return {
         loading: false,
-        users: action.payload,
+        data: action.payload,
         filteredUsers: action.payload,
         error: "",
         searchTerm: "",
@@ -34,7 +34,7 @@ const reducer = (state, action) => {
     case "FETCH_ERROR":
       return {
         loading: false,
-        users: [],
+        data: [],
         filteredUsers: [],
         error: "Error fetching users data",
       };
