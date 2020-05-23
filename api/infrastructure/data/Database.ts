@@ -2,7 +2,6 @@ import { Connection, ConnectionManager } from 'typeorm';
 import { UserSchema } from './schemas';
 
 export default class Database {
-  private connection!: Connection;
   private connectionManager: ConnectionManager;
   constructor() {
     this.connectionManager = new ConnectionManager();
@@ -15,7 +14,6 @@ export default class Database {
       : false;
   }
   public async connect(): Promise<Connection> {
-    console.log(this.isConnected());
     if (this.isConnected()) {
       return this.connectionManager.get('default');
     }
@@ -30,6 +28,6 @@ export default class Database {
       synchronize: true,
     });
     console.log('Connection to DB established');
-    return (this.connection = await manager.connect());
+    return await manager.connect();
   }
 }

@@ -50,11 +50,10 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.connect = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var manager, _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var manager;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
-                        console.log(this.isConnected());
                         if (this.isConnected()) {
                             return [2 /*return*/, this.connectionManager.get('default')];
                         }
@@ -69,9 +68,8 @@ var Database = /** @class */ (function () {
                             synchronize: true,
                         });
                         console.log('Connection to DB established');
-                        _a = this;
                         return [4 /*yield*/, manager.connect()];
-                    case 1: return [2 /*return*/, (_a.connection = _b.sent())];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
