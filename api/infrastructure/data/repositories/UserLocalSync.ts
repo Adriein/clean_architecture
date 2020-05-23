@@ -4,13 +4,12 @@ import { UserSchema } from '../schemas';
 import {
   userSchemaToUserModel,
   userModelToUserSchema,
-  createEventToUserSchema
+  createEventToUserSchema,
 } from '../mappers/UserMapper';
 
 export default class UserLocalSync implements ISync<IUserProps> {
-  private db: Database;
-  constructor() {
-    this.db = new Database();
+  constructor(private db: Database) {
+    this.db = db;
   }
   public async find(params?: any): Promise<IUserProps[]> {
     const connection = await this.db.connect();

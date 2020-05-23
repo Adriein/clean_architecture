@@ -44,22 +44,28 @@ var entities_2 = require("../../entities");
 var UserLocalSync_1 = __importDefault(require("../../../infrastructure/data/repositories/UserLocalSync"));
 var faker_1 = __importDefault(require("faker"));
 var UsersCreateUseCase = /** @class */ (function () {
-    function UsersCreateUseCase() {
+    function UsersCreateUseCase(database) {
+        this.database = database;
+        this.database = database;
     }
     UsersCreateUseCase.prototype.execute = function (id, body) {
         return __awaiter(this, void 0, void 0, function () {
-            var user, responseModel, _a, _b;
+            var user, responseModel, _a, _b, error_1;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
-                        user = new entities_2.User(new entities_1.ModelAttributes({}), new UserLocalSync_1.default());
+                        _c.trys.push([0, 2, , 3]);
+                        user = new entities_2.User(new entities_1.ModelAttributes({}), new UserLocalSync_1.default(this.database));
+                        responseModel = new entities_1.ResponseModel();
                         user.set(body);
                         user.set({ avatar: faker_1.default.image.avatar() });
-                        console.log(user.attr);
-                        responseModel = new entities_1.ResponseModel();
                         _b = (_a = responseModel).setData;
                         return [4 /*yield*/, user.create(user.attr)];
                     case 1: return [2 /*return*/, _b.apply(_a, [[_c.sent()]])];
+                    case 2:
+                        error_1 = _c.sent();
+                        throw error_1;
+                    case 3: return [2 /*return*/];
                 }
             });
         });

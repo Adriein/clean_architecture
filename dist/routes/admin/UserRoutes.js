@@ -42,45 +42,91 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var usecases_1 = require("../../core/usecases");
 var UserCreateUseCase_1 = __importDefault(require("../../core/usecases/users/UserCreateUseCase"));
+var UserReadUseCase_1 = __importDefault(require("../../core/usecases/users/UserReadUseCase"));
+var Database_1 = __importDefault(require("../../infrastructure/data/Database"));
+var UserModifyUseCase_1 = __importDefault(require("../../core/usecases/users/UserModifyUseCase"));
 var router = express_1.default.Router();
 exports.userRouter = router;
+var database = new Database_1.default();
 router
-    .get('/overview', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var usecase, response;
+    .get('/overview', function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var usecase, response, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                usecase = new usecases_1.UsersOverviewUseCase();
+                _a.trys.push([0, 2, , 3]);
+                usecase = new usecases_1.UsersOverviewUseCase(database);
                 return [4 /*yield*/, usecase.execute()];
             case 1:
                 response = _a.sent();
                 res.send(response.getData());
                 return [2 /*return*/];
+            case 2:
+                error_1 = _a.sent();
+                next(error_1);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); })
-    .get('/profile/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        return [2 /*return*/];
-    });
-}); })
-    .post('/profile', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var usecase, response;
+    .get('/profile/:id', function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var usecase, response, error_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                usecase = new UserCreateUseCase_1.default();
+                _a.trys.push([0, 2, , 3]);
+                usecase = new UserReadUseCase_1.default(database);
+                return [4 /*yield*/, usecase.execute(parseInt(req.params.id))];
+            case 1:
+                response = _a.sent();
+                res.send(response.getData());
+                return [2 /*return*/];
+            case 2:
+                error_2 = _a.sent();
+                next(error_2);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); })
+    .post('/profile', function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var usecase, response, error_3;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                usecase = new UserCreateUseCase_1.default(database);
                 return [4 /*yield*/, usecase.execute(undefined, req.body)];
             case 1:
                 response = _a.sent();
                 res.send(response.getData());
                 return [2 /*return*/];
+            case 2:
+                error_3 = _a.sent();
+                next(error_3);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); })
-    .put('/profile/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    .put('/profile/:id', function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var usecase, response, error_4;
     return __generator(this, function (_a) {
-        return [2 /*return*/];
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                usecase = new UserModifyUseCase_1.default(database);
+                return [4 /*yield*/, usecase.execute(parseInt(req.params.id), req.body)];
+            case 1:
+                response = _a.sent();
+                res.send(response.getData());
+                return [2 /*return*/];
+            case 2:
+                error_4 = _a.sent();
+                next(error_4);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
     });
 }); })
     .delete('/profile/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {

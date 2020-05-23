@@ -3,10 +3,10 @@ import IUseCase from '../../interfaces/IUseCase';
 import { ResponseModel, ModelAttributes } from '../../entities';
 import { User } from '../../entities';
 import UserLocalSync from '../../../infrastructure/data/repositories/UserLocalSync';
-import faker from 'faker';
+import { UserNotFoundError } from '../../entities/errors/UserNotFoundError';
 import Database from '../../../infrastructure/data/Database';
 
-export default class UsersCreateUseCase implements IUseCase<IUserProps> {
+export default class UsersReadUseCase implements IUseCase<IUserProps> {
   constructor(private database: Database) {
     this.database = database;
   }
@@ -21,12 +21,11 @@ export default class UsersCreateUseCase implements IUseCase<IUserProps> {
       );
       const responseModel = new ResponseModel<IUserProps>();
 
-      user.set(body!);
-      user.set({ avatar: faker.image.avatar() });
-
-      return responseModel.setData([await user.create(user.attr)]);
+      return responseModel.setData([await user.fetch(id!)]);
     } catch (error) {
-      throw error;
+      console.log(error);
+
+      throw new UserNotFoundError();
     }
   }
 }

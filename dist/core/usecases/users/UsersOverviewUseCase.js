@@ -43,7 +43,9 @@ var entities_1 = require("../../entities");
 var entities_2 = require("../../entities");
 var UserLocalSync_1 = __importDefault(require("../../../infrastructure/data/repositories/UserLocalSync"));
 var UsersOverviewUseCase = /** @class */ (function () {
-    function UsersOverviewUseCase() {
+    function UsersOverviewUseCase(database) {
+        this.database = database;
+        this.database = database;
     }
     UsersOverviewUseCase.prototype.execute = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -51,7 +53,7 @@ var UsersOverviewUseCase = /** @class */ (function () {
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
-                        user = new entities_2.User(new entities_1.ModelAttributes({}), new UserLocalSync_1.default());
+                        user = new entities_2.User(new entities_1.ModelAttributes({}), new UserLocalSync_1.default(this.database));
                         responseModel = new entities_1.ResponseModel();
                         _b = (_a = responseModel).setData;
                         return [4 /*yield*/, user.find()];

@@ -1,18 +1,25 @@
-import { createConnection, Connection } from 'typeorm';
+import { Connection, ConnectionManager } from 'typeorm';
 import { UserSchema } from './schemas';
 
 export default class Database {
   private connection!: Connection;
+  private connectionManager: ConnectionManager;
+  constructor() {
+    this.connectionManager = new ConnectionManager();
+  }
 
-  private async isConnected(): Promise<boolean> {
-    return this.connection ? true : false;
+  private isConnected(): boolean {
+    return this.connectionManager.has('default') &&
+      this.connectionManager.get('default')
+      ? true
+      : false;
   }
   public async connect(): Promise<Connection> {
-    if (!this.isConnected()) {
-      return this.connection;
+    console.log(this.isConnected());
+    if (this.isConnected()) {
+      return this.connectionManager.get('default');
     }
-
-    return (this.connection = await createConnection({
+    const manager = this.connectionManager.create({
       type: 'mysql',
       host: 'localhost',
       port: 3306,
@@ -21,6 +28,8 @@ export default class Database {
       database: 'test',
       entities: [UserSchema],
       synchronize: true,
-    }));
+    });
+    console.log('Connection to DB established');
+    return (this.connection = await manager.connect());
   }
 }

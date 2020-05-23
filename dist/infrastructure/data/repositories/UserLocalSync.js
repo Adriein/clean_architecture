@@ -35,16 +35,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var Database_1 = __importDefault(require("../Database"));
 var schemas_1 = require("../schemas");
 var UserMapper_1 = require("../mappers/UserMapper");
 var UserLocalSync = /** @class */ (function () {
-    function UserLocalSync() {
-        this.db = new Database_1.default();
+    function UserLocalSync(db) {
+        this.db = db;
+        this.db = db;
     }
     UserLocalSync.prototype.find = function (params) {
         return __awaiter(this, void 0, void 0, function () {

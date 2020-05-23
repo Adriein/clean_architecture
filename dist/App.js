@@ -10,7 +10,6 @@ var error_handler_1 = require("./routes/middelwares/error-handler");
 var App = /** @class */ (function () {
     function App() {
         this.app = express_1.default();
-        this.router = express_1.default.Router();
     }
     App.prototype.init = function () {
         this.setUpEnvironment();

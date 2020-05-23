@@ -8,7 +8,7 @@
     "server": "nodemon ./dist/index.js",
     "client": "npm start --prefix client",
     "ts": "tsc -w",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"node ./dist/index.js\" \"npm run client\""
   },
   "keywords": [],
   "author": "",

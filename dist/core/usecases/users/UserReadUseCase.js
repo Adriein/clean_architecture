@@ -35,47 +35,40 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var typeorm_1 = require("typeorm");
-var schemas_1 = require("./schemas");
-var Database = /** @class */ (function () {
-    function Database() {
-        this.connectionManager = new typeorm_1.ConnectionManager();
+var entities_1 = require("../../entities");
+var entities_2 = require("../../entities");
+var UserLocalSync_1 = __importDefault(require("../../../infrastructure/data/repositories/UserLocalSync"));
+var UserNotFoundError_1 = require("../../entities/errors/UserNotFoundError");
+var UsersReadUseCase = /** @class */ (function () {
+    function UsersReadUseCase(database) {
+        this.database = database;
+        this.database = database;
     }
-    Database.prototype.isConnected = function () {
-        return this.connectionManager.has('default') &&
-            this.connectionManager.get('default')
-            ? true
-            : false;
-    };
-    Database.prototype.connect = function () {
+    UsersReadUseCase.prototype.execute = function (id, body) {
         return __awaiter(this, void 0, void 0, function () {
-            var manager, _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var user, responseModel, _a, _b, error_1;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        console.log(this.isConnected());
-                        if (this.isConnected()) {
-                            return [2 /*return*/, this.connectionManager.get('default')];
-                        }
-                        manager = this.connectionManager.create({
-                            type: 'mysql',
-                            host: 'localhost',
-                            port: 3306,
-                            username: 'root',
-                            password: 'root',
-                            database: 'test',
-                            entities: [schemas_1.UserSchema],
-                            synchronize: true,
-                        });
-                        console.log('Connection to DB established');
-                        _a = this;
-                        return [4 /*yield*/, manager.connect()];
-                    case 1: return [2 /*return*/, (_a.connection = _b.sent())];
+                        _c.trys.push([0, 2, , 3]);
+                        user = new entities_2.User(new entities_1.ModelAttributes({}), new UserLocalSync_1.default(this.database));
+                        responseModel = new entities_1.ResponseModel();
+                        _b = (_a = responseModel).setData;
+                        return [4 /*yield*/, user.fetch(id)];
+                    case 1: return [2 /*return*/, _b.apply(_a, [[_c.sent()]])];
+                    case 2:
+                        error_1 = _c.sent();
+                        console.log(error_1);
+                        throw new UserNotFoundError_1.UserNotFoundError();
+                    case 3: return [2 /*return*/];
                 }
             });
         });
     };
-    return Database;
+    return UsersReadUseCase;
 }());
-exports.default = Database;
+exports.default = UsersReadUseCase;

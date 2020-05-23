@@ -6,11 +6,11 @@ import { errorHandler } from './routes/middelwares/error-handler';
 
 export default class App {
   private app: express.Application;
-  private router: express.Router;
+
 
   constructor() {
     this.app = express();
-    this.router = express.Router();
+
   }
 
   public init(): void {
