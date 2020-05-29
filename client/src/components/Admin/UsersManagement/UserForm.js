@@ -1,5 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import useSelectInput from '../../../hooks/useSelectInput';
+import useInput from '../../../hooks/useInput';
 
 import PersonalInfoForm from './PersonalInfoForm';
 import NutritionInfoForm from './NutritionInfoForm';
@@ -68,10 +70,10 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Personal info', 'Nutritional info', 'Review the user'];
 
-function getStepContent(step) {
+function getStepContent(step, input, setInput) {
   switch (step) {
     case 0:
-      return <PersonalInfoForm />;
+      return <PersonalInfoForm input={input} setInput={setInput} />;
     case 1:
       return <NutritionInfoForm />;
     case 2:
@@ -82,11 +84,31 @@ function getStepContent(step) {
 }
 
 export default function Checkout() {
+  console.log('render the main form');
+
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
+  const [input, setInput] = useInput({
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    gender: '',
+    level: '',
+    age: '',
+    height: '',
+    weight: '',
+    notes: '',
+    injuries: '',
+    status: '',
+    rol: '',
+    objective: '',
+  });
+
   const handleNext = () => {
     setActiveStep(activeStep + 1);
+    console.log(input)
   };
 
   const handleBack = () => {
@@ -103,7 +125,7 @@ export default function Checkout() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <main className={classes.layout}>
+      <form className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
             User Creation
@@ -129,7 +151,7 @@ export default function Checkout() {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep)}
+                {getStepContent(activeStep, input, setInput)}
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} className={classes.button}>
@@ -150,7 +172,7 @@ export default function Checkout() {
           </React.Fragment>
         </Paper>
         <Copyright />
-      </main>
+      </form>
     </React.Fragment>
   );
 }

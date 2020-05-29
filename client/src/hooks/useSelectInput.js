@@ -11,6 +11,14 @@ function useSelectInput(initialValue = {}) {
     });
   };
 
+  const reset = () => {
+    for (const value in state) {
+      setState({
+        ...Object.assign(state, { value: '' }),
+      });
+    }
+  };
+
   return [state, onchange];
 }
 

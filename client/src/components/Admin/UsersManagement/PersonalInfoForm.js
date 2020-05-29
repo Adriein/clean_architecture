@@ -9,12 +9,13 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 
-function PersonalInfoForm() {
+function PersonalInfoForm({ input, setInput }) {
   const [gender, setGender] = React.useState('');
 
   const handleChange = (event) => {
     setGender(event.target.value);
   };
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -27,6 +28,8 @@ function PersonalInfoForm() {
             id="firstName"
             name="firstName"
             label="First name"
+            value={input.firstName}
+            onChange={setInput}
             fullWidth
             autoComplete="given-name"
           />
@@ -37,6 +40,8 @@ function PersonalInfoForm() {
             id="lastName"
             name="lastName"
             label="Last name"
+            value={input.lastName}
+            onChange={setInput}
             fullWidth
             autoComplete="family-name"
           />
@@ -47,6 +52,8 @@ function PersonalInfoForm() {
             id="email"
             name="email"
             label="Email"
+            value={input.email}
+            onChange={setInput}
             fullWidth
             autoComplete="email"
           />
@@ -65,8 +72,9 @@ function PersonalInfoForm() {
             <Select
               labelId="gender"
               id="gender"
-              value={gender}
-              onChange={handleChange}
+              name='gender'
+              value={input.gender}
+              onChange={setInput}
             >
               <MenuItem value={'male'}>Male</MenuItem>
               <MenuItem value={'female'}>Female</MenuItem>
@@ -80,6 +88,8 @@ function PersonalInfoForm() {
             name="age"
             label="Age"
             fullWidth
+            value={input}
+            onChange={setInput}
             autoComplete="age"
           />
         </Grid>
@@ -90,14 +100,19 @@ function PersonalInfoForm() {
             name="city"
             label="City"
             fullWidth
+            value={input}
+            onChange={setInput}
             autoComplete="city"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
+            required
             id="state"
             name="state"
             label="State/Province/Region"
+            value={input}
+            onChange={setInput}
             fullWidth
           />
         </Grid>
@@ -108,6 +123,8 @@ function PersonalInfoForm() {
             name="zip"
             label="Zip / Postal code"
             fullWidth
+            value={input}
+            onChange={setInput}
             autoComplete="shipping postal-code"
           />
         </Grid>
@@ -118,6 +135,8 @@ function PersonalInfoForm() {
             name="country"
             label="Country"
             fullWidth
+            value={input}
+            onChange={setInput}
             autoComplete="shipping country"
           />
         </Grid>
