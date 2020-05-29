@@ -4,14 +4,14 @@ import '../App.css';
 
 import Dashboard from './Dashboard';
 import Diet from './Diet';
-import Users from './Users';
+import UsersManager from './Admin/UsersManagement/UsersManager';
 
 function App() {
   console.log('render');
   return (
     <BrowserRouter>
       <Route path="/" exact component={Dashboard} />
-      <Route path="/users" exact component={Users} />
+      <Route path="/users" exact component={UsersManager} />
       <Route path="/diet" exact component={Diet} />
       <Route path="/create-user" exact component={Diet} />
       <Route path="/create-diet" exact component={Diet} />
