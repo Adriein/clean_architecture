@@ -8,14 +8,20 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
+import LoopIcon from '@material-ui/icons/Loop';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import Input from '@material-ui/core/Input';
+import Tooltip from '@material-ui/core/Tooltip';
+
+import { v4 as uuidv4 } from 'uuid';
 
 function PersonalInfoForm({ input, setInput }) {
-  const [gender, setGender] = React.useState('');
-
-  const handleChange = (event) => {
-    setGender(event.target.value);
+  const generatePass = (event) => {
+    event.target.value = uuidv4();
+    event.target.name = 'password';
+    setInput(event);
   };
-
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -59,11 +65,26 @@ function PersonalInfoForm({ input, setInput }) {
           />
         </Grid>
         <Grid item xs={12}>
-          <TextField
+          <InputLabel htmlFor="password">Password</InputLabel>
+          <Input
             id="password"
+            type="text"
             name="password"
-            label="Generate password"
+            value={input.password}
+            onChange={setInput}
             fullWidth
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={generatePass}
+                >
+                  <Tooltip title="Generate password" placement="top">
+                    <LoopIcon />
+                  </Tooltip>
+                </IconButton>
+              </InputAdornment>
+            }
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -72,7 +93,7 @@ function PersonalInfoForm({ input, setInput }) {
             <Select
               labelId="gender"
               id="gender"
-              name='gender'
+              name="gender"
               value={input.gender}
               onChange={setInput}
             >
@@ -88,7 +109,7 @@ function PersonalInfoForm({ input, setInput }) {
             name="age"
             label="Age"
             fullWidth
-            value={input}
+            value={input.age}
             onChange={setInput}
             autoComplete="age"
           />
@@ -100,7 +121,7 @@ function PersonalInfoForm({ input, setInput }) {
             name="city"
             label="City"
             fullWidth
-            value={input}
+            value={input.city}
             onChange={setInput}
             autoComplete="city"
           />
@@ -111,7 +132,7 @@ function PersonalInfoForm({ input, setInput }) {
             id="state"
             name="state"
             label="State/Province/Region"
-            value={input}
+            value={input.state}
             onChange={setInput}
             fullWidth
           />
@@ -123,7 +144,7 @@ function PersonalInfoForm({ input, setInput }) {
             name="zip"
             label="Zip / Postal code"
             fullWidth
-            value={input}
+            value={input.zip}
             onChange={setInput}
             autoComplete="shipping postal-code"
           />
@@ -135,7 +156,7 @@ function PersonalInfoForm({ input, setInput }) {
             name="country"
             label="Country"
             fullWidth
-            value={input}
+            value={input.country}
             onChange={setInput}
             autoComplete="shipping country"
           />

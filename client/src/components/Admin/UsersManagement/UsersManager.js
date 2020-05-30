@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Navigation from '../../Navigation';
 import { withStyles } from '@material-ui/core/styles';
 import OrderedTable from './OrderedTable';
 
-import UserView from './UserView';
 import UserForm from "./UserForm";
 
 import { UsersProvider } from '../../../contexts/UsersContext';

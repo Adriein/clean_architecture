@@ -3,21 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
-const products = [
-  { name: 'Product 1', desc: 'A nice thing', price: '$9.99' },
-  { name: 'Product 2', desc: 'Another thing', price: '$3.45' },
-  { name: 'Product 3', desc: 'Something else', price: '$6.51' },
-  { name: 'Product 4', desc: 'Best thing of all', price: '$14.11' },
-  { name: 'Shipping', desc: '', price: 'Free' },
-];
-const addresses = ['1 Material-UI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
-const payments = [
-  { name: 'Card type', detail: 'Visa' },
-  { name: 'Card holder', detail: 'Mr John Smith' },
-  { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
-  { name: 'Expiry date', detail: '04/2024' },
-];
-
 const useStyles = makeStyles((theme) => ({
   listItem: {
     padding: theme.spacing(1, 0),
@@ -30,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Review() {
+export default function Review({ input }) {
   const classes = useStyles();
 
   return (
@@ -41,26 +26,33 @@ export default function Review() {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
-            Personal Information
+            Contact details
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
-          <Typography gutterBottom>{addresses.join(', ')}</Typography>
+          <Typography gutterBottom>
+            Name: {`${input.firstName} ${input.lastName}`}
+          </Typography>
+          <Typography gutterBottom>Email: {input.email}</Typography>
+          <Typography gutterBottom>Age: {input.age}</Typography>
+          <Typography gutterBottom>Gender: {input.gender}</Typography>
+          <Typography gutterBottom>
+            Address:{' '}
+            {`${input.city}, ${input.state}, ${input.country}, ${input.zip}`}
+          </Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
-            Payment details
+            Nutrition details
           </Typography>
           <Grid container>
-            {payments.map((payment) => (
-              <React.Fragment key={payment.name}>
-                <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.name}</Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.detail}</Typography>
-                </Grid>
-              </React.Fragment>
-            ))}
+            <Grid item xs={12} sm={6}>
+              <Typography gutterBottom>Weight: {input.weight} kg</Typography>
+
+              <Typography gutterBottom>Height: {input.height} cm</Typography>
+
+              <Typography gutterBottom>Obj: {input.objective}</Typography>
+
+              <Typography gutterBottom>Injuries: {input.injuries}</Typography>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

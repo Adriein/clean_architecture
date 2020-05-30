@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import useSelectInput from '../../../hooks/useSelectInput';
 import useInput from '../../../hooks/useInput';
 
 import PersonalInfoForm from './PersonalInfoForm';
@@ -75,9 +74,9 @@ function getStepContent(step, input, setInput) {
     case 0:
       return <PersonalInfoForm input={input} setInput={setInput} />;
     case 1:
-      return <NutritionInfoForm />;
+      return <NutritionInfoForm input={input} setInput={setInput} />;
     case 2:
-      return <ReviewInfoForm />;
+      return <ReviewInfoForm input={input} />;
     default:
       throw new Error('Unknown step');
   }
@@ -90,25 +89,29 @@ export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
 
   const [input, setInput] = useInput({
-    email: '',
+    email: 'adria.claret@gmail.com',
     password: '',
-    firstName: '',
-    lastName: '',
-    gender: '',
+    firstName: 'Adria',
+    lastName: 'Claret',
+    gender: 'male',
     level: '',
-    age: '',
-    height: '',
-    weight: '',
-    notes: '',
-    injuries: '',
+    age: '28',
+    height: '185',
+    weight: '76',
+    notes: 'test notes',
+    injuries: 'none',
     status: '',
     rol: '',
-    objective: '',
+    objective: 'volumen',
+    country: 'Spain',
+    state: 'Barcelona',
+    zip: '08191',
+    city: 'Rubi',
   });
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
-    console.log(input)
+    console.log(input);
   };
 
   const handleBack = () => {
@@ -125,7 +128,7 @@ export default function Checkout() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <form className={classes.layout}>
+      <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
             User Creation
@@ -172,7 +175,7 @@ export default function Checkout() {
           </React.Fragment>
         </Paper>
         <Copyright />
-      </form>
+      </main>
     </React.Fragment>
   );
 }

@@ -7,11 +7,8 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 
-import useSelectInput from '../../../hooks/useSelectInput';
-
-function NutritionInfoForm() {
+function NutritionInfoForm({ input, setInput }) {
   console.log('render the nutrition form');
-  const [value, setValue] = useSelectInput({ objective: '', injuries: '' });
 
   return (
     <React.Fragment>
@@ -24,8 +21,11 @@ function NutritionInfoForm() {
             required
             id="weight"
             label="Weight"
+            name="weight"
             fullWidth
             autoComplete="cc-name"
+            value={input.weight}
+            onChange={setInput}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -33,8 +33,11 @@ function NutritionInfoForm() {
             required
             id="height"
             label="Height"
+            name="height"
             fullWidth
             autoComplete="cc-number"
+            value={input.height}
+            onChange={setInput}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -43,8 +46,8 @@ function NutritionInfoForm() {
             <Select
               labelId="objective"
               id="objective"
-              value={value.objective}
-              onChange={setValue}
+              value={input.objective}
+              onChange={setInput}
               name="objective"
             >
               <MenuItem value={'volumen'}>Volumen</MenuItem>
@@ -59,8 +62,8 @@ function NutritionInfoForm() {
             <Select
               labelId="injuries"
               id="injuries"
-              value={value.injuries}
-              onChange={setValue}
+              value={input.injuries}
+              onChange={setInput}
               name="injuries"
             >
               <MenuItem value={'hombroDerecho'}>Hombro Derecho</MenuItem>
@@ -74,6 +77,7 @@ function NutritionInfoForm() {
               <MenuItem value={'lumbar'}>Lumbar</MenuItem>
               <MenuItem value={'piernaDerecha'}>Pierna Derecha</MenuItem>
               <MenuItem value={'piernaIzq'}>Pierna Izq</MenuItem>
+              <MenuItem value={'none'}>None</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -81,10 +85,13 @@ function NutritionInfoForm() {
           <TextField
             id="notes"
             label="Notes"
+            name="notes"
             placeholder="Notes"
             multiline
             variant="outlined"
             fullWidth
+            value={input.notes}
+            onChange={setInput}
           />
         </Grid>
       </Grid>

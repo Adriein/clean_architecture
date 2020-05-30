@@ -168,7 +168,7 @@ const styles = {
   },
 };
 
-function CreationDialog({ isCreating, setCreating }) {
+function CreationDialog({ isCreating, setView }) {
   return (
     <Dialog open={isCreating} aria-labelledby="form-dialog-title">
       <DialogTitle id="form-dialog-title">Create User</DialogTitle>
@@ -187,7 +187,7 @@ function CreationDialog({ isCreating, setCreating }) {
         />
       </DialogContent>
       <DialogActions>
-        <Button color="primary">Create Existing User</Button>
+        <Button color="primary" onClick={setView}>Create Existing User</Button>
         <Button color="primary">Create</Button>
       </DialogActions>
     </Dialog>
@@ -234,7 +234,7 @@ function OrderedTable({ classes, setView }) {
 
   return (
     <>
-      <CreationDialog isCreating={isCreating} setCreating={setCreating} />
+      <CreationDialog isCreating={isCreating} setView={setView}/>
       {state.loading ? (
         <CircularProgress classes={{ root: classes.loading }} />
       ) : (
