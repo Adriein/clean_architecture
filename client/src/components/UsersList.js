@@ -20,7 +20,7 @@ function OverviewList(props) {
         <CircularProgress classes={{ root: classes.loading }} />
       ) : (
         <List>
-          {state.filteredUsers.map((user) => (
+          {state.data.map((user) => (
             <UserCard user={user}  key={user.id}/>
           ))}
         </List>
