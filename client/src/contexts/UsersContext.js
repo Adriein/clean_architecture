@@ -1,25 +1,24 @@
 import React, { createContext } from 'react';
 
-import useApiFetch from '../hooks/useApiFetch';
+import useApi from '../hooks/useApi';
 
 export const UsersContext = createContext();
 //export const DispatchContext = createContext();
 
-// const initialState = {
-//   loading: true,
-//   data: [],
-//   error: "",
-// };
+const initialState = {
+  loading: false,
+  data: [],
+  payload: [],
+  error: '',
+};
 
-const getUsersUrl = '/api/admin/overview';
-const initUsersData = [];
+const getEndpoint = '/api/admin/overview';
 
 export function UsersProvider(props) {
-  //const [state, dispatch] = UseSyncUsersState(initialState);
-  const [state, setUrl] = useApiFetch(getUsersUrl, initUsersData);
+  const { state, makePost } = useApi(getEndpoint, initialState);
 
   return (
-    <UsersContext.Provider value={{ state }}>
+    <UsersContext.Provider value={{ state, makePost}}>
       {props.children}
     </UsersContext.Provider>
   );

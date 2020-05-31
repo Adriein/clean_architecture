@@ -39,7 +39,7 @@ function UsersManager({ classes }) {
       <div className={classes.container}>
         <UsersProvider>
           {isView ? (
-            <UserForm setView={setView} userId={user} />
+            <UserForm setView={setView} userId={user} setUserId={setUser} />
           ) : (
             <OrderedTable setView={setView} setUser={setUser} />
           )}

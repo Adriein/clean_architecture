@@ -87,10 +87,10 @@ function getStepContent(step, input, setInput) {
   }
 }
 
-export default function Checkout({ setView, userId }) {
+export default function Checkout({ setView, userId, setUserId }) {
   console.log('render the main form');
   const classes = useStyles();
-  const { state, dispatch } = useContext(UsersContext);
+  const { state, makePost } = useContext(UsersContext);
   const [activeStep, setActiveStep] = React.useState(0);
   const initialUserState =
     userId !== -1
@@ -121,14 +121,19 @@ export default function Checkout({ setView, userId }) {
   const handleNext = () => {
     setActiveStep(activeStep + 1);
     if (activeStep === steps.length - 1) {
-      dispatch({ type: 'ADD', payload: input });
+      makePost('api/admin/profile', input);
+      setUserId(-1);
       setView();
     }
-    console.log(input);
   };
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
+  };
+
+  const handleCancel = () => {
+    setUserId(-1);
+    setView();
   };
 
   return (
@@ -173,7 +178,7 @@ export default function Checkout({ setView, userId }) {
                     variant="outlined"
                     color="secondary"
                     className={classes.buttonCancel}
-                    onClick={setView}
+                    onClick={handleCancel}
                   >
                     Cancel
                   </Button>
