@@ -33,7 +33,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-
 function createData(id, status, rol, email, password, name, lastName, gender) {
   return { id, status, rol, email, password, name, lastName, gender };
 }
@@ -187,14 +186,16 @@ function CreationDialog({ isCreating, setView }) {
         />
       </DialogContent>
       <DialogActions>
-        <Button color="primary" onClick={setView}>Create Existing User</Button>
+        <Button color="primary" onClick={setView}>
+          Create Existing User
+        </Button>
         <Button color="primary">Create</Button>
       </DialogActions>
     </Dialog>
   );
 }
 
-function OrderedTable({ classes, setView }) {
+function OrderedTable({ classes, setView, setUser }) {
   const { state } = useContext(UsersContext);
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('status');
@@ -232,9 +233,14 @@ function OrderedTable({ classes, setView }) {
     )
   );
 
+  const onView = (id) => (event) => {
+    setUser(id);
+    setView();
+  };
+
   return (
     <>
-      <CreationDialog isCreating={isCreating} setView={setView}/>
+      <CreationDialog isCreating={isCreating} setView={setView} />
       {state.loading ? (
         <CircularProgress classes={{ root: classes.loading }} />
       ) : (
@@ -277,13 +283,16 @@ function OrderedTable({ classes, setView }) {
                       <TableCell align="right">{row.password}</TableCell>
                       <TableCell align="right">{row.gender}</TableCell>
                       <TableCell align="right">
-                        <Tooltip title="Edit">
+                        {/* <Tooltip title="Edit">
                           <IconButton aria-label="edit">
                             <EditIcon />
                           </IconButton>
-                        </Tooltip>
+                        </Tooltip> */}
                         <Tooltip title="View">
-                          <IconButton aria-label="view" onClick={setView}>
+                          <IconButton
+                            aria-label="view"
+                            onClick={onView(row.id)}
+                          >
                             <VisibilityIcon />
                           </IconButton>
                         </Tooltip>

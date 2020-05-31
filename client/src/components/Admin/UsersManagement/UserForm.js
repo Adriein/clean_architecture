@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import useInput from '../../../hooks/useInput';
+import { UsersContext } from '../../../contexts/UsersContext';
 
 import PersonalInfoForm from './PersonalInfoForm';
 import NutritionInfoForm from './NutritionInfoForm';
@@ -59,7 +60,11 @@ const useStyles = makeStyles((theme) => ({
   },
   buttons: {
     display: 'flex',
-    justifyContent: 'flex-end',
+  },
+  buttonCancel: {
+    marginRight: 'auto',
+    marginTop: theme.spacing(3),
+    marginLeft: theme.spacing(1),
   },
   button: {
     marginTop: theme.spacing(3),
@@ -82,35 +87,43 @@ function getStepContent(step, input, setInput) {
   }
 }
 
-export default function Checkout() {
+export default function Checkout({ setView, userId }) {
   console.log('render the main form');
-
   const classes = useStyles();
+  const { state, dispatch } = useContext(UsersContext);
   const [activeStep, setActiveStep] = React.useState(0);
+  const initialUserState =
+    userId !== -1
+      ? state.data.find((element) => element.id === userId)
+      : {
+          email: '',
+          password: '',
+          firstName: '',
+          lastName: '',
+          gender: '',
+          level: '',
+          age: '',
+          height: '',
+          weight: '',
+          notes: '',
+          injuries: '',
+          status: '',
+          rol: '',
+          objective: '',
+          country: '',
+          state: '',
+          zip: '',
+          city: '',
+        };
 
-  const [input, setInput] = useInput({
-    email: 'adria.claret@gmail.com',
-    password: '',
-    firstName: 'Adria',
-    lastName: 'Claret',
-    gender: 'male',
-    level: '',
-    age: '28',
-    height: '185',
-    weight: '76',
-    notes: 'test notes',
-    injuries: 'none',
-    status: '',
-    rol: '',
-    objective: 'volumen',
-    country: 'Spain',
-    state: 'Barcelona',
-    zip: '08191',
-    city: 'Rubi',
-  });
+  const [input, setInput] = useInput(initialUserState);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
+    if (activeStep === steps.length - 1) {
+      dispatch({ type: 'ADD', payload: input });
+      setView();
+    }
     console.log(input);
   };
 
@@ -156,6 +169,14 @@ export default function Checkout() {
               <React.Fragment>
                 {getStepContent(activeStep, input, setInput)}
                 <div className={classes.buttons}>
+                  <Button
+                    variant="outlined"
+                    color="secondary"
+                    className={classes.buttonCancel}
+                    onClick={setView}
+                  >
+                    Cancel
+                  </Button>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} className={classes.button}>
                       Back

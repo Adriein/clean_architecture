@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navigation from '../../Navigation';
 import { withStyles } from '@material-ui/core/styles';
 import OrderedTable from './OrderedTable';
 
-import UserForm from "./UserForm";
+import UserForm from './UserForm';
 
 import { UsersProvider } from '../../../contexts/UsersContext';
 
@@ -28,6 +28,7 @@ const styles = {
 
 function UsersManager({ classes }) {
   const [isView, setView] = useToggle();
+  const [user, setUser] = useState(-1);
 
   return (
     <div className={classes.root}>
@@ -37,7 +38,11 @@ function UsersManager({ classes }) {
 
       <div className={classes.container}>
         <UsersProvider>
-          {isView ? <UserForm /> : <OrderedTable setView={setView} />}
+          {isView ? (
+            <UserForm setView={setView} userId={user} />
+          ) : (
+            <OrderedTable setView={setView} setUser={setUser} />
+          )}
         </UsersProvider>
       </div>
     </div>
