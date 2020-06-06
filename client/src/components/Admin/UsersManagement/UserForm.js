@@ -3,9 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import useInput from '../../../hooks/useInput';
 import { UsersContext } from '../../../contexts/UsersContext';
 
-import { Formik } from 'formik';
-import * as yup from 'yup';
-
 import PersonalInfoForm from './PersonalInfoForm';
 import NutritionInfoForm from './NutritionInfoForm';
 import ReviewInfoForm from './ReviewInfoForm';
@@ -167,7 +164,6 @@ export default function Checkout({ setView, userId, setUserId }) {
             ))}
           </Stepper>
           <React.Fragment>
-            <Formik
               initialValues={initialUserState}
               validate={(values) => {
                 const errors = {};
@@ -213,7 +209,6 @@ export default function Checkout({ setView, userId, setUserId }) {
                   </Button>
                 </div>
               </React.Fragment>
-            </Formik>
           </React.Fragment>
         </Paper>
         <Copyright />
