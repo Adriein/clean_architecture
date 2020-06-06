@@ -27,6 +27,7 @@ const styles = {
 };
 
 function UsersManager({ classes }) {
+  console.log('render user manager')
   const [isView, setView] = useToggle();
   const [user, setUser] = useState(-1);
 

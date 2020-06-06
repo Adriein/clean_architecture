@@ -6,7 +6,7 @@ const useApi = (initEndpoint, initState) => {
   const [endpoint] = useState(initEndpoint);
   const [state, dispatch] = useReducer(reducer, initState);
 
-  const makePost = async (url, data) => {
+  const post = async (url, data) => {
     try {
       dispatch({
         type: 'POST',
@@ -14,6 +14,25 @@ const useApi = (initEndpoint, initState) => {
       });
     } catch (error) {
       dispatch({ type: 'POST_ERROR' });
+    }
+  };
+
+  const put = async (url, data) => {
+    try {
+      dispatch({
+        type: 'PUT',
+        payload: (await axios.put(url, data)).data,
+      });
+    } catch (error) {
+      dispatch({ type: 'POST_ERROR' });
+    }
+  };
+
+  const del = async (url) => {
+    try {
+      dispatch({ type: 'DELETE', payload: await axios.delete(url) });
+    } catch (error) {
+      dispatch({ type: 'DELETE_ERROR' });
     }
   };
 
@@ -32,7 +51,7 @@ const useApi = (initEndpoint, initState) => {
     fetchData();
   }, [endpoint]);
 
-  return { state, makePost };
+  return { state, post, put, del };
 };
 
 export default useApi;

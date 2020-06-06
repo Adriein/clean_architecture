@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Review({ input }) {
   const classes = useStyles();
-
+  console.log('render review form')
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>

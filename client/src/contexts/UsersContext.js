@@ -6,7 +6,7 @@ export const UsersContext = createContext();
 //export const DispatchContext = createContext();
 
 const initialState = {
-  loading: false,
+  loading: true,
   data: [],
   payload: [],
   error: '',
@@ -15,10 +15,10 @@ const initialState = {
 const getEndpoint = '/api/admin/overview';
 
 export function UsersProvider(props) {
-  const { state, makePost } = useApi(getEndpoint, initialState);
+  const { state, post, put, del } = useApi(getEndpoint, initialState);
 
   return (
-    <UsersContext.Provider value={{ state, makePost}}>
+    <UsersContext.Provider value={{ state, post, put, del }}>
       {props.children}
     </UsersContext.Provider>
   );

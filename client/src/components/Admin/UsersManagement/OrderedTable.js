@@ -71,22 +71,26 @@ function tableSort(array, comparator) {
   });
   return stabilizedThis.map((el) => el[0]);
 }
-function EnhancedTableToolbar({ numSelected, classes, setCreate }) {
+function EnhancedTableToolbar({ selected, classes, setCreate, del }) {
+  const onDelete = (event) => {
+    selected.forEach((id) => del(`api/admin/profile/${id}`));
+  };
+
   return (
     <Paper elevation={0}>
       <Toolbar
         className={clsx(classes.toolbar, {
-          [classes.highlight]: numSelected > 0,
+          [classes.highlight]: selected.length > 0,
         })}
       >
-        {numSelected > 0 ? (
+        {selected.length > 0 ? (
           <Typography
             className={classes.title}
             color="inherit"
             variant="subtitle1"
             component="div"
           >
-            {numSelected} selected
+            {selected.length} selected
           </Typography>
         ) : (
           <Typography
@@ -99,9 +103,9 @@ function EnhancedTableToolbar({ numSelected, classes, setCreate }) {
           </Typography>
         )}
 
-        {numSelected > 0 ? (
+        {selected.length > 0 ? (
           <Tooltip title="Delete">
-            <IconButton aria-label="delete">
+            <IconButton aria-label="delete" onClick={onDelete}>
               <DeleteIcon />
             </IconButton>
           </Tooltip>
@@ -166,9 +170,13 @@ const styles = {
   },
 };
 
-function CreationDialog({ isCreating, setView }) {
+function CreationDialog({ isCreating, setView, setCreating }) {
   return (
-    <Dialog open={isCreating} aria-labelledby="form-dialog-title">
+    <Dialog
+      open={isCreating}
+      onClose={setCreating}
+      aria-labelledby="form-dialog-title"
+    >
       <DialogTitle id="form-dialog-title">Create User</DialogTitle>
       <DialogContent>
         <DialogContentText>
@@ -195,7 +203,8 @@ function CreationDialog({ isCreating, setView }) {
 }
 
 function OrderedTable({ classes, setView, setUser }) {
-  const { state } = useContext(UsersContext);
+  console.log('render table');
+  const { state, del } = useContext(UsersContext);
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('status');
   const [selected, setSelected] = useState([]);
@@ -239,15 +248,20 @@ function OrderedTable({ classes, setView, setUser }) {
 
   return (
     <>
-      <CreationDialog isCreating={isCreating} setView={setView} />
+      <CreationDialog
+        isCreating={isCreating}
+        setView={setView}
+        setCreating={setCreating}
+      />
       {state.loading ? (
         <CircularProgress classes={{ root: classes.loading }} />
       ) : (
         <>
           <EnhancedTableToolbar
-            numSelected={selected.length}
+            selected={selected}
             classes={classes}
             setCreate={setCreating}
+            del={del}
           />
           <TableContainer component={Paper}>
             <Table aria-label="simple table">
@@ -282,11 +296,6 @@ function OrderedTable({ classes, setView, setUser }) {
                       <TableCell align="right">{row.password}</TableCell>
                       <TableCell align="right">{row.gender}</TableCell>
                       <TableCell align="right">
-                        {/* <Tooltip title="Edit">
-                          <IconButton aria-label="edit">
-                            <EditIcon />
-                          </IconButton>
-                        </Tooltip> */}
                         <Tooltip title="View">
                           <IconButton
                             aria-label="view"

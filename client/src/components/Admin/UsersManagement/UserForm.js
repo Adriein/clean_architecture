@@ -3,6 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import useInput from '../../../hooks/useInput';
 import { UsersContext } from '../../../contexts/UsersContext';
 
+import { Formik } from 'formik';
+import * as yup from 'yup';
+
 import PersonalInfoForm from './PersonalInfoForm';
 import NutritionInfoForm from './NutritionInfoForm';
 import ReviewInfoForm from './ReviewInfoForm';
@@ -88,9 +91,9 @@ function getStepContent(step, input, setInput) {
 }
 
 export default function Checkout({ setView, userId, setUserId }) {
-  console.log('render the main form');
+  console.log('render stepper');
   const classes = useStyles();
-  const { state, makePost } = useContext(UsersContext);
+  const { state, post, put } = useContext(UsersContext);
   const [activeStep, setActiveStep] = React.useState(0);
   const initialUserState =
     userId !== -1
@@ -120,8 +123,13 @@ export default function Checkout({ setView, userId, setUserId }) {
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
-    if (activeStep === steps.length - 1) {
-      makePost('api/admin/profile', input);
+    if (activeStep === steps.length - 1 && userId === -1) {
+      post('api/admin/profile', input);
+      setUserId(-1);
+      setView();
+    }
+    if (activeStep === steps.length - 1 && userId !== -1) {
+      put(`api/admin/profile/${userId}`, input);
       setUserId(-1);
       setView();
     }
@@ -159,18 +167,26 @@ export default function Checkout({ setView, userId, setUserId }) {
             ))}
           </Stepper>
           <React.Fragment>
-            {activeStep === steps.length ? (
-              <React.Fragment>
-                <Typography variant="h5" gutterBottom>
-                  Thank you for your order.
-                </Typography>
-                <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order
-                  confirmation, and will send you an update when your order has
-                  shipped.
-                </Typography>
-              </React.Fragment>
-            ) : (
+            <Formik
+              initialValues={initialUserState}
+              validate={(values) => {
+                const errors = {};
+                if (!values.email) {
+                  errors.email = 'Required';
+                } else if (
+                  !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                ) {
+                  errors.email = 'Invalid email address';
+                }
+                return errors;
+              }}
+              onSubmit={(values, { setSubmitting }) => {
+                setTimeout(() => {
+                  alert(JSON.stringify(values, null, 2));
+                  setSubmitting(false);
+                }, 400);
+              }}
+            >
               <React.Fragment>
                 {getStepContent(activeStep, input, setInput)}
                 <div className={classes.buttons}>
@@ -197,7 +213,7 @@ export default function Checkout({ setView, userId, setUserId }) {
                   </Button>
                 </div>
               </React.Fragment>
-            )}
+            </Formik>
           </React.Fragment>
         </Paper>
         <Copyright />

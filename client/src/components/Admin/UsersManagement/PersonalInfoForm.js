@@ -17,6 +17,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { v4 as uuidv4 } from 'uuid';
 
 function PersonalInfoForm({ input, setInput }) {
+  console.log('render personal info form')
   const generatePass = (event) => {
     event.target.value = uuidv4();
     event.target.name = 'password';
